@@ -1,6 +1,7 @@
 package org.form;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,7 +16,6 @@ public class ComboBoxAndButton {
 
     static ComboBoxAndButton INSTANCE;
 
-    String selectedChannel;
     JComboBox<String> channelList;
     JButton submit;
 
@@ -31,7 +31,24 @@ public class ComboBoxAndButton {
     }
 
     public static void main(String[] args) {
+        ComboBoxAndButton form = getForm();
+        form.populateChannelList(new String[]{"General", "Private", "Quiet"});
 
+        JPanel panel = new JPanel(new BorderLayout());
+
+        panel.add(form.channelList, BorderLayout.PAGE_START);
+        panel.add(form.submit, BorderLayout.PAGE_END);
+        //Create and set up the window.
+        JFrame frame = new JFrame("Channel Selection Demo");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //Create and set up the content pane.
+        panel.setOpaque(true); //content panes must be opaque
+        frame.setContentPane(panel);
+
+        //Display the window.
+        frame.pack();
+        frame.setVisible(true);
     }
 
     void populateChannelList(String[] channelSet) {
@@ -40,12 +57,8 @@ public class ComboBoxAndButton {
         }
     }
 
-    String getSelectedChannel() {
+    public String getSelectedChannel() {
         return (String) channelList.getSelectedItem();
-    }
-
-    void setSelectedChannel(int index) {
-
     }
 }
 
@@ -67,6 +80,6 @@ class SubmissionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.printf("[SUBMISSION] %s", form.getSelectedChannel());
+        System.out.printf("[SUBMISSION] '%s'.\n", form.getSelectedChannel());
     }
 }
