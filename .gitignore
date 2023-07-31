@@ -1,0 +1,6 @@
+# Configs
+.idea/
+.vscode/
+
+# Compiled Code
+target/
