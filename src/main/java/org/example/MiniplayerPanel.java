@@ -25,9 +25,11 @@ public class MiniplayerPanel extends JPanel implements ActionListener {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         songTitle = new JLabel("Song Title");
+        songTitle.setAlignmentX(CENTER_ALIGNMENT);
         this.add(songTitle);
         playlist = new JLabel("Playlist");
         this.add(playlist);
+        playlist.setAlignmentX(CENTER_ALIGNMENT);
         volumeControl = new JSlider(0, 100);
         volumeControl.addChangeListener(e -> System.out.printf("[POST Request] Set the Bot's audio level '<%d>'.\n", volumeControl.getValue()));
         this.add(volumeControl);
@@ -38,6 +40,7 @@ public class MiniplayerPanel extends JPanel implements ActionListener {
         skipBack.addActionListener(e -> System.out.print("[POST Request] Skip to the previous song.\n"));
         songControls.add(skipBack);
         pauseResume = new JButton("PAUSE");
+        pauseResume.setAlignmentX(CENTER_ALIGNMENT);
         pauseResume.addActionListener(this);
         songControls.add(pauseResume);
         JButton skipAhead = new JButton(">>>");
@@ -63,7 +66,7 @@ public class MiniplayerPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String requestInstruction = isPlaying ? "Pause the audio." : "Resume the audio.";
+        String requestInstruction = isPlaying ? "Pause the audio" : "Resume the audio";
         isPlaying = !isPlaying;
         String labelText = isPlaying ? "PAUSE" : "RESUME";
         pauseResume.setText(labelText);
