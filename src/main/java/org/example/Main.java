@@ -4,16 +4,33 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        ChannelSelectorPanel panel = ChannelSelectorPanel.getChannelSelector();
-        panel.populateChannelList(new String[]{"General", "Private", "Quiet"});
+        JPanel panel = new JPanel();
+        panel.add(doChannelSelector());
+        panel.add(doMiniplayer());
 
         //Create and set up the window.
-        JFrame frame = new JFrame("Channel Selection Demo");
+        JFrame frame = new JFrame("Demo");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(panel);
 
         //Display the window.
         frame.pack();
         frame.setVisible(true);
+    }
+
+    static ChannelSelectorPanel doChannelSelector() {
+        ChannelSelectorPanel panel = ChannelSelectorPanel.getChannelSelector();
+        panel.populateChannelList(new String[]{"General", "Private", "Quiet"});
+        return panel;
+    }
+
+    static MiniplayerPanel doMiniplayer() {
+        MiniplayerPanel panel = MiniplayerPanel.getMiniplayerPanel();
+        panel.setSong("Za Song");
+        panel.setPlaylist("Za Playlist");
+        panel.setVolume(-1);
+        panel.setVolume(101);
+        panel.setVolume(50);
+        return panel;
     }
 }
