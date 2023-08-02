@@ -16,14 +16,22 @@ public class CatalogueSelectorPanel extends JPanel {
 
         JPanel gamePanel = new JPanel();
         gamePanel.add(new Button("Game"));
+        gamePanel.add(new Button("Game"));
+        gamePanel.add(new Button("Game"));
 
         JPanel combatPanel = new JPanel();
+        combatPanel.add(new Button(("Combat")));
+        combatPanel.add(new Button(("Combat")));
         combatPanel.add(new Button(("Combat")));
 
         JPanel moodPanel = new JPanel();
         moodPanel.add(new Button("Mood"));
+        moodPanel.add(new Button("Mood"));
+        moodPanel.add(new Button("Mood"));
 
         JPanel ambiencePanel = new JPanel();
+        ambiencePanel.add(new Button("Ambience"));
+        ambiencePanel.add(new Button("Ambience"));
         ambiencePanel.add(new Button("Ambience"));
 
         tabbedPane.addTab("GAME", gamePanel);
