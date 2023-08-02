@@ -24,6 +24,9 @@ public class Main {
         MiniplayerPanel panel = MiniplayerPanel.getMiniplayerPanel();
         panel.setSong("Za Song");
         panel.setPlaylist("Za Playlist");
+        panel.setVolume(-1);
+        panel.setVolume(101);
+        panel.setVolume(50);
         return panel;
     }
 }

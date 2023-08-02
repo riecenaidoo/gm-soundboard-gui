@@ -64,6 +64,14 @@ public class MiniplayerPanel extends JPanel implements ActionListener {
         this.playlist.setText(playlist);
     }
 
+    public void setVolume(int volume) {
+        if (volume >= 0 && volume <= 100) {
+            this.volumeControl.setValue(volume);
+        } else {
+            System.out.printf("[WARNING in MiniplayerPanel] Cannot set volume level to '%d'.\n", volume);
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String requestInstruction = isPlaying ? "Pause the audio" : "Resume the audio";
