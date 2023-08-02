@@ -4,10 +4,14 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
+        JPanel panel = new JPanel();
+        panel.add(doChannelSelector());
+        panel.add(doMiniplayer());
+
         //Create and set up the window.
         JFrame frame = new JFrame("Demo");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setContentPane(doMiniplayer());
+        frame.setContentPane(panel);
 
         //Display the window.
         frame.pack();
