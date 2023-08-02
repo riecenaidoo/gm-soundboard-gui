@@ -7,6 +7,7 @@ public class Main {
         JPanel panel = new JPanel();
         panel.add(doChannelSelector());
         panel.add(doMiniplayer());
+        panel.add(CatalogueSelectorPanel.getCatalogueSelector());
 
         //Create and set up the window.
         JFrame frame = new JFrame("Demo");
