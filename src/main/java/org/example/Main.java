@@ -5,9 +5,14 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
         JPanel panel = new JPanel();
-        panel.add(doChannelSelector());
-        panel.add(doMiniplayer());
+        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         panel.add(CatalogueSelectorPanel.getCatalogueSelector());
+
+        JPanel mediaPanel = new JPanel();
+        mediaPanel.add(doMiniplayer());
+        mediaPanel.add(doChannelSelector());
+
+        panel.add(mediaPanel);
 
         //Create and set up the window.
         JFrame frame = new JFrame("Demo");

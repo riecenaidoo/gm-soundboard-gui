@@ -66,7 +66,7 @@ public class MiniplayerPanel extends JPanel implements ActionListener {
         JButton skipBack = new JButton("<<<");
         skipBack.addActionListener(e -> System.out.print("[POST Request] Skip to the previous song.\n"));
         songControls.add(skipBack);
-        pauseResume = new JButton("PAUSE");
+        pauseResume = new JButton("PAUSE_");
         pauseResume.setAlignmentX(CENTER_ALIGNMENT);
         pauseResume.addActionListener(this);
         songControls.add(pauseResume);
@@ -103,7 +103,7 @@ public class MiniplayerPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String requestInstruction = isPlaying ? "Pause the audio" : "Resume the audio";
         isPlaying = !isPlaying;
-        String labelText = isPlaying ? "PAUSE" : "RESUME";
+        String labelText = isPlaying ? "PAUSE_" : "RESUME";
         pauseResume.setText(labelText);
         System.out.printf("[POST Request] %s.\n", requestInstruction);
     }
