@@ -3,6 +3,8 @@ package org.example;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * Singleton container class for the music miniplayer controller portion of the interface.
@@ -31,7 +33,32 @@ public class MiniplayerPanel extends JPanel implements ActionListener {
         this.add(playlist);
         playlist.setAlignmentX(CENTER_ALIGNMENT);
         volumeControl = new JSlider(0, 100);
-        volumeControl.addChangeListener(e -> System.out.printf("[POST Request] Set the Bot's audio level '<%d>'.\n", volumeControl.getValue()));
+        volumeControl.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                System.out.printf("[POST Request] Set the Bot's audio level '<%d>'.\n", volumeControl.getValue());
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
         this.add(volumeControl);
 
         JPanel songControls = new JPanel();
