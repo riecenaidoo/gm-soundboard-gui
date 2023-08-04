@@ -10,10 +10,20 @@ public class CatalogueSelectorPanel extends JPanel {
 
     private static CatalogueSelectorPanel INSTANCE;
 
+    JTabbedPane tabbedPane;
+
     private CatalogueSelectorPanel() {
         super();
-        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane = new JTabbedPane();
+        this.add(tabbedPane);
+    }
 
+    public static CatalogueSelectorPanel getCatalogueSelector() {
+        if (INSTANCE == null) INSTANCE = new CatalogueSelectorPanel();
+        return INSTANCE;
+    }
+
+    public void loadDummyUI() {
         JPanel gamePanel = new JPanel();
         gamePanel.add(new Button("Game"));
         gamePanel.add(new Button("Game"));
@@ -38,12 +48,5 @@ public class CatalogueSelectorPanel extends JPanel {
         tabbedPane.addTab("COMBAT", combatPanel);
         tabbedPane.addTab("MOOD", moodPanel);
         tabbedPane.addTab("AMBIENCE", ambiencePanel);
-
-        this.add(tabbedPane);
-    }
-
-    public static CatalogueSelectorPanel getCatalogueSelector() {
-        if (INSTANCE == null) INSTANCE = new CatalogueSelectorPanel();
-        return INSTANCE;
     }
 }
