@@ -6,7 +6,10 @@ public class Main {
     public static void main(String[] args) {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        panel.add(CatalogueSelectorPanel.getCatalogueSelector());
+
+        CatalogueSelectorPanel catalogueSelector = CatalogueSelectorPanel.getCatalogueSelector();
+        catalogueSelector.loadUI("src/main/resources/mock_catalogue.json");
+        panel.add(catalogueSelector);
 
         JPanel mediaPanel = new JPanel();
         mediaPanel.add(doMiniplayer());

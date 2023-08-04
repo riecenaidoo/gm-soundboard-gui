@@ -1,0 +1,78 @@
+[
+  {
+    "Group": "Game",
+    "Items": [
+      {
+        "Title": "GOne",
+        "Songs": [
+          "1",
+          "2"
+        ]
+      },
+      {
+        "Title": "GTwo",
+        "Songs": [
+          "3",
+          "4"
+        ]
+      }
+    ]
+  },
+  {
+    "Group": "Combat",
+    "Items": [
+      {
+        "Title": "COne",
+        "Songs": [
+          "5",
+          "6"
+        ]
+      },
+      {
+        "Title": "CTwo",
+        "Songs": [
+          "7",
+          "8"
+        ]
+      }
+    ]
+  },
+  {
+    "Group": "Mood",
+    "Items": [
+      {
+        "Title": "MOne",
+        "Songs": [
+          "9",
+          "10"
+        ]
+      },
+      {
+        "Title": "MTwo",
+        "Songs": [
+          "11",
+          "12"
+        ]
+      }
+    ]
+  },
+  {
+    "Group": "Ambience",
+    "Items": [
+      {
+        "Title": "AOne",
+        "Songs": [
+          "13",
+          "14"
+        ]
+      },
+      {
+        "Title": "ATwo",
+        "Songs": [
+          "15",
+          "16"
+        ]
+      }
+    ]
+  }
+]
