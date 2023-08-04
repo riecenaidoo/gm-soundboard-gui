@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Singleton container class for the Channel Selector portion of the interface.
@@ -47,7 +49,16 @@ public class CatalogueSelectorPanel extends JPanel {
                 for (JsonNode item : itemNode) {
                     String title = item.get("Title").asText();
                     JButton button = new JButton(title);
-                    button.addActionListener(e -> System.out.printf("Play Songs '%s'.\n", item.get("Songs")));  // TODO Construct a normal array from the songs.
+
+                    JsonNode songArray = item.get("Songs");
+                    if (!songArray.isArray())
+                        throw new RuntimeException("[WARNING] The structure of the JSON is not as expected!");
+                    List<String> songs = new ArrayList<>();
+                    for (JsonNode song : songArray) {
+                        songs.add(song.asText());
+                    }
+
+                    button.addActionListener(e -> System.out.printf("[POST Request] Play these songs: '%s'.\n", songs));
                     groupPanel.add(button);
                 }
 
