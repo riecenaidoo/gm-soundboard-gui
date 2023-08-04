@@ -33,8 +33,28 @@ public class CatalogueSelectorPanel extends JPanel {
     public void loadUI(String filepath) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            JsonNode jsonNode = mapper.readTree(new File(filepath));
-            System.out.println(jsonNode.toPrettyString());
+            JsonNode arrayNode = mapper.readTree(new File(filepath));
+            if (!arrayNode.isArray())
+                throw new RuntimeException("[WARNING] The structure of the JSON is not as expected!");
+
+            for (JsonNode jsonNode : arrayNode) {
+                JPanel groupPanel = new JPanel();
+                String groupName = jsonNode.get("Group").asText();
+
+                JsonNode itemNode = jsonNode.get("Items");
+                if (!itemNode.isArray())
+                    throw new RuntimeException("[WARNING] The structure of the JSON is not as expected!");
+                for (JsonNode item : itemNode) {
+                    String title = item.get("Title").asText();
+                    JButton button = new JButton(title);
+                    button.addActionListener(e -> System.out.printf("Play Songs '%s'.\n", item.get("Songs")));  // TODO Construct a normal array from the songs.
+                    groupPanel.add(button);
+                }
+
+                tabbedPane.add(groupName, groupPanel);
+            }
+
+
         } catch (JsonProcessingException e) {
             System.out.printf("[WARNING] There was a problem parsing '%s'.\n", filepath);
             System.out.printf("\tReason: '%s'.\n", e.getMessage());
