@@ -1,7 +1,13 @@
 package org.example;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Singleton container class for the Channel Selector portion of the interface.
@@ -21,6 +27,23 @@ public class CatalogueSelectorPanel extends JPanel {
     public static CatalogueSelectorPanel getCatalogueSelector() {
         if (INSTANCE == null) INSTANCE = new CatalogueSelectorPanel();
         return INSTANCE;
+    }
+
+
+    public void loadUI(String filepath) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            JsonNode jsonNode = mapper.readTree(new File(filepath));
+            System.out.println(jsonNode.toPrettyString());
+        } catch (JsonProcessingException e) {
+            System.out.printf("[WARNING] There was a problem parsing '%s'.\n", filepath);
+            System.out.printf("\tReason: '%s'.\n", e.getMessage());
+            loadDummyUI();
+        } catch (IOException e) {
+            System.out.printf("[WARNING] There was a problem opening '%s'.\n", filepath);
+            System.out.printf("\tReason: '%s'.\n", e.getMessage());
+            loadDummyUI();
+        }
     }
 
     public void loadDummyUI() {
