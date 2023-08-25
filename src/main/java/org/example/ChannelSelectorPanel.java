@@ -10,12 +10,12 @@ import java.awt.event.ActionListener;
  */
 public class ChannelSelectorPanel extends JPanel implements ActionListener {
 
-    private static ChannelSelectorPanel INSTANCE;
-
+    private final API api;
     private final JComboBox<String> channelList;
 
-    private ChannelSelectorPanel() {
+    public ChannelSelectorPanel(API api) {
         super();
+        this.api = api;
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         channelList = new JComboBox<>();
         this.add(channelList);
@@ -24,11 +24,6 @@ public class ChannelSelectorPanel extends JPanel implements ActionListener {
         submit.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(submit);
         this.setOpaque(true);
-    }
-
-    public static ChannelSelectorPanel getChannelSelector() {
-        if (INSTANCE == null) INSTANCE = new ChannelSelectorPanel();
-        return INSTANCE;
     }
 
     /**
@@ -58,6 +53,6 @@ public class ChannelSelectorPanel extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        API.join_channel(channelList.getSelectedItem());
+        api.join_channel(channelList.getSelectedItem());
     }
 }

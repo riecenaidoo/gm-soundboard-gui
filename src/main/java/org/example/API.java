@@ -4,7 +4,13 @@ import java.util.List;
 
 public class API {
 
-    static void play(List<String> songs) {
+    private final Client client;
+
+    public API(Client client) {
+        this.client = client;
+    }
+
+    void play(List<String> songs) {
         StringBuilder stringBuilder = new StringBuilder("play");
 
         for (String song : songs) {
@@ -15,29 +21,36 @@ public class API {
         System.out.println(command);
 
         System.out.printf("[POST Request] Play these songs: '%s' -> '%s' \n", songs, command);
+        client.send(command);
     }
 
-    static void join_channel(Object selectedItem) {
+    void join_channel(Object selectedItem) {
         System.out.printf("[POST Request] Set the Bot's audio channel to <%s>.\n", selectedItem);
+        client.send("join " + selectedItem);
     }
 
-    static void set_volume(int volume) {
+    void set_volume(int volume) {
         System.out.printf("[POST Request] Set the Bot's audio level '<%d>'.\n", volume);
+        client.send("volume " + volume);
     }
 
-    static void resume() {
+    void resume() {
         System.out.print("[POST Request] Pause the audio.\n");
+        client.send("resume");
     }
 
-    static void pause() {
+    void pause() {
         System.out.print("[POST Request] Resume the audio.\n");
+        client.send("pause");
     }
 
-    static void skip() {
+    void skip() {
         System.out.print("[POST Request] Skip to the next song.\n");
+        client.send("skip");
     }
 
-    static void prev() {
+    void prev() {
         System.out.print("[POST Request] Skip to the previous song.\n");
+        client.send("prev");
     }
 }
