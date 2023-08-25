@@ -58,7 +58,7 @@ public class CatalogueSelectorPanel extends JPanel {
                         songs.add(song.asText());
                     }
 
-                    button.addActionListener(e -> System.out.printf("[POST Request] Play these songs: '%s'.\n", songs));
+                    button.addActionListener(e -> API.play(songs));
                     groupPanel.add(button);
                 }
 

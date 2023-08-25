@@ -58,6 +58,6 @@ public class ChannelSelectorPanel extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.printf("[POST Request] Set the Bot's audio channel to <%s>.\n", channelList.getSelectedItem());
+        API.join_channel(channelList.getSelectedItem());
     }
 }
