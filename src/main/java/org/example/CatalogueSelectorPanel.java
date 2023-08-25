@@ -16,19 +16,15 @@ import java.util.List;
  */
 public class CatalogueSelectorPanel extends JPanel {
 
-    private static CatalogueSelectorPanel INSTANCE;
+    private final API api;
 
     JTabbedPane tabbedPane;
 
-    private CatalogueSelectorPanel() {
+    public CatalogueSelectorPanel(API api) {
         super();
+        this.api = api;
         tabbedPane = new JTabbedPane();
         this.add(tabbedPane);
-    }
-
-    public static CatalogueSelectorPanel getCatalogueSelector() {
-        if (INSTANCE == null) INSTANCE = new CatalogueSelectorPanel();
-        return INSTANCE;
     }
 
 
@@ -58,7 +54,7 @@ public class CatalogueSelectorPanel extends JPanel {
                         songs.add(song.asText());
                     }
 
-                    button.addActionListener(e -> API.play(songs));
+                    button.addActionListener(e -> api.play(songs));
                     groupPanel.add(button);
                 }
 

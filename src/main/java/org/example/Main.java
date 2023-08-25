@@ -4,16 +4,24 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
+        Client client = Client.getClient();
+        API api = new API(client);
+
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 
-        CatalogueSelectorPanel catalogueSelector = CatalogueSelectorPanel.getCatalogueSelector();
+        CatalogueSelectorPanel catalogueSelector = new CatalogueSelectorPanel(api);
         catalogueSelector.loadUI("src/main/resources/mock_catalogue.json");
         panel.add(catalogueSelector);
 
         JPanel mediaPanel = new JPanel();
-        mediaPanel.add(doMiniplayer());
-        mediaPanel.add(doChannelSelector());
+
+        MiniplayerPanel miniPlayer = new MiniplayerPanel(api);
+        mediaPanel.add(miniPlayer);
+
+        ChannelSelectorPanel channelSelector = new ChannelSelectorPanel(api);
+        channelSelector.populateChannelList(new String[]{"0", "1"});
+        mediaPanel.add(channelSelector);
 
         panel.add(mediaPanel);
 
@@ -25,21 +33,5 @@ public class Main {
         //Display the window.
         frame.pack();
         frame.setVisible(true);
-    }
-
-    static ChannelSelectorPanel doChannelSelector() {
-        ChannelSelectorPanel panel = ChannelSelectorPanel.getChannelSelector();
-        panel.populateChannelList(new String[]{"0", "1", "2", "3", "7"});
-        return panel;
-    }
-
-    static MiniplayerPanel doMiniplayer() {
-        MiniplayerPanel panel = MiniplayerPanel.getMiniplayerPanel();
-        panel.setSong("Za Song");
-        panel.setPlaylist("Za Playlist");
-        panel.setVolume(-1);
-        panel.setVolume(101);
-        panel.setVolume(50);
-        return panel;
     }
 }

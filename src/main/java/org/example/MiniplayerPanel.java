@@ -13,17 +13,17 @@ import java.awt.event.MouseListener;
  */
 public class MiniplayerPanel extends JPanel implements ActionListener {
 
-    private static MiniplayerPanel INSTANCE;
-
     private final JLabel songTitle;
     private final JLabel playlist;
     private final JSlider volumeControl;
     private final JButton pauseResume;
+    private final API api;
 
     private boolean isPlaying;
 
-    private MiniplayerPanel() {
+    public MiniplayerPanel(API api) {
         super();
+        this.api = api;
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         songTitle = new JLabel("Song Title");
@@ -46,7 +46,7 @@ public class MiniplayerPanel extends JPanel implements ActionListener {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                API.set_volume(volumeControl.getValue());
+                api.set_volume(volumeControl.getValue());
             }
 
             @Override
@@ -64,23 +64,18 @@ public class MiniplayerPanel extends JPanel implements ActionListener {
         JPanel songControls = new JPanel();
         songControls.setLayout(new BoxLayout(songControls, BoxLayout.LINE_AXIS));
         JButton skipBack = new JButton("<<<");
-        skipBack.addActionListener(e -> API.prev());
+        skipBack.addActionListener(e -> api.prev());
         songControls.add(skipBack);
         pauseResume = new JButton("PAUSE_");
         pauseResume.setAlignmentX(CENTER_ALIGNMENT);
         pauseResume.addActionListener(this);
         songControls.add(pauseResume);
         JButton skipAhead = new JButton(">>>");
-        skipAhead.addActionListener(e -> API.skip());
+        skipAhead.addActionListener(e -> api.skip());
         songControls.add(skipAhead);
 
         this.add(songControls);
         isPlaying = true;
-    }
-
-    public static MiniplayerPanel getMiniplayerPanel() {
-        if (INSTANCE == null) INSTANCE = new MiniplayerPanel();
-        return INSTANCE;
     }
 
     public void setSong(String songTitle) {
@@ -102,9 +97,9 @@ public class MiniplayerPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (isPlaying) {
-            API.pause();
+            api.pause();
         } else {
-            API.resume();
+            api.resume();
         }
 
         isPlaying = !isPlaying;
