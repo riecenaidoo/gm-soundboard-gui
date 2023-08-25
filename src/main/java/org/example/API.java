@@ -5,7 +5,16 @@ import java.util.List;
 public class API {
 
     static void play(List<String> songs) {
-        System.out.printf("[POST Request] Play these songs: '%s'.\n", songs);
+        StringBuilder stringBuilder = new StringBuilder("play");
+
+        for (String song : songs) {
+            stringBuilder.append(" ").append(song);
+        }
+
+        String command = stringBuilder.toString();
+        System.out.println(command);
+
+        System.out.printf("[POST Request] Play these songs: '%s' -> '%s' \n", songs, command);
     }
 
     static void join_channel(Object selectedItem) {
