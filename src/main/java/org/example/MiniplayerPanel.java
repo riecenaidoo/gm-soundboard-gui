@@ -46,7 +46,7 @@ public class MiniplayerPanel extends JPanel implements ActionListener {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                System.out.printf("[POST Request] Set the Bot's audio level '<%d>'.\n", volumeControl.getValue());
+                API.set_volume(volumeControl.getValue());
             }
 
             @Override
@@ -64,14 +64,14 @@ public class MiniplayerPanel extends JPanel implements ActionListener {
         JPanel songControls = new JPanel();
         songControls.setLayout(new BoxLayout(songControls, BoxLayout.LINE_AXIS));
         JButton skipBack = new JButton("<<<");
-        skipBack.addActionListener(e -> System.out.print("[POST Request] Skip to the previous song.\n"));
+        skipBack.addActionListener(e -> API.prev());
         songControls.add(skipBack);
         pauseResume = new JButton("PAUSE_");
         pauseResume.setAlignmentX(CENTER_ALIGNMENT);
         pauseResume.addActionListener(this);
         songControls.add(pauseResume);
         JButton skipAhead = new JButton(">>>");
-        skipAhead.addActionListener(e -> System.out.print("[POST Request] Skip to the next song.\n"));
+        skipAhead.addActionListener(e -> API.skip());
         songControls.add(skipAhead);
 
         this.add(songControls);
@@ -101,10 +101,14 @@ public class MiniplayerPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String requestInstruction = isPlaying ? "Pause the audio" : "Resume the audio";
+        if (isPlaying) {
+            API.pause();
+        } else {
+            API.resume();
+        }
+
         isPlaying = !isPlaying;
         String labelText = isPlaying ? "PAUSE_" : "RESUME";
         pauseResume.setText(labelText);
-        System.out.printf("[POST Request] %s.\n", requestInstruction);
     }
 }

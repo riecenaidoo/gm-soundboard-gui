@@ -29,7 +29,7 @@ public class Main {
 
     static ChannelSelectorPanel doChannelSelector() {
         ChannelSelectorPanel panel = ChannelSelectorPanel.getChannelSelector();
-        panel.populateChannelList(new String[]{"General", "Private", "Quiet"});
+        panel.populateChannelList(new String[]{"0", "1", "2", "3", "7"});
         return panel;
     }
 
