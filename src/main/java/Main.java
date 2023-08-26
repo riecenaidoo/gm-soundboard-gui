@@ -1,7 +1,10 @@
+import com.formdev.flatlaf.FlatDarkLaf;
+
 import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
+        FlatDarkLaf.setup();
         Client client = Client.getClient();
         API api = new API(client);
 
@@ -9,7 +12,7 @@ public class Main {
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 
         CatalogueSelectorPanel catalogueSelector = new CatalogueSelectorPanel(api);
-        catalogueSelector.loadUI("src/main/resources/mock_catalogue.json");
+        catalogueSelector.loadUI("src/main/resources/sample_catalogue.json");
         panel.add(catalogueSelector);
 
         JPanel mediaPanel = new JPanel();
