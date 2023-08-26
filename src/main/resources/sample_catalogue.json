@@ -1,0 +1,71 @@
+[
+  {
+    "Group": "Session",
+    "Items": [
+      {
+        "Title": "Waiting Room",
+        "Songs": [
+          "https://youtu.be/JX4TiwCGSPo"
+        ]
+      },
+      {
+        "Title": "Main Intro",
+        "Songs": [
+          "https://www.youtube.com/watch?v=3aUH08obnTk"
+        ]
+      },
+      {
+        "Title": "Main Outro",
+        "Songs": [
+          "https://www.youtube.com/watch?v=9EhWCAHBbjU"
+        ]
+      }
+    ]
+  },
+  {
+    "Group": "Combat",
+    "Items": [
+      {
+        "Title": "General",
+        "Songs": [
+          "https://www.youtube.com/watch?v=grLafeVF2-s",
+          "https://www.youtube.com/watch?v=T7Qlx8bZTsg",
+          "https://www.youtube.com/watch?v=2Ej5SnMIq5w",
+          "https://www.youtube.com/watch?v=pDINdTnK9Ok",
+          "https://www.youtube.com/watch?v=nRLrSOc2654",
+          "https://www.youtube.com/watch?v=YqgwI6uURJw",
+          "https://www.youtube.com/watch?v=KW0QTWpcjc0",
+          "https://www.youtube.com/watch?v=Tw-ihgnMqwA",
+          "https://www.youtube.com/watch?v=3bRN__YwhXU",
+          "https://www.youtube.com/watch?v=SNRJ2v9IEfU",
+          "https://www.youtube.com/watch?v=NDuMvYZbDsU",
+          "https://www.youtube.com/watch?v=ISbV2Rx8VWs",
+          "https://www.youtube.com/watch?v=9CEkOipYAmI",
+          "https://www.youtube.com/watch?v=TTKdvO9LWwk",
+          "https://www.youtube.com/watch?v=XZh5EagnKYo",
+          "https://www.youtube.com/watch?v=n8wbYig-gIw",
+          "https://www.youtube.com/watch?v=aDZVGqCz26g"
+        ]
+      },
+      {
+        "Title": "Tribal",
+        "Songs": [
+          "https://www.youtube.com/watch?v=wxUi9WA_zk0",
+          "https://www.youtube.com/watch?v=5crKb9nMwSw",
+          "https://www.youtube.com/watch?v=DBbnhhzXPbQ",
+          "https://www.youtube.com/watch?v=nFmQqUxH7GA",
+          "https://www.youtube.com/watch?v=0YXh3OqUJhc",
+          "https://www.youtube.com/watch?v=ZcNyPdipjeU",
+          "https://www.youtube.com/watch?v=pa2Ud9GBqKI"
+        ]
+      },
+      {
+        "Title": "Duel",
+        "Songs": [
+          "https://www.youtube.com/watch?v=56GVo6ZeAOg",
+          "https://www.youtube.com/watch?v=1E83ziGEsPE"
+        ]
+      }
+    ]
+  }
+]
