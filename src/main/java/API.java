@@ -16,7 +16,6 @@ public class API {
         }
 
         String command = stringBuilder.toString();
-        System.out.println(command);
 
 //        System.out.printf("[INFO][POST Request] Play these songs: '%s' -> '%s' \n", songs, command);
         client.send(command);
