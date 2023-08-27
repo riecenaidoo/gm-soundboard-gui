@@ -1,7 +1,7 @@
-.PHONY: gui clean
+.PHONY: gui clean debug
 
 JAVA_HOME = java
-TARGET = target/gui-1.0-SNAPSHOT-jar-with-dependencies.jar
+TARGET = target/soundboard-1.0-SNAPSHOT-jar-with-dependencies.jar
 
 
 
@@ -11,6 +11,11 @@ $(TARGET):
 
 run: $(TARGET)
 	$(JAVA_HOME) -jar $(TARGET)
+
+
+debug:
+	$(MAKE) clean
+	$(MAKE) run
 
 
 clean:
