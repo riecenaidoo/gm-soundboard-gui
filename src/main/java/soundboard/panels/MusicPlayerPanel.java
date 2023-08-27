@@ -21,7 +21,7 @@ public class MusicPlayerPanel extends JPanel {
 
     /**
      * Builds a MusicPlayer JPanel that provides a graphical user interface for the soundboard.API.
-     * @param api the soundboard.API this MusicPlayer is providing graphical controls for.
+     * @param api the API this MusicPlayer is providing graphical controls for.
      */
     public MusicPlayerPanel(API api) {
         super();
