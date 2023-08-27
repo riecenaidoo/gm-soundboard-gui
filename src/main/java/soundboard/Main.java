@@ -1,4 +1,9 @@
+package soundboard;
+
 import com.formdev.flatlaf.FlatDarkLaf;
+import soundboard.panels.CatalogueSelectorPanel;
+import soundboard.panels.ChannelSelectorPanel;
+import soundboard.panels.MusicPlayerPanel;
 
 import javax.swing.*;
 

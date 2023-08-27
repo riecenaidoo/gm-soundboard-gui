@@ -1,3 +1,7 @@
+package soundboard.panels;
+
+import soundboard.API;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

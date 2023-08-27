@@ -1,3 +1,7 @@
+package soundboard.panels;
+
+import soundboard.API;
+
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -16,8 +20,8 @@ public class MusicPlayerPanel extends JPanel {
     private boolean shufflePlay;
 
     /**
-     * Builds a MusicPlayer JPanel that provides a graphical user interface for the API.
-     * @param api the API this MusicPlayer is providing graphical controls for.
+     * Builds a MusicPlayer JPanel that provides a graphical user interface for the soundboard.API.
+     * @param api the soundboard.API this MusicPlayer is providing graphical controls for.
      */
     public MusicPlayerPanel(API api) {
         super();

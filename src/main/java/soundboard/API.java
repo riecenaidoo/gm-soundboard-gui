@@ -1,3 +1,5 @@
+package soundboard;
+
 import java.util.List;
 
 public class API {
@@ -10,17 +12,17 @@ public class API {
 
     // Channel Selector Panel
 
-    void join_channel(Object selectedItem) {
+    public void join_channel(Object selectedItem) {
 //        System.out.printf("[INFO][POST Request] Set the Bot's audio channel to <%s>.\n", selectedItem);
         client.send("join " + selectedItem);
     }
 
-    void leave(){
+    public void leave(){
         client.send("leave");
     }
 
     // Catalogue Selector Panel
-    void play(List<String> songs) {
+    public void play(List<String> songs) {
         StringBuilder stringBuilder = new StringBuilder("play");
 
         for (String song : songs) {
@@ -35,48 +37,48 @@ public class API {
 
     // MusicPlayer Panel
 
-    void stop(){
+    public void stop(){
         client.send("stop");
     }
 
-    void resume() {
+    public void resume() {
 //        System.out.print("[INFO][POST Request] Pause the audio.\n");
         client.send("resume");
     }
 
-    void pause() {
+    public void pause() {
 //        System.out.print("[INFO][POST Request] Resume the audio.\n");
         client.send("pause");
     }
 
-    void set_volume(int volume) {
+    public void set_volume(int volume) {
 //        System.out.printf("[INFO][POST Request] Set the Bot's audio level '<%d>'.\n", volume);
         client.send("volume " + volume);
     }
 
-    void skip() {
+    public void skip() {
 //        System.out.print("[INFO][POST Request] Skip to the next song.\n");
         client.send("skip");
     }
 
-    void prev() {
+    public void prev() {
 //        System.out.print("[INFO][POST Request] Skip to the previous song.\n");
         client.send("prev");
     }
 
-    void shuffle(){
+    public void shuffle(){
         client.send("shuffle");
     }
 
-    void loop(){
+    public void loop(){
         client.send("loop");
     }
 
-    void repeat(){
+    public void repeat(){
         client.send("repeat");
     }
 
-    void loop_none(){
+    public void loop_none(){
         client.send("normal");
     }
 }
