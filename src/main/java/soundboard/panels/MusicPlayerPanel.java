@@ -3,6 +3,7 @@ package soundboard.panels;
 import soundboard.API;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -21,6 +22,7 @@ public class MusicPlayerPanel extends JPanel {
 
     /**
      * Builds a MusicPlayer JPanel that provides a graphical user interface for the soundboard API.
+     *
      * @param api the API this MusicPlayer is providing graphical controls for.
      */
     public MusicPlayerPanel(API api) {
@@ -33,6 +35,8 @@ public class MusicPlayerPanel extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.add(buildVolumeControl());
         this.add(buildSongControls());
+
+        this.setPreferredSize(new Dimension(600, 50));  // TODO remove once there are standard icons.
     }
 
     private JSlider buildVolumeControl() {
@@ -120,6 +124,7 @@ public class MusicPlayerPanel extends JPanel {
             String labelText = (shufflePlay) ? "SHUFFLE: ON" : "SHUFFLE : OFF";
             shuffleToggle.setText(labelText);
         });
+
         return shuffleToggle;
     }
 
@@ -147,6 +152,7 @@ public class MusicPlayerPanel extends JPanel {
 
             loopMode = nextMode;
         });
+
         return loopToggle;
     }
 

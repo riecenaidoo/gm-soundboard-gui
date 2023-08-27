@@ -19,12 +19,13 @@ public class CatalogueSelectorPanel extends JPanel {
 
     private final API api;
 
-    JTabbedPane tabbedPane;
+    private final JTabbedPane tabbedPane;
 
     public CatalogueSelectorPanel(API api) {
         super();
         this.api = api;
-        tabbedPane = new JTabbedPane();
+        this.tabbedPane = new JTabbedPane();
+
         this.add(tabbedPane);
     }
 
@@ -43,6 +44,7 @@ public class CatalogueSelectorPanel extends JPanel {
                 JsonNode itemNode = jsonNode.get("Items");
                 if (!itemNode.isArray())
                     throw new RuntimeException("[WARNING] The structure of the JSON is not as expected!");
+
                 for (JsonNode item : itemNode) {
                     String title = item.get("Title").asText();
                     JButton button = new JButton(title);
@@ -50,18 +52,15 @@ public class CatalogueSelectorPanel extends JPanel {
                     JsonNode songArray = item.get("Songs");
                     if (!songArray.isArray())
                         throw new RuntimeException("[WARNING] The structure of the JSON is not as expected!");
-                    List<String> songs = new ArrayList<>();
-                    for (JsonNode song : songArray) {
-                        songs.add(song.asText());
-                    }
 
+                    List<String> songs = new ArrayList<>();
+                    for (JsonNode song : songArray) songs.add(song.asText());
                     button.addActionListener(e -> api.play(songs));
                     groupPanel.add(button);
                 }
 
                 tabbedPane.add(groupName, groupPanel);
             }
-
 
         } catch (JsonProcessingException e) {
             System.out.printf("[WARNING] There was a problem parsing '%s'.\n", filepath);

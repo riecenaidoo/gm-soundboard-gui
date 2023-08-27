@@ -46,15 +46,17 @@ public class ChannelSelectorPanel extends JPanel {
 
             lastSelectedIndex = channelList.getSelectedIndex();
         });
+
         return channelList;
     }
 
     private JButton buildLeaveChannelButton() {
         JButton leaveChannelButton = new JButton("LEAVE");
+        leaveChannelButton.setAlignmentX(CENTER_ALIGNMENT);
         leaveChannelButton.addActionListener(e -> {
             channelList.setSelectedIndex(0);    // Triggers Channel List's 'leave' call.
         });
-        leaveChannelButton.setAlignmentX(CENTER_ALIGNMENT);
+
         return leaveChannelButton;
     }
 
@@ -73,10 +75,7 @@ public class ChannelSelectorPanel extends JPanel {
     public void populateChannelList(String[] channelSet) {
         channelList.removeAllItems();
         channelList.addItem("");
-        for (String channel : channelSet) {
-            channelList.addItem(channel);
-        }
-
+        for (String channel : channelSet) channelList.addItem(channel);
         channelList.setSelectedIndex(0);
     }
 }
