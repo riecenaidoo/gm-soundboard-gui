@@ -1,36 +1,38 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 /**
- * Singleton container class for the music miniplayer controller portion of the interface.
- * The miniplayer displays information on the song being played, provides a volume control,
- * skipping ahead/behind buttons, and a pause/resume button.
+ * Music miniplayer panel that provides song controls
+ * such as volume increasing/decreasing, skipping, shuffling,
+ * pausing, etc.
  */
-public class MiniplayerPanel extends JPanel implements ActionListener {
+public class MiniplayerPanel extends JPanel {
 
-    private final JLabel songTitle;
-    private final JLabel playlist;
-    private final JSlider volumeControl;
-    private final JButton pauseResume;
     private final API api;
 
     private boolean isPlaying;
+    private LoopMode loopMode;
+    private boolean shufflePlay;
 
+    /**
+     * Builds a Miniplayer panel that provides a graphical user interface for the API.
+     * @param api the API this Miniplayer is providing graphical controls for.
+     */
     public MiniplayerPanel(API api) {
         super();
         this.api = api;
-        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        this.loopMode = LoopMode.OFF;
+        this.shufflePlay = false;
+        this.isPlaying = true;
 
-        songTitle = new JLabel("Song Title");
-        songTitle.setAlignmentX(CENTER_ALIGNMENT);
-        this.add(songTitle);
-        playlist = new JLabel("Playlist");
-        this.add(playlist);
-        playlist.setAlignmentX(CENTER_ALIGNMENT);
-        volumeControl = new JSlider(0, 100);
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        this.add(buildVolumeControl());
+        this.add(buildSongControls());
+    }
+
+    private JSlider buildVolumeControl() {
+        JSlider volumeControl = new JSlider(0, 100);
         volumeControl.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -57,51 +59,94 @@ public class MiniplayerPanel extends JPanel implements ActionListener {
 
             }
         });
-        this.add(volumeControl);
 
+        return volumeControl;
+    }
+
+    private JPanel buildSongControls() {
         JPanel songControls = new JPanel();
         songControls.setLayout(new BoxLayout(songControls, BoxLayout.LINE_AXIS));
-        JButton skipBack = new JButton("<<<");
+
+        songControls.add(buildShuffleToggle());
+        songControls.add(buildSkipBack());
+        songControls.add(buildPauseResume());
+        songControls.add(buildStopPlay());
+        songControls.add(buildSkipAhead());
+        songControls.add(buildLoopToggle());
+
+        return songControls;
+    }
+
+    private JButton buildPauseResume() {
+        JButton pauseResume = new JButton("PAUSE");
+        pauseResume.addActionListener(e -> {
+            if (isPlaying) api.pause();
+            else api.resume();
+
+            isPlaying = !isPlaying;
+            pauseResume.setText(isPlaying ? "PAUSE" : "RESUME");
+        });
+
+        return pauseResume;
+    }
+
+    private JButton buildStopPlay() {
+        JButton stopPlay = new JButton("STOP");
+        stopPlay.addActionListener(e -> api.stop());
+        return stopPlay;
+    }
+
+    private JButton buildSkipBack() {
+        JButton skipBack = new JButton("<<-");
         skipBack.addActionListener(e -> api.prev());
-        songControls.add(skipBack);
-        pauseResume = new JButton("PAUSE_");
-        pauseResume.setAlignmentX(CENTER_ALIGNMENT);
-        pauseResume.addActionListener(this);
-        songControls.add(pauseResume);
-        JButton skipAhead = new JButton(">>>");
+        return skipBack;
+    }
+
+    private JButton buildSkipAhead() {
+        JButton skipAhead = new JButton("->>");
         skipAhead.addActionListener(e -> api.skip());
-        songControls.add(skipAhead);
-
-        this.add(songControls);
-        isPlaying = true;
+        return skipAhead;
     }
 
-    public void setSong(String songTitle) {
-        this.songTitle.setText(songTitle);
+    private JButton buildShuffleToggle() {
+        JButton shuffleToggle = new JButton("SHUFFLE: OFF");
+        shuffleToggle.addActionListener(e -> {
+            api.shuffle();
+            shufflePlay = !shufflePlay;
+            String labelText = (shufflePlay) ? "SHUFFLE: ON" : "SHUFFLE : OFF";
+            shuffleToggle.setText(labelText);
+        });
+        return shuffleToggle;
     }
 
-    public void setPlaylist(String playlist) {
-        this.playlist.setText(playlist);
+    private JButton buildLoopToggle() {
+        JButton loopToggle = new JButton("LOOP: OFF");
+        loopToggle.addActionListener(e -> {
+            LoopMode[] modes = LoopMode.values();
+            int nextModeIndex = ((loopMode.ordinal() + 1) % modes.length);
+            LoopMode nextMode = modes[nextModeIndex];
+
+            switch (loopMode) {
+                case OFF -> {
+                    api.loop_none();
+                    loopToggle.setText("LOOP: " + nextMode);
+                }
+                case ALL -> {
+                    api.loop();
+                    loopToggle.setText("LOOP: " + nextMode);
+                }
+                case REPEAT -> {
+                    api.repeat();
+                    loopToggle.setText("LOOP: " + nextMode);
+                }
+            }
+
+            loopMode = nextMode;
+        });
+        return loopToggle;
     }
 
-    public void setVolume(int volume) {
-        if (volume >= 0 && volume <= 100) {
-            this.volumeControl.setValue(volume);
-        } else {
-            System.out.printf("[WARNING in MiniplayerPanel] Cannot set volume level to '%d'.\n", volume);
-        }
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (isPlaying) {
-            api.pause();
-        } else {
-            api.resume();
-        }
-
-        isPlaying = !isPlaying;
-        String labelText = isPlaying ? "PAUSE_" : "RESUME";
-        pauseResume.setText(labelText);
+    private enum LoopMode {
+        OFF, ALL, REPEAT
     }
 }

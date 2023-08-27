@@ -70,4 +70,8 @@ public class API {
     void repeat(){
         client.send("repeat");
     }
+
+    void loop_none(){
+        client.send("normal");
+    }
 }
