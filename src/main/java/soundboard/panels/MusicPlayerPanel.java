@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 /**
- * MusicPlayer JPanel that provides song controls
+ * Music Player JPanel that provides song controls
  * such as volume increasing/decreasing, skipping, shuffling,
  * pausing, etc.
  */
@@ -20,7 +20,7 @@ public class MusicPlayerPanel extends JPanel {
     private boolean shufflePlay;
 
     /**
-     * Builds a MusicPlayer JPanel that provides a graphical user interface for the soundboard.API.
+     * Builds a MusicPlayer JPanel that provides a graphical user interface for the soundboard API.
      * @param api the API this MusicPlayer is providing graphical controls for.
      */
     public MusicPlayerPanel(API api) {
