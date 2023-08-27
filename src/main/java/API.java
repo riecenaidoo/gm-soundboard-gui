@@ -8,6 +8,18 @@ public class API {
         this.client = client;
     }
 
+    // Channel Selector Panel
+
+    void join_channel(Object selectedItem) {
+//        System.out.printf("[INFO][POST Request] Set the Bot's audio channel to <%s>.\n", selectedItem);
+        client.send("join " + selectedItem);
+    }
+
+    void leave(){
+        client.send("leave");
+    }
+
+    // Catalogue Selector Panel
     void play(List<String> songs) {
         StringBuilder stringBuilder = new StringBuilder("play");
 
@@ -21,22 +33,10 @@ public class API {
         client.send(command);
     }
 
+    // MusicPlayer Panel
+
     void stop(){
         client.send("stop");
-    }
-
-    void join_channel(Object selectedItem) {
-//        System.out.printf("[INFO][POST Request] Set the Bot's audio channel to <%s>.\n", selectedItem);
-        client.send("join " + selectedItem);
-    }
-
-    void leave(){
-        client.send("leave");
-    }
-
-    void set_volume(int volume) {
-//        System.out.printf("[INFO][POST Request] Set the Bot's audio level '<%d>'.\n", volume);
-        client.send("volume " + volume);
     }
 
     void resume() {
@@ -47,6 +47,11 @@ public class API {
     void pause() {
 //        System.out.print("[INFO][POST Request] Resume the audio.\n");
         client.send("pause");
+    }
+
+    void set_volume(int volume) {
+//        System.out.printf("[INFO][POST Request] Set the Bot's audio level '<%d>'.\n", volume);
+        client.send("volume " + volume);
     }
 
     void skip() {

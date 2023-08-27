@@ -3,11 +3,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 /**
- * Music miniplayer panel that provides song controls
+ * MusicPlayer JPanel that provides song controls
  * such as volume increasing/decreasing, skipping, shuffling,
  * pausing, etc.
  */
-public class MiniplayerPanel extends JPanel {
+public class MusicPlayerPanel extends JPanel {
 
     private final API api;
 
@@ -16,10 +16,10 @@ public class MiniplayerPanel extends JPanel {
     private boolean shufflePlay;
 
     /**
-     * Builds a Miniplayer panel that provides a graphical user interface for the API.
-     * @param api the API this Miniplayer is providing graphical controls for.
+     * Builds a MusicPlayer JPanel that provides a graphical user interface for the API.
+     * @param api the API this MusicPlayer is providing graphical controls for.
      */
-    public MiniplayerPanel(API api) {
+    public MusicPlayerPanel(API api) {
         super();
         this.api = api;
         this.loopMode = LoopMode.OFF;
