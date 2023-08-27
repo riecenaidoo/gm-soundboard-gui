@@ -21,9 +21,17 @@ public class API {
         client.send(command);
     }
 
+    void stop(){
+        client.send("stop");
+    }
+
     void join_channel(Object selectedItem) {
 //        System.out.printf("[INFO][POST Request] Set the Bot's audio channel to <%s>.\n", selectedItem);
         client.send("join " + selectedItem);
+    }
+
+    void leave(){
+        client.send("leave");
     }
 
     void set_volume(int volume) {
@@ -49,5 +57,17 @@ public class API {
     void prev() {
 //        System.out.print("[INFO][POST Request] Skip to the previous song.\n");
         client.send("prev");
+    }
+
+    void shuffle(){
+        client.send("shuffle");
+    }
+
+    void loop(){
+        client.send("loop");
+    }
+
+    void repeat(){
+        client.send("repeat");
     }
 }
