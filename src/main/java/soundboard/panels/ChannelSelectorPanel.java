@@ -2,7 +2,11 @@ package soundboard.panels;
 
 import soundboard.API;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Channel Selector JPanel that enables joining
@@ -51,7 +55,16 @@ public class ChannelSelectorPanel extends JPanel {
     }
 
     private JButton buildLeaveChannelButton() {
-        JButton leaveChannelButton = new JButton("LEAVE");
+        JButton leaveChannelButton = new JButton();
+
+        try {
+            Image leaveImage = ImageIO.read(new File("icons/leave.png"));
+            Icon leaveIcon = new ImageIcon(leaveImage);
+            leaveChannelButton.setIcon(leaveIcon);
+        } catch (IOException e) {
+            leaveChannelButton.setText("LEAVE");
+        }
+
         leaveChannelButton.setAlignmentX(CENTER_ALIGNMENT);
         leaveChannelButton.addActionListener(e -> {
             channelList.setSelectedIndex(0);    // Triggers Channel List's 'leave' call.
