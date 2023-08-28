@@ -44,24 +44,29 @@ public class CatalogueSelectorPanel extends JPanel {
 
     public void loadMockUI() {
         URL mockCatalogue = this.getClass().getResource("mock_catalogue.json");
-        assert mockCatalogue != null;
+        if (mockCatalogue == null) throw new RuntimeException("Mock Catalogue was not found in resources!");
+
         ObjectMapper mapper = new ObjectMapper();
         try {
-            JsonNode arrayNode = mapper.readTree(new File(mockCatalogue.getPath()));
+            JsonNode arrayNode = mapper.readTree(new File(mockCatalogue.getFile()));
             buildUI(arrayNode);
         } catch (IOException e) {
-            throw new RuntimeException("Mock Catalogue was not found in resources!");
+            throw new RuntimeException("Mock Catalogue could not be read!");
         }
     }
 
     private void buildUI(JsonNode arrayNode) {
-        assert arrayNode.isArray();
+        if (!arrayNode.isArray())
+            throw new RuntimeException("[WARNING] The structure of the JSON is not as expected!");
+
         for (JsonNode jsonNode : arrayNode) {
             JPanel groupPanel = new JPanel();
             String groupName = jsonNode.get("Group").asText();
 
             JsonNode itemNode = jsonNode.get("Items");
-            assert arrayNode.isArray();
+            if (!itemNode.isArray())
+                throw new RuntimeException("[WARNING] The structure of the JSON is not as expected!");
+
             for (JsonNode item : itemNode) {
                 String title = item.get("Title").asText();
                 JButton button = new JButton(title);
