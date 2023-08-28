@@ -10,6 +10,7 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
         FlatDarkLaf.setup();
+        Icons icons = new Icons();
         Client client = Client.getClient();
         API api = new API(client);
 
@@ -25,7 +26,7 @@ public class Main {
         MusicPlayerPanel miniPlayer = new MusicPlayerPanel(api);
         mediaPanel.add(miniPlayer);
 
-        ChannelSelectorPanel channelSelector = new ChannelSelectorPanel(api);
+        ChannelSelectorPanel channelSelector = new ChannelSelectorPanel(api, icons);
         channelSelector.populateChannelList(new String[]{"0", "1"});
         mediaPanel.add(channelSelector);
 

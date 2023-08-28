@@ -1,6 +1,7 @@
 package soundboard.panels;
 
 import soundboard.API;
+import soundboard.Icons;
 
 import javax.swing.*;
 
@@ -11,17 +12,20 @@ import javax.swing.*;
 public class ChannelSelectorPanel extends JPanel {
 
     private final API api;
+    private final Icons icons;
     private final JComboBox<String> channelList;
     private int lastSelectedIndex;
 
     /**
      * Builds a ChannelSelector JPanel that provides a graphical user interface for the soundboard API.
      *
-     * @param api the API this ChannelSelector is providing graphical controls for.
+     * @param api   the API this ChannelSelector is providing graphical controls for.
+     * @param icons available Icons of the Soundboard.
      */
-    public ChannelSelectorPanel(API api) {
+    public ChannelSelectorPanel(API api, Icons icons) {
         super();
         this.api = api;
+        this.icons = icons;
         this.channelList = buildChannelList();
         this.lastSelectedIndex = 0;
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -52,7 +56,14 @@ public class ChannelSelectorPanel extends JPanel {
 
     private JButton buildLeaveChannelButton() {
         JButton leaveChannelButton = new JButton();
-        leaveChannelButton.setText("LEAVE");
+        Icon leaveIcon = icons.getLeaveIcon();
+
+        if (leaveIcon == null) {
+            leaveChannelButton.setText("LEAVE");
+        } else {
+            leaveChannelButton.setIcon(leaveIcon);
+        }
+
         leaveChannelButton.setAlignmentX(CENTER_ALIGNMENT);
         leaveChannelButton.addActionListener(e -> {
             channelList.setSelectedIndex(0);    // Triggers Channel List's 'leave' call.
