@@ -12,6 +12,8 @@ import java.io.IOException;
  */
 public class Icons {
 
+    private static int ICON_SIZE = 40;
+
     private final Icon backIcon;
     private final Icon leaveIcon;
     private final Icon loopIcon;
@@ -43,7 +45,18 @@ public class Icons {
     }
 
     /**
+     * Set the size of all icons. Must be set before an Icons object is constructed.
+     *
+     * @param size positive integer greater than zero that corresponds to the
+     *             size, in pixels, that icons should be scaled to.
+     */
+    public static void setIconSize(int size) {
+        if (size > 0) ICON_SIZE = size;
+    }
+
+    /**
      * Retrieves an Image from a file.
+     * TODO Allow images to be retrieved from resources inside the jar file.
      *
      * @param pathname Path to the image.
      * @return Image if there was an image at the pathname provided, or null if not.
@@ -65,7 +78,8 @@ public class Icons {
     private Icon buildIcon(String pathname) {
         Image image = getImage(pathname);
         if (image == null) return null;
-        return new ImageIcon(image);    // TODO Resize to 60x60, or a global scale.
+        image = image.getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_REPLICATE);
+        return new ImageIcon(image);
     }
 
     public Icon getBackIcon() {
