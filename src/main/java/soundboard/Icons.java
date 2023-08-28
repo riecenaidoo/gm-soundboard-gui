@@ -3,8 +3,8 @@ package soundboard;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 /**
  * Loads Icons and makes them available for use.
@@ -31,17 +31,17 @@ public class Icons {
      * Singly threaded and blocking. Avoid loading large icons.
      */
     public Icons() {
-        this.backIcon = buildIcon("src/main/resources/icons/back.png");
-        this.leaveIcon = buildIcon("src/main/resources/icons/leave.png");
-        this.loopIcon = buildIcon("src/main/resources/icons/loop.png");
-        this.loopOffIcon = buildIcon("src/main/resources/icons/loop_off.png");
-        this.pauseIcon = buildIcon("src/main/resources/icons/pause.png");
-        this.playIcon = buildIcon("src/main/resources/icons/play.png");
-        this.repeatOneIcon = buildIcon("src/main/resources/icons/repeat_one.png");
-        this.shuffleIcon = buildIcon("src/main/resources/icons/shuffle.png");
-        this.shuffleOffIcon = buildIcon("src/main/resources/icons/shuffle_off.png");
-        this.skipIcon = buildIcon("src/main/resources/icons/skip.png");
-        this.stopIcon = buildIcon("src/main/resources/icons/stop.png");
+        this.backIcon = buildIcon("/icons/back.png");
+        this.leaveIcon = buildIcon("/icons/leave.png");
+        this.loopIcon = buildIcon("/icons/loop.png");
+        this.loopOffIcon = buildIcon("/icons/loop_off.png");
+        this.pauseIcon = buildIcon("/icons/pause.png");
+        this.playIcon = buildIcon("/icons/play.png");
+        this.repeatOneIcon = buildIcon("/icons/repeat_one.png");
+        this.shuffleIcon = buildIcon("/icons/shuffle.png");
+        this.shuffleOffIcon = buildIcon("/icons/shuffle_off.png");
+        this.skipIcon = buildIcon("/icons/skip.png");
+        this.stopIcon = buildIcon("/icons/stop.png");
     }
 
     /**
@@ -56,14 +56,15 @@ public class Icons {
 
     /**
      * Retrieves an Image from a file.
-     * TODO Allow images to be retrieved from resources inside the jar file.
      *
      * @param pathname Path to the image.
      * @return Image if there was an image at the pathname provided, or null if not.
      */
     private Image getImage(String pathname) {
         try {
-            return ImageIO.read(new File(pathname));
+            URL imageURL = this.getClass().getResource(pathname);
+            if (imageURL == null) return null;
+            return ImageIO.read(imageURL);
         } catch (NullPointerException | IllegalArgumentException | IOException e) {
             return null;
         }

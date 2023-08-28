@@ -18,7 +18,7 @@ public class Main {
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 
         CatalogueSelectorPanel catalogueSelector = new CatalogueSelectorPanel(api);
-        catalogueSelector.loadUI("src/main/resources/sample_catalogue.json");
+        catalogueSelector.loadUI("sample_catalogue.json");
         panel.add(catalogueSelector);
 
         JPanel mediaPanel = new JPanel();
