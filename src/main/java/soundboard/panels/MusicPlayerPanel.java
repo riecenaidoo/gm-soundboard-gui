@@ -1,9 +1,9 @@
 package soundboard.panels;
 
 import soundboard.API;
+import soundboard.Icons;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -15,6 +15,7 @@ import java.awt.event.MouseListener;
 public class MusicPlayerPanel extends JPanel {
 
     private final API api;
+    private final Icons icons;
 
     private boolean isPlaying;
     private LoopMode loopMode;
@@ -23,11 +24,13 @@ public class MusicPlayerPanel extends JPanel {
     /**
      * Builds a MusicPlayer JPanel that provides a graphical user interface for the soundboard API.
      *
-     * @param api the API this MusicPlayer is providing graphical controls for.
+     * @param api   the API this MusicPlayer is providing graphical controls for.
+     * @param icons available Icons of the Soundboard.
      */
-    public MusicPlayerPanel(API api) {
+    public MusicPlayerPanel(API api, Icons icons) {
         super();
         this.api = api;
+        this.icons = icons;
         this.loopMode = LoopMode.OFF;
         this.shufflePlay = false;
         this.isPlaying = true;
@@ -35,8 +38,6 @@ public class MusicPlayerPanel extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.add(buildVolumeControl());
         this.add(buildSongControls());
-
-        this.setPreferredSize(new Dimension(600, 50));  // TODO remove once there are standard icons.
     }
 
     private JSlider buildVolumeControl() {
@@ -86,71 +87,128 @@ public class MusicPlayerPanel extends JPanel {
     }
 
     private JButton buildPauseResume() {
-        JButton pauseResume = new JButton("PAUSE");
+        JButton pauseResume = new JButton();
+        Icon pauseIcon = icons.getPauseIcon();
+        Icon playIcon = icons.getPlayIcon();
+
+        if (pauseIcon == null) pauseResume.setText("PAUSE");
+        else pauseResume.setIcon(pauseIcon);
+
         pauseResume.addActionListener(e -> {
             if (isPlaying) api.pause();
             else api.resume();
 
             isPlaying = !isPlaying;
-            pauseResume.setText(isPlaying ? "PAUSE" : "RESUME");
+
+            if (isPlaying) {
+                if (pauseIcon == null) pauseResume.setText("PAUSE");
+                else pauseResume.setIcon(pauseIcon);
+            } else {
+                if (playIcon == null) pauseResume.setText("RESUME");
+                else pauseResume.setIcon(playIcon);
+            }
         });
 
         return pauseResume;
     }
 
     private JButton buildStopPlay() {
-        JButton stopPlay = new JButton("STOP");
+        JButton stopPlay = new JButton();
+
+        Icon stopIcon = icons.getStopIcon();
+        if (stopIcon == null) stopPlay.setText("STOP");
+        else {
+            stopPlay.setIcon(stopIcon);
+        }
+
         stopPlay.addActionListener(e -> api.stop());
         return stopPlay;
     }
 
     private JButton buildSkipBack() {
-        JButton skipBack = new JButton("<<-");
+        JButton skipBack = new JButton();
+
+        Icon backIcon = icons.getBackIcon();
+        if (backIcon == null) skipBack.setText("<<-");
+        else {
+            skipBack.setIcon(backIcon);
+        }
+
         skipBack.addActionListener(e -> api.prev());
         return skipBack;
     }
 
     private JButton buildSkipAhead() {
-        JButton skipAhead = new JButton("->>");
+        JButton skipAhead = new JButton();
+
+        Icon skipIcon = icons.getSkipIcon();
+        if (skipIcon == null) skipAhead.setText("->>");
+        else {
+            skipAhead.setIcon(skipIcon);
+        }
+
         skipAhead.addActionListener(e -> api.skip());
         return skipAhead;
     }
 
     private JButton buildShuffleToggle() {
-        JButton shuffleToggle = new JButton("SHUFFLE: OFF");
+        JButton shuffleToggle = new JButton();
+
+        Icon shuffleIcon = icons.getShuffleIcon();
+        Icon shuffleOffIcon = icons.getShuffleOffIcon();
+
+        if (shuffleOffIcon == null) shuffleToggle.setText("SHUFFLE: OFF");
+        else shuffleToggle.setIcon(shuffleOffIcon);
+
         shuffleToggle.addActionListener(e -> {
             api.shuffle();
             shufflePlay = !shufflePlay;
-            String labelText = (shufflePlay) ? "SHUFFLE: ON" : "SHUFFLE : OFF";
-            shuffleToggle.setText(labelText);
+
+            if (shufflePlay) {
+                if (shuffleIcon == null) shuffleToggle.setText("SHUFFLE: ON");
+                else shuffleToggle.setIcon(shuffleIcon);
+            } else {
+                if (shuffleOffIcon == null) shuffleToggle.setText("SHUFFLE: OFF");
+                else shuffleToggle.setIcon(shuffleOffIcon);
+            }
         });
 
         return shuffleToggle;
     }
 
     private JButton buildLoopToggle() {
-        JButton loopToggle = new JButton("LOOP: OFF");
+        JButton loopToggle = new JButton();
+
+        Icon loopIcon = icons.getLoopIcon();
+        Icon loopOffIcon = icons.getLoopOffIcon();
+        Icon repeatOneIcon = icons.getRepeatOneIcon();
+
+        if (loopOffIcon == null) loopToggle.setText("LOOP: OFF");
+        else loopToggle.setIcon(loopOffIcon);
+
         loopToggle.addActionListener(e -> {
             LoopMode[] modes = LoopMode.values();
             int nextModeIndex = ((loopMode.ordinal() + 1) % modes.length);
             LoopMode nextMode = modes[nextModeIndex];
+            loopMode = nextMode;
 
             switch (loopMode) {
                 case OFF -> {
                     api.loop_none();
-                    loopToggle.setText("LOOP: " + nextMode);
+                    if (loopOffIcon == null) loopToggle.setText("LOOP: " + nextMode);
+                    else loopToggle.setIcon(loopOffIcon);
                 }
                 case ALL -> {
                     api.loop();
-                    loopToggle.setText("LOOP: " + nextMode);
+                    if (loopIcon == null) loopToggle.setText("LOOP: " + nextMode);
+                    else loopToggle.setIcon(loopIcon);
                 }
                 case REPEAT -> {
                     api.repeat();
-                    loopToggle.setText("LOOP: " + nextMode);
+                    if (repeatOneIcon == null) loopToggle.setText("LOOP: " + nextMode);
+                    else loopToggle.setIcon(repeatOneIcon);
                 }
             }
-
-            loopMode = nextMode;
         });
 
         return loopToggle;

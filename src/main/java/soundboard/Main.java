@@ -23,7 +23,7 @@ public class Main {
 
         JPanel mediaPanel = new JPanel();
 
-        MusicPlayerPanel miniPlayer = new MusicPlayerPanel(api);
+        MusicPlayerPanel miniPlayer = new MusicPlayerPanel(api, icons);
         mediaPanel.add(miniPlayer);
 
         ChannelSelectorPanel channelSelector = new ChannelSelectorPanel(api, icons);

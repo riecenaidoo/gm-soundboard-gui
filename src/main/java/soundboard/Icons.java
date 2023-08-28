@@ -15,10 +15,12 @@ public class Icons {
     private final Icon backIcon;
     private final Icon leaveIcon;
     private final Icon loopIcon;
+    private final Icon loopOffIcon;
     private final Icon pauseIcon;
     private final Icon playIcon;
     private final Icon repeatOneIcon;
     private final Icon shuffleIcon;
+    private final Icon shuffleOffIcon;
     private final Icon skipIcon;
     private final Icon stopIcon;
 
@@ -30,10 +32,12 @@ public class Icons {
         this.backIcon = buildIcon("src/main/resources/icons/back.png");
         this.leaveIcon = buildIcon("src/main/resources/icons/leave.png");
         this.loopIcon = buildIcon("src/main/resources/icons/loop.png");
+        this.loopOffIcon = buildIcon("src/main/resources/icons/loop_off.png");
         this.pauseIcon = buildIcon("src/main/resources/icons/pause.png");
         this.playIcon = buildIcon("src/main/resources/icons/play.png");
-        this.repeatOneIcon = buildIcon("src/main/resources/icons/repeatOne.png");
+        this.repeatOneIcon = buildIcon("src/main/resources/icons/repeat_one.png");
         this.shuffleIcon = buildIcon("src/main/resources/icons/shuffle.png");
+        this.shuffleOffIcon = buildIcon("src/main/resources/icons/shuffle_off.png");
         this.skipIcon = buildIcon("src/main/resources/icons/skip.png");
         this.stopIcon = buildIcon("src/main/resources/icons/stop.png");
     }
@@ -61,7 +65,7 @@ public class Icons {
     private Icon buildIcon(String pathname) {
         Image image = getImage(pathname);
         if (image == null) return null;
-        return new ImageIcon(image);
+        return new ImageIcon(image);    // TODO Resize to 60x60, or a global scale.
     }
 
     public Icon getBackIcon() {
@@ -74,6 +78,10 @@ public class Icons {
 
     public Icon getLoopIcon() {
         return loopIcon;
+    }
+
+    public Icon getLoopOffIcon() {
+        return loopOffIcon;
     }
 
     public Icon getPauseIcon() {
@@ -90,6 +98,10 @@ public class Icons {
 
     public Icon getShuffleIcon() {
         return shuffleIcon;
+    }
+
+    public Icon getShuffleOffIcon() {
+        return shuffleOffIcon;
     }
 
     public Icon getSkipIcon() {
