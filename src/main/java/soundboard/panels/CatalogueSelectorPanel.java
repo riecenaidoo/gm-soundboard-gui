@@ -7,7 +7,7 @@ import soundboard.API;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,12 +43,9 @@ public class CatalogueSelectorPanel extends JPanel {
     }
 
     public void loadMockUI() {
-        URL mockCatalogue = this.getClass().getResource("mock_catalogue.json");
-        if (mockCatalogue == null) throw new RuntimeException("Mock Catalogue was not found in resources!");
-
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            JsonNode arrayNode = mapper.readTree(new File(mockCatalogue.getFile()));
+        try (InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream("mock_catalogue.json")) {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode arrayNode = mapper.readValue(in, JsonNode.class);
             buildUI(arrayNode);
         } catch (IOException e) {
             throw new RuntimeException("Mock Catalogue could not be read!");
