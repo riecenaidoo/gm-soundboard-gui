@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import soundboard.API;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,7 +24,7 @@ public class CatalogueSelectorPanel extends JPanel {
     public CatalogueSelectorPanel(API api) {
         super();
         this.api = api;
-        this.tabbedPane = new JTabbedPane();
+        this.tabbedPane = new JTabbedPane(SwingConstants.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
 
         this.add(tabbedPane);
     }
@@ -57,7 +58,7 @@ public class CatalogueSelectorPanel extends JPanel {
             throw new RuntimeException("[WARNING] The structure of the JSON is not as expected!");
 
         for (JsonNode jsonNode : arrayNode) {
-            JPanel groupPanel = new JPanel();
+            JPanel groupPanel = new JPanel(new GridLayout(0, 2));
             String groupName = jsonNode.get("Group").asText();
 
             JsonNode itemNode = jsonNode.get("Items");
