@@ -54,6 +54,10 @@ public class Icons {
         if (size > 0) ICON_SIZE = size;
     }
 
+    public static int getIconSize(){
+        return ICON_SIZE;
+    }
+
     /**
      * Retrieves an Image from a file.
      *

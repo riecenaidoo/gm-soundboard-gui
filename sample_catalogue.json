@@ -15,9 +15,21 @@
         ]
       },
       {
-        "Title": "Main Outro",
+        "Title": "Gentler Intro",
+        "Songs": [
+          "https://www.youtube.com/watch?v=EhVyExSGN2o"
+        ]
+      },
+      {
+        "Title": "Lullaby Outro",
         "Songs": [
           "https://www.youtube.com/watch?v=9EhWCAHBbjU"
+        ]
+      },
+      {
+        "Title": "Haunting Outro",
+        "Songs": [
+          "https://www.youtube.com/watch?v=y9wm-Yk4lOw"
         ]
       }
     ]
@@ -56,7 +68,18 @@
           "https://www.youtube.com/watch?v=nFmQqUxH7GA",
           "https://www.youtube.com/watch?v=0YXh3OqUJhc",
           "https://www.youtube.com/watch?v=ZcNyPdipjeU",
-          "https://www.youtube.com/watch?v=pa2Ud9GBqKI"
+          "https://www.youtube.com/watch?v=pa2Ud9GBqKI",
+          "https://www.youtube.com/watch?v=V8HUUjDznCc",
+          "https://www.youtube.com/watch?v=7SuRgcQ0pM0",
+          "https://www.youtube.com/watch?v=TD8qEyHq0aY"
+        ]
+      },
+      {
+        "Title": "Heroic",
+        "Songs": [
+          "https://www.youtube.com/watch?v=RbAU5GIrq-0",
+          "https://www.youtube.com/watch?v=nMmSUGxPEmQ",
+          "https://www.youtube.com/watch?v=N9u-7Xe8rD0"
         ]
       },
       {
@@ -64,6 +87,132 @@
         "Songs": [
           "https://www.youtube.com/watch?v=56GVo6ZeAOg",
           "https://www.youtube.com/watch?v=1E83ziGEsPE"
+        ]
+      }
+    ]
+  },
+  {
+    "Group": "Mood",
+    "Items": [
+      {
+        "Title": "Adventure",
+        "Songs": [
+          "https://www.youtube.com/watch?v=zOFJvvsPv5I",
+          "https://www.youtube.com/watch?v=89GJi12ecnk",
+          "https://www.youtube.com/watch?v=hK0qM9hnr-0",
+          "https://www.youtube.com/watch?v=uvW-QTiZLQ0",
+          "https://www.youtube.com/watch?v=B92P1-OUNJo",
+          "https://www.youtube.com/watch?v=SX9d2wolx6I",
+          "https://www.youtube.com/watch?v=7dvC03u_wgo",
+          "https://www.youtube.com/watch?v=t72YTK00iqY",
+          "https://www.youtube.com/watch?v=Vn4uGYW-TRA",
+          "https://www.youtube.com/watch?v=WdLQpyhiH84",
+          "https://www.youtube.com/watch?v=bvfXOdIJTDY",
+          "https://www.youtube.com/watch?v=KHFCJqM_xLU",
+          "https://www.youtube.com/watch?v=IC6s8DOcIZk",
+          "https://www.youtube.com/watch?v=Lp_R_6UBH2w"
+        ]
+      },
+      {
+        "Title": "Fear/Suspense",
+        "Songs": [
+          "https://www.youtube.com/watch?v=p5-ZkZ3luMA",
+          "https://www.youtube.com/watch?v=535yS1PxX2A"
+        ]
+      },
+      {
+        "Title": "The Dark Trilogy Albums",
+        "Songs":[
+          "https://www.youtube.com/watch?v=WUhMLw6vq8g"
+        ]
+      }
+    ]
+  },
+  {
+    "Group": "Warcamp Ambience",
+    "Items": [
+      {
+        "Title": "Warcamp Ambience",
+        "Songs": [
+          "https://www.youtube.com/watch?v=uhqGVGpVt-A"
+        ]
+      },
+      {
+        "Title": "Warcamp Night Ambience",
+        "Songs": [
+          "https://www.youtube.com/watch?v=IgPOVJbdrOI"
+        ]
+      },
+      {
+        "Title": "Fifth-Wheel Ambience",
+        "Songs": [
+          "https://www.youtube.com/watch?v=ie2fxiTSreQ"
+        ]
+      }]
+    },
+    {    
+      "Group": "Warcamp Ambience",
+      "Items": [
+      {
+        "Title": "Night Camp Forest",
+        "Songs": [
+          "https://www.youtube.com/watch?v=7KFoj-SOfHs",
+          "https://www.youtube.com/watch?v=imxILmKjjCQ"
+        ]
+      },
+      {
+        "Title": "Forest Daytime",
+        "Songs": [
+          "https://www.youtube.com/watch?v=6Em9tLXbhfo"
+        ]
+      },
+      {
+        "Title": "Forest Nighttime",
+        "Songs": [
+          "https://www.youtube.com/watch?v=L3dEOA4giio"
+        ]
+      },
+      {
+        "Title": "Marshes",
+        "Songs": [
+          "https://www.youtube.com/watch?v=NQIoLiQ_uNU",
+          "https://www.youtube.com/watch?v=fq_ZTJqJTcc",
+          "https://www.youtube.com/watch?v=juMabblyLZU"
+        ]
+      },
+      {
+        "Title": "Forest Creek",
+        "Songs": [
+          "https://www.youtube.com/watch?v=mk58c70aLcA"
+        ]
+      },
+      {
+        "Title": "Woodland Waterfall",
+        "Songs": [
+          "https://www.youtube.com/watch?v=fEgFDTkjprM"
+        ]
+      }
+    ]
+  },
+  {
+    "Group": "Cinematics",
+    "Items": [
+      {
+        "Title": "Inspired to War",
+        "Songs": [
+          "https://www.youtube.com/watch?v=7CWYzFk2V6s"
+        ]
+      },
+      {
+        "Title": "Tribal Leader",
+        "Songs": [
+          "https://www.youtube.com/watch?v=AMhd6a8FmuQ"
+        ]
+      },
+      {
+        "Title": "Battle Haka",
+        "Songs": [
+          "https://www.youtube.com/watch?v=AUJUAufR8MA"
         ]
       }
     ]
