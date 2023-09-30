@@ -61,7 +61,7 @@ public class Soundboard {
         JButton connect = new JButton("Connect");
         connect.addActionListener(e -> {
             try {
-                client = Client.getClient();
+                client = Client.getClient(this);
                 status.setText("Connected!");
 
                 openSoundboard();
@@ -88,24 +88,21 @@ public class Soundboard {
     private void openSoundboard() {
         api = new API(client);
         soundboard = buildSoundboard();
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu("Options");
+        JMenuItem disconnect = new JMenuItem("Disconnect");
+        disconnect.addActionListener(e -> closeSoundboard());
+        menu.add(disconnect);
+        menuBar.add(menu);
+        app.setJMenuBar(menuBar);
         app.setContentPane(soundboard);
         app.pack();
-
-        new Thread(() -> {
-            while (!client.socket.isClosed() || client.socket.isConnected()) {
-                try {
-                    Thread.sleep(1500);
-                } catch (InterruptedException e) {
-                    System.out.println("Warning, the socket connection watcher was interrupted.");
-                }
-            }
-            closeSoundboard();
-        }).start();
     }
 
     public void closeSoundboard() {
         client = null;
         api = null;
+        app.setJMenuBar(null);
         app.setContentPane(home);
         app.pack();
         soundboard = null;
