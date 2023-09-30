@@ -6,6 +6,7 @@ import soundboard.panels.ChannelSelectorPanel;
 import soundboard.panels.MusicPlayerPanel;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Soundboard {
 
@@ -56,9 +57,13 @@ public class Soundboard {
 
     private JPanel buildHome() {
         JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.setPreferredSize(new Dimension(250, 60));
 
         JLabel status = new JLabel();
+        status.setPreferredSize(new Dimension(80, 20));
         JButton connect = new JButton("Connect");
+        connect.setPreferredSize(new Dimension(50, 30));
         connect.addActionListener(e -> {
             try {
                 client = Client.getClient(this);
@@ -79,9 +84,8 @@ public class Soundboard {
             }).start();
         });
 
-        panel.add(connect);
-        panel.add(status);
-
+        panel.add(connect, BorderLayout.CENTER);
+        panel.add(status, BorderLayout.SOUTH);
         return panel;
     }
 
