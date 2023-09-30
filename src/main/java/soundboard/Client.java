@@ -58,6 +58,7 @@ public class Client {
                             [ERROR] An error occurred while communicating with the server.
                             \tReason: '%s'.
                             """, e.getMessage());
+            throw new WebSocketBrokenException();
         } finally {
             if (socket.isClosed()) closeQuietly();
         }
@@ -92,5 +93,8 @@ public class Client {
                     \tReason: '%s'.
                     """, e.getMessage()));
         }
+    }
+
+    static class WebSocketBrokenException extends RuntimeException {
     }
 }

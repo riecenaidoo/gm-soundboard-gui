@@ -22,8 +22,6 @@ public class Soundboard {
     private Soundboard() {
         icons = new Icons();
         home = buildHome();
-        soundboard = buildSoundboard();
-
         //Create and set up the window.
         app = new JFrame(String.format("Soundboard V%s", VERSION));
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,23 +62,21 @@ public class Soundboard {
         connect.addActionListener(e -> {
             try {
                 client = Client.getClient();
-                api = new API(client);
                 status.setText("Connected!");
 
-                new Thread(() -> {
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException ex) {
-                        System.out.println("Label clearing thread interrupted.");
-                    }
-                    status.setText("");
-                }).start();
-
                 openSoundboard();
-
             } catch (Client.ClientCreationException c) {
                 status.setText("Connection Failed.");
             }
+
+            new Thread(() -> {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException ex) {
+                    System.out.println("Label clearing thread interrupted.");
+                }
+                status.setText("");
+            }).start();
         });
 
         panel.add(connect);
@@ -90,8 +86,29 @@ public class Soundboard {
     }
 
     private void openSoundboard() {
+        api = new API(client);
+        soundboard = buildSoundboard();
         app.setContentPane(soundboard);
         app.pack();
+
+        new Thread(() -> {
+            while (!client.socket.isClosed() || client.socket.isConnected()) {
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    System.out.println("Warning, the socket connection watcher was interrupted.");
+                }
+            }
+            closeSoundboard();
+        }).start();
+    }
+
+    public void closeSoundboard() {
+        client = null;
+        api = null;
+        app.setContentPane(home);
+        app.pack();
+        soundboard = null;
     }
 
     public void run() {
