@@ -15,13 +15,15 @@ public class Client {
     Socket socket;
     PrintStream out;
     BufferedReader in;
+    Soundboard soundboard;
 
     /**
      * @throws IOException if an I/O error occurs when creating the output stream
      *                     or if the socket is not connected.
      */
-    private Client(Socket socket) throws IOException {
+    private Client(Socket socket, Soundboard soundboard) throws IOException {
         this.socket = socket;
+        this.soundboard = soundboard;
         this.out = new PrintStream(socket.getOutputStream());
         this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
@@ -29,14 +31,14 @@ public class Client {
     /**
      * @throws ClientCreationException if an I/O error occurred while setting up the socket.
      */
-    public static Client getClient() {
+    public static Client getClient(Soundboard soundboard) {
         if (INSTANCE != null) {
             return INSTANCE;
         }
 
         try {
             Socket socket = new Socket(SERVER_IP, PORT);
-            return new Client(socket);
+            return new Client(socket, soundboard);
         } catch (IOException e) {
             throw new ClientCreationException(e);
         }
@@ -45,7 +47,9 @@ public class Client {
     public void send(String output) {
         out.println(output);
         out.flush();
-        System.out.println(receive());
+        String received = receive();
+        if (received == null) soundboard.closeSoundboard();
+        System.out.println(received);
     }
 
     public String receive() {
@@ -60,6 +64,7 @@ public class Client {
                             """, e.getMessage());
         } finally {
             if (socket.isClosed()) closeQuietly();
+            soundboard.closeSoundboard();
         }
 
         return messageFromServer;
