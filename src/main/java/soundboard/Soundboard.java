@@ -104,6 +104,7 @@ public class Soundboard {
     }
 
     public void closeSoundboard() {
+        client.disconnect();
         client = null;
         api = null;
         app.setJMenuBar(null);
