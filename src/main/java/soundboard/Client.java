@@ -62,9 +62,9 @@ public class Client {
                             [ERROR] An error occurred while communicating with the server.
                             \tReason: '%s'.
                             """, e.getMessage());
+            soundboard.closeSoundboard();
         } finally {
             if (socket.isClosed()) closeQuietly();
-            soundboard.closeSoundboard();
         }
 
         return messageFromServer;
@@ -76,6 +76,22 @@ public class Client {
             in.close();
             socket.shutdownInput();
             socket.shutdownOutput();
+            socket.close();
+        } catch (IOException e) {
+            System.out.printf(
+                    """
+                            [ERROR] An error occurred while closing down the client socket.
+                            \tReason: '%s'.
+                            """, e.getMessage());
+        }
+    }
+
+    /**
+     * Disconnects the Socket, handling any errors
+     * that may occur while doing so.
+     */
+    public void disconnect() {
+        try {
             socket.close();
         } catch (IOException e) {
             System.out.printf(
