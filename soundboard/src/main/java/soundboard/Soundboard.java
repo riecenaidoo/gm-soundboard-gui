@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class Soundboard {
 
-    final static double VERSION = 0.3;
+    final static String VERSION = "0.3.1";
     final static String CATALOGUE = "sample_catalogue.json";
 
     Icons icons;
