@@ -1,23 +1,26 @@
-.PHONY: run clean debug
-
-JAVA_HOME = java
-TARGET = target/soundboard-*-SNAPSHOT-jar-with-dependencies.jar
+JAVA = java
+MAVEN = mvn
+SOUNDBOARD = soundboard
+TARGET = $(SOUNDBOARD)/target/soundboard-*-SNAPSHOT-jar-with-dependencies.jar
 
 
 
 $(TARGET):
-	mvn package
+	$(MAVEN) -f $(SOUNDBOARD) package
 
 
+.PHONY: run
 run: $(TARGET)
-	$(JAVA_HOME) -jar $(TARGET)
+	$(JAVA) -jar $(TARGET)
 
 
-# TODO: Start the Dummy Server
+# TODO: Start the Dummy Server, exec: without packaging.
+.PHONY: debug
 debug:
 	$(MAKE) clean
 	$(MAKE) run
 
 
+.PHONY: clean
 clean:
-	mvn clean
+	$(MAVEN) -f $(SOUNDBOARD) clean
