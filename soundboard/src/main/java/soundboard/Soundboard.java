@@ -10,7 +10,6 @@ import java.awt.*;
 
 public class Soundboard {
 
-    final static String VERSION = "0.3.1";
     final static String CATALOGUE = "sample_catalogue.json";
 
     Icons icons;
@@ -24,7 +23,7 @@ public class Soundboard {
         icons = new Icons();
         home = buildHome();
         //Create and set up the window.
-        app = new JFrame(String.format("Soundboard V%s", VERSION));
+        app = new JFrame("Soundboard");
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         app.setContentPane(home);
     }
