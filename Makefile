@@ -1,4 +1,4 @@
-.PHONY: gui clean debug
+.PHONY: run clean debug
 
 JAVA_HOME = java
 TARGET = target/soundboard-*-SNAPSHOT-jar-with-dependencies.jar
@@ -13,6 +13,7 @@ run: $(TARGET)
 	$(JAVA_HOME) -jar $(TARGET)
 
 
+# TODO: Start the Dummy Server
 debug:
 	$(MAKE) clean
 	$(MAKE) run
