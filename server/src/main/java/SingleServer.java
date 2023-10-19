@@ -4,6 +4,9 @@ import java.net.Socket;
 
 public class SingleServer {
 
+    static final int PORT = 5000;
+    static final String hostname = "localhost";
+
     private final ServerSocket serverSocket;
     private BufferedWriter out;
     private BufferedReader in;
@@ -17,7 +20,6 @@ public class SingleServer {
     }
 
     public static void main(String[] args) {
-        int PORT = 5000;
         new SingleServer(PORT).run();
     }
 

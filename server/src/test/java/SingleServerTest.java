@@ -19,7 +19,7 @@ class SingleServerTest {
     @Test
     void connect() {
         try {
-            Socket socket = new Socket("localhost", 5000);
+            Socket socket = new Socket(SingleServer.hostname, SingleServer.PORT);
             socket.close();
         } catch (SocketException s) {
             Assertions.fail("Could not connect.");
