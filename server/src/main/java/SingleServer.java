@@ -2,6 +2,10 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * A dummy server that allows a single connection.
+ * Responds to any request with a 200 code.
+ */
 public class SingleServer {
 
     static final int PORT = 5000;
