@@ -12,6 +12,24 @@ import java.net.UnknownHostException;
  */
 class SingleServerTest {
 
+    static final int PORT = SingleServer.PORT;
+    static final String HOST = SingleServer.hostname;
+
+    SingleServer server;
+
+    @org.junit.jupiter.api.BeforeEach
+    void setUp() {
+        server = new SingleServer(PORT);
+        new Thread(() -> {
+            server.run();
+        }).start();
+    }
+
+    @org.junit.jupiter.api.AfterEach
+    void tearDown() {
+        server.shutdown();
+    }
+
     /**
      * Can connect to the SingleServer
      * over a local port.
@@ -19,7 +37,7 @@ class SingleServerTest {
     @Test
     void connect() {
         try {
-            Socket socket = new Socket(SingleServer.hostname, SingleServer.PORT);
+            Socket socket = new Socket(HOST, PORT);
             socket.close();
         } catch (SocketException s) {
             Assertions.fail("Could not connect.");

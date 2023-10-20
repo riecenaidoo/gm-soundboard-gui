@@ -8,6 +8,7 @@ public class SingleServer {
     static final String hostname = "localhost";
 
     private final ServerSocket serverSocket;
+    private Socket clientSocket;
     private BufferedWriter out;
     private BufferedReader in;
 
@@ -25,17 +26,28 @@ public class SingleServer {
 
     public void connect() {
         try {
-            Socket socket = serverSocket.accept();
+            clientSocket = serverSocket.accept();
 
-            OutputStream outputStream = socket.getOutputStream();
+            OutputStream outputStream = clientSocket.getOutputStream();
             out = new BufferedWriter(new OutputStreamWriter(outputStream));
 
-            InputStream inputStream = socket.getInputStream();
+            InputStream inputStream = clientSocket.getInputStream();
             in = new BufferedReader(new InputStreamReader(inputStream));
         } catch (IOException e) {
             throw new RuntimeException(("[WARNING] There was a problem connecting & setting up the socket."));
         } finally {
             closeQuietly();
+        }
+    }
+
+    public void shutdown() {
+        closeQuietly();
+
+        try {
+            serverSocket.close();
+            if (clientSocket != null) clientSocket.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
