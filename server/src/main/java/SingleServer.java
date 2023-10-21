@@ -8,7 +8,7 @@ import java.net.Socket;
  */
 public class SingleServer {
 
-    static final int PORT = 5000;
+    static final int PORT = 6000;
     static final String hostname = "localhost";
 
     private final ServerSocket serverSocket;
@@ -34,13 +34,10 @@ public class SingleServer {
 
             OutputStream outputStream = clientSocket.getOutputStream();
             out = new BufferedWriter(new OutputStreamWriter(outputStream));
-
             InputStream inputStream = clientSocket.getInputStream();
             in = new BufferedReader(new InputStreamReader(inputStream));
         } catch (IOException e) {
             throw new RuntimeException(("[WARNING] There was a problem connecting & setting up the socket."));
-        } finally {
-            closeQuietly();
         }
     }
 
@@ -67,9 +64,11 @@ public class SingleServer {
                 String serverResponse = "200";
                 System.out.printf("[--->] '%s'.\n", serverResponse);
                 out.write(serverResponse);
+                out.newLine();
                 out.flush();
             } while (clientRequest != null);
         } catch (IOException ex) {
+            ex.printStackTrace();
             System.out.println("[INFO] Disconnected.");
         } finally {
             closeQuietly();
@@ -82,7 +81,7 @@ public class SingleServer {
             if (out != null) out.close();
         } catch (IOException e) {
             System.out.println("[WARNING] There was a problem closing ServerSocket I/O streams.");
-            e.printStackTrace();
+
         }
     }
 }

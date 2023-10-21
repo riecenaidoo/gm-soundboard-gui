@@ -2,10 +2,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
@@ -31,7 +28,9 @@ class SingleServerTest {
 
     @org.junit.jupiter.api.AfterEach
     void tearDown() {
+        System.out.println("Shutting down.");
         server.shutdown();
+        System.out.println("Shutdown.");
     }
 
     /**
@@ -78,13 +77,15 @@ class SingleServerTest {
     void sendReceiveOne() {
         Socket socket = getSocket();
         try {
-            PrintStream out = new PrintStream(socket.getOutputStream(), true);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     socket.getInputStream()));
 
-            out.println("Hello World.");
-            Assertions.assertFalse(out.checkError(), "There was an error sending a request to the Server.");
+            out.write("Hello World.");
+            out.newLine();
+            out.flush();
             Assertions.assertEquals("200", in.readLine(), "Server did not return success code.");
+            socket.close();
         } catch (IOException e) {
             Assertions.fail("Could not set up input and output streams.");
         }
