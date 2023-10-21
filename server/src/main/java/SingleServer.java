@@ -68,7 +68,6 @@ public class SingleServer {
                 out.flush();
             } while (clientRequest != null);
         } catch (IOException ex) {
-            ex.printStackTrace();
             System.out.println("[INFO] Disconnected.");
         } finally {
             closeQuietly();

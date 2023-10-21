@@ -1,14 +1,17 @@
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
 import java.net.Socket;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 /**
+ * Small suite of tests to check correctness of SingleServer implementation.
+ *
  * @see SingleServer
  */
 class SingleServerTest {
@@ -17,56 +20,47 @@ class SingleServerTest {
     static final String HOST = SingleServer.hostname;
 
     SingleServer server;
+    Socket socket;
+    BufferedWriter out;
+    BufferedReader in;
 
-    @org.junit.jupiter.api.BeforeEach
-    void setUp() {
+    /**
+     * Create an instance of the SingleServer, running it in a thread.
+     * Connects a Socket and sets up its input and output streams for testing.
+     *
+     * @throws IOException IOExceptions occurring during the setup process.
+     *                     Usually problems with the HOSTNAME / PORT that need to be resolved manually
+     *                     before testing can proceed.
+     */
+    @BeforeEach
+    void setUp() throws IOException {
         server = new SingleServer(PORT);
         new Thread(() -> {
             server.run();
         }).start();
+
+        socket = new Socket(HOST, PORT);
+        out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+        in = new BufferedReader(new InputStreamReader(
+                socket.getInputStream()));
     }
 
-    @org.junit.jupiter.api.AfterEach
-    void tearDown() {
-        System.out.println("Shutting down.");
+    @AfterEach
+    void tearDown() throws IOException {
+        socket.close();
         server.shutdown();
-        System.out.println("Shutdown.");
     }
 
     /**
-     * @return Socket connected to the setUp Server.
+     * Appends the system's newline to message and flushes the stream.
+     * @param msg message without newline and/or carriage return characters to write to the stream.
+     * @throws IOException IOException that occurs during the writing to stream process to be handled by test case
+     * using this method, usually it should fail the test.
      */
-    Socket getSocket() {
-        try {
-            return new Socket(HOST, PORT);
-        } catch (SocketException s) {
-            throw new RuntimeException("Could not connect.");
-        } catch (UnknownHostException | IllegalArgumentException ex) {
-            throw new RuntimeException("Invalid host/port specification.");
-        } catch (SecurityException | IOException e) {
-            throw new RuntimeException("Check firewall, and local machine resources.");
-        }
-    }
-
-    /**
-     * Can connect to the SingleServer
-     * over a local port.
-     *
-     * Disabled: Will be used for other tests.
-     */
-    @Test
-    @Disabled
-    void connect() {
-        try {
-            Socket socket = new Socket(HOST, PORT);
-            socket.close();
-        } catch (SocketException s) {
-            Assertions.fail("Could not connect.");
-        } catch (UnknownHostException | IllegalArgumentException ex) {
-            throw new RuntimeException("Invalid host/port specification.");
-        } catch (SecurityException | IOException e) {
-            throw new RuntimeException("Check firewall, and local machine resources.");
-        }
+    void sendMessage(String msg) throws IOException {
+        out.write(msg);
+        out.newLine();
+        out.flush();
     }
 
     /**
@@ -75,19 +69,11 @@ class SingleServerTest {
      */
     @Test
     void sendReceiveOne() {
-        Socket socket = getSocket();
         try {
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                    socket.getInputStream()));
-
-            out.write("Hello World.");
-            out.newLine();
-            out.flush();
-            Assertions.assertEquals("200", in.readLine(), "Server did not return success code.");
-            socket.close();
+            sendMessage("Hello World.");
+            assertEquals("200", in.readLine(), "Server did not return success code.");
         } catch (IOException e) {
-            Assertions.fail("Could not set up input and output streams.");
+            fail(String.format("I/O Exception during Test: %s", e.getMessage()));
         }
     }
 
@@ -96,7 +82,15 @@ class SingleServerTest {
      */
     @Test
     void sendReceiveMany() {
+        try {
+            sendMessage("First.");
+            assertEquals("200", in.readLine(), "Server did not return success code.");
 
+            sendMessage("Second.");
+            assertEquals("200", in.readLine(), "Server did not return success code.");
+        } catch (IOException e) {
+            fail(String.format("I/O Exception during Test: %s", e.getMessage()));
+        }
     }
 
     /**
