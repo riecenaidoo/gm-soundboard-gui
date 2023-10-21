@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 
 /**
- * Small suite of tests to check correctness of SingleServer implementation.
+ * Small set of tests to check correctness of SingleServer implementation.
  *
  * @see SingleServer
  */
@@ -35,9 +35,7 @@ class SingleServerTest {
     @BeforeEach
     void setUp() throws IOException {
         server = new SingleServer(PORT);
-        new Thread(() -> {
-            server.run();
-        }).start();
+        new Thread(() -> server.run()).start();
 
         socket = new Socket(HOST, PORT);
         out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
@@ -98,6 +96,29 @@ class SingleServerTest {
      */
     @Test
     void disconnectReconnect() {
+        try {
+            sendMessage("Before.");
+            assertEquals("200", in.readLine(), "Server did not return success code.");
+        } catch (IOException e) {
+            fail(String.format("I/O Exception during Test: %s", e.getMessage()));
+        }
 
+        try {
+            socket.close();
+        } catch (IOException e) {
+            System.out.printf("[WARNING] During Socket Closing: %s\n.", e.getMessage());
+        }
+
+        try {
+            socket = new Socket(HOST, PORT);
+            out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            in = new BufferedReader(new InputStreamReader(
+                    socket.getInputStream()));
+
+            sendMessage("After.");
+            assertEquals("200", in.readLine(), "Server did not return success code.");
+        } catch (IOException e) {
+            fail(String.format("I/O Exception during Test: %s", e.getMessage()));
+        }
     }
 }
