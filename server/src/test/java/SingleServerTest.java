@@ -106,6 +106,7 @@ class SingleServerTest {
         try {
             socket.close();
         } catch (IOException e) {
+            // IOException here is probably not caused by the Server, so don't fail the test.
             System.out.printf("[WARNING] During Socket Closing: %s\n.", e.getMessage());
         }
 
