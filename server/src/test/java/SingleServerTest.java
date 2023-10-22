@@ -46,7 +46,7 @@ class SingleServerTest {
     @AfterEach
     void tearDown() throws IOException {
         socket.close();
-        server.shutdown();
+        server.shutdownServer();
     }
 
     /**
