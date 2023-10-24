@@ -4,3 +4,6 @@
 
 # Compiled Code
 target/
+
+# Process Files
+server.PID
