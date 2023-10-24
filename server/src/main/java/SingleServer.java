@@ -8,7 +8,7 @@ import java.net.Socket;
  */
 public class SingleServer implements Runnable {
 
-    static final int PORT = 6000;
+    static final int PORT = 5000;
     static final String hostname = "localhost";
 
     private final ServerSocket serverSocket;
@@ -24,6 +24,7 @@ public class SingleServer implements Runnable {
      */
     public SingleServer(int PORT) throws IOException {
         serverSocket = new ServerSocket(PORT);
+        System.out.printf("[INFO] Bound server to PORT %d.\n", PORT);
     }
 
     public static void main(String[] args) {
@@ -49,6 +50,7 @@ public class SingleServer implements Runnable {
         clientSocket = serverSocket.accept();
         out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        System.out.println("[INFO] Client connected.");
     }
 
     /**
@@ -58,7 +60,6 @@ public class SingleServer implements Runnable {
     public void disconnectClient() {
         if (clientSocket == null) return;
 
-        System.out.println("[INFO] Disconnecting Client.");
         try {
             clientSocket.close();
         } catch (IOException e) {
@@ -75,6 +76,7 @@ public class SingleServer implements Runnable {
      * to shut down if it is running.
      */
     public void shutdownServer(){
+        System.out.println("[INFO] Shutting down server.");
         try {
             serverSocket.close();
         } catch (IOException e) {
@@ -83,6 +85,7 @@ public class SingleServer implements Runnable {
     }
 
     public void run() {
+        System.out.println("[INFO] Server online.");
         while (!serverSocket.isClosed()) {
             try {
                 connectClient();
@@ -91,6 +94,7 @@ public class SingleServer implements Runnable {
                     if (clientRequest == null) break;
                     sendResponse("200");
                 }
+                System.out.println("[INFO] Client disconnected.");
             } catch (IOException e) {
                 System.out.printf("[WARNING] IOException: '%s'.\n", e.getMessage());
             } finally {
@@ -100,7 +104,6 @@ public class SingleServer implements Runnable {
     }
 
     private String getRequest() throws IOException {
-        System.out.println("[INFO] Awaiting...");
         String clientRequest = in.readLine();
         System.out.printf("[<---] '%s'.\n", clientRequest);
         return clientRequest;
