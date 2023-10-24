@@ -1,23 +1,47 @@
-.PHONY: run clean debug
-
-JAVA_HOME = java
-TARGET = target/soundboard-*-SNAPSHOT-jar-with-dependencies.jar
-
+JAVA = java
+MAVEN = mvn
+SOUNDBOARD = soundboard
+SERVER = server
+TARGET = $(SOUNDBOARD)/target/soundboard-*-jar-with-dependencies.jar
+DUMMY = $(SERVER)/target/server*.jar
 
 
 $(TARGET):
-	mvn package
+	$(MAVEN) -f $(SOUNDBOARD) package
 
 
+$(DUMMY):
+	$(MAVEN) -f $(SERVER) package
+
+
+.PHONY: run
 run: $(TARGET)
-	$(JAVA_HOME) -jar $(TARGET)
+	$(JAVA) -jar $(TARGET)
 
 
-# TODO: Start the Dummy Server
-debug:
-	$(MAKE) clean
+# Rebuilds & runs the Soundboard against a dummy server.
+.PHONY: debug
+debug: $(DUMMY)
+	$(MAVEN) -f $(SOUNDBOARD) clean
+	$(JAVA) -jar $(DUMMY) & echo $$! > server.PID&
 	$(MAKE) run
+	$(MAKE) shutdown_dummy
 
 
+shutdown_dummy:
+	@if test -f "server.PID";then\
+		echo "Checking status of dummy server..";\
+		if ps -p `cat server.PID`;then\
+			echo "Shutting down running dummy server process..";\
+			kill `cat server.PID`;\
+		fi;\
+		echo "Removing PID cache file..";\
+		rm -f server.PID;\
+	fi;
+
+
+.PHONY: clean
 clean:
-	mvn clean
+	$(MAKE) shutdown_dummy
+	$(MAVEN) -f $(SOUNDBOARD) clean
+	$(MAVEN) -f $(SERVER) clean
