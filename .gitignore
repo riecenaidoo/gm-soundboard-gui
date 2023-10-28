@@ -6,4 +6,4 @@
 target/
 
 # Process Files
-server.PID
+*.PID
