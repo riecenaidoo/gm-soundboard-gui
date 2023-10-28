@@ -1,9 +1,10 @@
-package soundboard;
+package controller;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import soundboard.panels.CatalogueSelectorPanel;
-import soundboard.panels.ChannelSelectorPanel;
-import soundboard.panels.MusicPlayerPanel;
+import model.Icons;
+import view.CatalogueSelectorPanel;
+import view.ChannelSelectorPanel;
+import view.MusicPlayerPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +24,7 @@ public class Soundboard {
         icons = new Icons();
         home = buildHome();
         //Create and set up the window.
-        app = new JFrame("Soundboard");
+        app = new JFrame("controller.Soundboard");
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         app.setContentPane(home);
     }

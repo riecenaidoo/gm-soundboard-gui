@@ -1,4 +1,4 @@
-package soundboard;
+package model;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -12,7 +12,7 @@ import java.net.URL;
  */
 public class Icons {
 
-    private static int ICON_SIZE = 40;
+    private static final int ICON_SIZE = 40;
 
     private final Icon backIcon;
     private final Icon leaveIcon;
@@ -42,20 +42,6 @@ public class Icons {
         this.shuffleOffIcon = buildIcon("/icons/shuffle_off.png");
         this.skipIcon = buildIcon("/icons/skip.png");
         this.stopIcon = buildIcon("/icons/stop.png");
-    }
-
-    /**
-     * Set the size of all icons. Must be set before an Icons object is constructed.
-     *
-     * @param size positive integer greater than zero that corresponds to the
-     *             size, in pixels, that icons should be scaled to.
-     */
-    public static void setIconSize(int size) {
-        if (size > 0) ICON_SIZE = size;
-    }
-
-    public static int getIconSize(){
-        return ICON_SIZE;
     }
 
     /**

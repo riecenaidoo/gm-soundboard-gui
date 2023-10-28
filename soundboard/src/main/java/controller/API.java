@@ -1,4 +1,4 @@
-package soundboard;
+package controller;
 
 import java.util.List;
 

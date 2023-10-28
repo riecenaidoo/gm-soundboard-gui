@@ -1,7 +1,7 @@
-package soundboard.panels;
+package view;
 
-import soundboard.API;
-import soundboard.Icons;
+import controller.API;
+import model.Icons;
 
 import javax.swing.*;
 
@@ -20,7 +20,7 @@ public class ChannelSelectorPanel extends JPanel {
      * Builds a ChannelSelector JPanel that provides a graphical user interface for the soundboard API.
      *
      * @param api   the API this ChannelSelector is providing graphical controls for.
-     * @param icons available Icons of the Soundboard.
+     * @param icons available Icons of the controller.Soundboard.
      */
     public ChannelSelectorPanel(API api, Icons icons) {
         super();

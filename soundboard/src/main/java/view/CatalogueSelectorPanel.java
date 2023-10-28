@@ -1,8 +1,8 @@
-package soundboard.panels;
+package view;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import soundboard.API;
+import controller.API;
 
 import javax.swing.*;
 import java.awt.*;

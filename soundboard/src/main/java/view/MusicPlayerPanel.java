@@ -1,7 +1,7 @@
-package soundboard.panels;
+package view;
 
-import soundboard.API;
-import soundboard.Icons;
+import controller.API;
+import model.Icons;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
@@ -25,7 +25,7 @@ public class MusicPlayerPanel extends JPanel {
      * Builds a MusicPlayer JPanel that provides a graphical user interface for the soundboard API.
      *
      * @param api   the API this MusicPlayer is providing graphical controls for.
-     * @param icons available Icons of the Soundboard.
+     * @param icons available Icons of the controller.Soundboard.
      */
     public MusicPlayerPanel(API api, Icons icons) {
         super();
