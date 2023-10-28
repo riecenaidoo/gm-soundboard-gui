@@ -49,7 +49,7 @@ public class Client {
         out.flush();
         String received = receive();
         if (received == null) soundboard.closeSoundboard();
-        System.out.println(received);
+//        System.out.printf("[INFO] Received: '%s'.\n", received);
     }
 
     public String receive() {

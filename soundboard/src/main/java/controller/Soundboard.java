@@ -24,7 +24,7 @@ public class Soundboard {
         icons = new Icons();
         home = buildHome();
         //Create and set up the window.
-        app = new JFrame("controller.Soundboard");
+        app = new JFrame("Soundboard");
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         app.setContentPane(home);
     }
