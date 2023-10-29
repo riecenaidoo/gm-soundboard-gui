@@ -19,15 +19,12 @@ run: $(TARGET)
 	$(JAVA) -jar $(TARGET)
 
 
-# Rebuilds & runs the Soundboard against a dummy server.
-.PHONY: debug
-debug: $(DUMMY)
-	$(MAVEN) -f $(SOUNDBOARD) clean
+.PHONY: start_dummy
+start_dummy: $(DUMMY)
 	$(JAVA) -jar $(DUMMY) & echo $$! > server.PID&
-	$(MAKE) run
-	$(MAKE) shutdown_dummy
 
 
+.PHONY: shutdown_dummy
 shutdown_dummy:
 	@if test -f "server.PID";then\
 		echo "Checking status of dummy server..";\
@@ -38,6 +35,15 @@ shutdown_dummy:
 		echo "Removing PID cache file..";\
 		rm -f server.PID;\
 	fi;
+
+
+# Rebuilds & runs the Soundboard against a dummy server.
+.PHONY: debug
+debug:
+	$(MAVEN) -f $(SOUNDBOARD) clean
+	$(MAKE) start_dummy
+	$(MAKE) run
+	$(MAKE) shutdown_dummy
 
 
 .PHONY: clean
