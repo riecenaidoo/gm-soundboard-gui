@@ -1,1 +1,9 @@
-Categories are used to organise groups of Playlists together. A Category object represents an ordered collection of Playlists.
+package model;
+
+/**
+ * Categories are used to organise groups of Playlists together.
+ * A Category object represents an ordered collection of Playlists.
+ */
+class Category {
+
+}
