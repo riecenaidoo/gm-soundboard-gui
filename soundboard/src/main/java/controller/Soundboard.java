@@ -1,13 +1,17 @@
 package controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.formdev.flatlaf.FlatDarkLaf;
+import model.Catalogue;
 import model.Icons;
-import view.CatalogueSelectorPanel;
+import view.CatalogueTabbedPane;
 import view.ChannelSelectorPanel;
 import view.MusicPlayerPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Soundboard {
 
@@ -38,9 +42,19 @@ public class Soundboard {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 
-        CatalogueSelectorPanel catalogueSelector = new CatalogueSelectorPanel(api);
-        catalogueSelector.loadUI(CATALOGUE);
-        panel.add(catalogueSelector);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            Catalogue catalogue = Catalogue.fromJson(mapper.readTree(new File(CATALOGUE)));
+            CatalogueTabbedPane catalogueTabbedPane = new CatalogueTabbedPane();
+            new CatalogueController(api, catalogue, catalogueTabbedPane);
+            panel.add(catalogueTabbedPane);
+        } catch (IOException e) {
+            // Fallback: Read from template.
+            //InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream("mock_catalogue.json")) {
+            //ObjectMapper mapper = new ObjectMapper();
+            //JsonNode arrayNode = mapper.readValue(in, JsonNode.class);
+            throw new RuntimeException("There was a problem parsing '%s' as a JSON file.\\n\", CATALOGUE.");
+        }
 
         JPanel mediaPanel = new JPanel();
 
