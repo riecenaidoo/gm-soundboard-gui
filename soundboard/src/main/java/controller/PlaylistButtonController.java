@@ -11,16 +11,11 @@ public class PlaylistButtonController {
     private final Playlist playlist;
     private final JButton button;
 
-
-    public PlaylistButtonController(API api, Playlist playlist) {
+    public PlaylistButtonController(API api, Playlist playlist, PlaylistButton button) {
         this.api = api;
         this.playlist = playlist;
-        button = new PlaylistButton(playlist);
+        this.button = button;
         button.addActionListener(l -> this.play());
-    }
-
-    public JButton getButton() {
-        return button;
     }
 
     public void play() {
