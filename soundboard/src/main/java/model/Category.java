@@ -14,10 +14,51 @@ class Category {
 
     public Category(String title) {
         this.title = title;
-        this.playlists = new ArrayList<>();
+        playlists = new ArrayList<>();
     }
 
-    public void addPlaylist(Playlist playlist) {
-        this.playlists.add(playlist);
+    public String getTitle() {
+        return title;
+    }
+
+    public Collection<Playlist> getPlaylists() {
+        return playlists;
+    }
+
+    public boolean add(Playlist playlist) {
+        return playlists.add(playlist);
+    }
+
+    public boolean remove(Playlist playlist) {
+        return playlists.remove(playlist);
+    }
+
+    /**
+     * @return number of Playlists in this Category.
+     */
+    public int size() {
+        return playlists.size();
+    }
+
+    /**
+     * @return total number of Songs in this Category.
+     */
+    public int total() {
+        return playlists.stream().mapToInt(Playlist::size).sum();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder("{");
+        s.append(title);
+        s.append(":[");
+        playlists.forEach(playlist -> {
+            s.append(playlist.getTitle());
+            s.append(", ");
+        });
+        s.deleteCharAt(s.lastIndexOf(", "));
+        s.append("]}");
+
+        return s.toString();
     }
 }
