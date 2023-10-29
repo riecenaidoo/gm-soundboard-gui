@@ -19,7 +19,11 @@ public class CatalogueController {
         controllers = new ArrayList<>();
     }
 
+    /**
+     * Load all elements into the Catalogue view.
+     */
     public void load() {
+        if (!controllers.isEmpty()) unload();
         catalogue.getCategories().forEach(category -> {
             CategoryPanel view = new CategoryPanel(category);
             CategoryController controller = new CategoryController(category, view);
@@ -27,6 +31,15 @@ public class CatalogueController {
             controllers.add(controller);
             tabbedPane.addTab(category.getTitle(), view);
         });
+    }
+
+    /**
+     * Unload all elements from the Catalogue view.
+     */
+    private void unload() {
+        controllers.forEach(CategoryController::unload);
+        controllers.clear();
+        tabbedPane.removeAll();
     }
 
     /**

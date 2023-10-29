@@ -19,13 +19,25 @@ public class CategoryController {
         controllers = new ArrayList<>();
     }
 
+    /**
+     * Unload all elements from the Category view.
+     */
     public void load() {
+        if (!controllers.isEmpty()) unload();
         category.getPlaylists().forEach(playlist -> {
             PlaylistButton button = new PlaylistButton(playlist);
             PlaylistButtonController controller = new PlaylistButtonController(playlist, button);
             controllers.add(controller);
             view.add(button);
         });
+    }
+
+    /**
+     * Unload all elements from the Category view.
+     */
+    public void unload() {
+        controllers.clear();
+        view.removeAll();
     }
 
     /**
