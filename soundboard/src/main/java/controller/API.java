@@ -1,6 +1,6 @@
 package controller;
 
-import java.util.List;
+import java.util.Collection;
 
 public class API {
 
@@ -22,7 +22,7 @@ public class API {
     }
 
     // Catalogue Selector Panel
-    public void play(List<String> songs) {
+    public void play(Collection<String> songs) {
         StringBuilder stringBuilder = new StringBuilder("play");
 
         for (String song : songs) {
