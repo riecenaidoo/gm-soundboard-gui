@@ -1,5 +1,7 @@
 package model;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -7,7 +9,7 @@ import java.util.Collection;
  * The Catalogue represents all playlists,
  * sorted by category, that have been loaded into this application.
  */
-class Catalogue {
+public class Catalogue {
 
     private final Collection<Category> categories;
 
@@ -52,6 +54,16 @@ class Catalogue {
         s.append("]");
 
         return s.toString();
+    }
+
+    public static Catalogue fromJson(JsonNode json) {
+        Catalogue catalogue = new Catalogue();
+        for (JsonNode category : json) catalogue.add(Category.fromJson(category));
+        return catalogue;
+    }
+
+    public JsonNode toJson(Catalogue catalogue) {
+        throw new UnsupportedOperationException("TODO");
     }
 }
 

@@ -1,5 +1,7 @@
 package model;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -7,7 +9,7 @@ import java.util.Collection;
  * Categories are used to organise groups of Playlists together.
  * A Category object represents an ordered collection of Playlists.
  */
-class Category {
+public class Category {
 
     private final String title;
     private final Collection<Playlist> playlists;
@@ -60,5 +62,15 @@ class Category {
         s.append("]}");
 
         return s.toString();
+    }
+
+    public static Category fromJson(JsonNode json) {
+        Category category = new Category(json.get("Group").asText());
+        for (JsonNode playlist : json.get("Items")) category.add(Playlist.fromJson(playlist));
+        return category;
+    }
+
+    public JsonNode toJson(Category category) {
+        throw new UnsupportedOperationException("TODO");
     }
 }
