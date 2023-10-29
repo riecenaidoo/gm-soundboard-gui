@@ -60,7 +60,7 @@ public class Soundboard {
         }
 
         CatalogueTabbedPane catalogueTabbedPane = new CatalogueTabbedPane();
-        new CatalogueController(api, catalogue, catalogueTabbedPane);
+        new CatalogueController(catalogue, catalogueTabbedPane).loadCategories(api);
         panel.add(catalogueTabbedPane);
 
         JPanel mediaPanel = new JPanel();
