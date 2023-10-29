@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public class Soundboard {
 
-    final static String CATALOGUE = "sample_catalogue.json";
+    final static String CATALOGUE = "docs/catalogue_sample.json";
 
     Icons icons;
     Client client;
@@ -27,6 +27,7 @@ public class Soundboard {
     private Soundboard() {
         icons = new Icons();
         home = buildHome();
+        soundboard = buildSoundboard();
         //Create and set up the window.
         app = new JFrame("Soundboard");
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -105,7 +106,6 @@ public class Soundboard {
 
     private void openSoundboard() {
         api = new API(client);
-        soundboard = buildSoundboard();
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Options");
         JMenuItem disconnect = new JMenuItem("Disconnect");
