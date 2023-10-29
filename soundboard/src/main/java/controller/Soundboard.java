@@ -1,5 +1,6 @@
 package controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.formdev.flatlaf.FlatDarkLaf;
 import model.Catalogue;
@@ -12,6 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class Soundboard {
 
@@ -27,7 +29,6 @@ public class Soundboard {
     private Soundboard() {
         icons = new Icons();
         home = buildHome();
-        soundboard = buildSoundboard();
         //Create and set up the window.
         app = new JFrame("Soundboard");
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,23 +40,28 @@ public class Soundboard {
         new Soundboard().run();
     }
 
+
     private JPanel buildSoundboard() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 
         ObjectMapper mapper = new ObjectMapper();
+        Catalogue catalogue;
         try {
-            Catalogue catalogue = Catalogue.fromJson(mapper.readTree(new File(CATALOGUE)));
-            CatalogueTabbedPane catalogueTabbedPane = new CatalogueTabbedPane();
-            new CatalogueController(api, catalogue, catalogueTabbedPane);
-            panel.add(catalogueTabbedPane);
+            if (!CATALOGUE.isEmpty()) {
+                catalogue = Catalogue.fromJson(mapper.readTree(new File(CATALOGUE)));
+            } else {
+                InputStream in = Thread.currentThread().getContextClassLoader().
+                        getResourceAsStream("catalogue_template.json");
+                catalogue = Catalogue.fromJson(mapper.readValue(in, JsonNode.class));
+            }
         } catch (IOException e) {
-            // Fallback: Read from template.
-            //InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream("mock_catalogue.json")) {
-            //ObjectMapper mapper = new ObjectMapper();
-            //JsonNode arrayNode = mapper.readValue(in, JsonNode.class);
-            throw new RuntimeException("There was a problem parsing '%s' as a JSON file.\\n\", CATALOGUE.");
+            throw new RuntimeException(e.getMessage());
         }
+
+        CatalogueTabbedPane catalogueTabbedPane = new CatalogueTabbedPane();
+        new CatalogueController(api, catalogue, catalogueTabbedPane);
+        panel.add(catalogueTabbedPane);
 
         JPanel mediaPanel = new JPanel();
 
@@ -106,6 +112,7 @@ public class Soundboard {
 
     private void openSoundboard() {
         api = new API(client);
+        soundboard = buildSoundboard();
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Options");
         JMenuItem disconnect = new JMenuItem("Disconnect");
