@@ -9,13 +9,8 @@ public class PlaylistButtonController {
     private final PlaylistButton button;
 
     public PlaylistButtonController(Playlist playlist, PlaylistButton button) {
-
         this.playlist = playlist;
         this.button = button;
-    }
-
-    public void loadSongs(API api) {
-        button.addActionListener(l -> api.play(playlist.getSongs()));
     }
 
     /**
@@ -24,5 +19,6 @@ public class PlaylistButtonController {
      * @param api
      */
     public void connect(API api) {
+        button.addActionListener(l -> api.play(playlist.getSongs()));
     }
 }
