@@ -21,7 +21,7 @@ run: $(TARGET)
 
 .PHONY: start_dummy
 start_dummy: $(DUMMY)
-	$(JAVA) -jar $(DUMMY)
+	$(JAVA) -jar $(DUMMY) & echo $$! > server.PID&
 
 
 .PHONY: shutdown_dummy
@@ -41,7 +41,7 @@ shutdown_dummy:
 .PHONY: debug
 debug:
 	$(MAVEN) -f $(SOUNDBOARD) clean
-	$(MAKE) start_dummy & echo $$! > server.PID&
+	$(MAKE) start_dummy
 	$(MAKE) run
 	$(MAKE) shutdown_dummy
 
