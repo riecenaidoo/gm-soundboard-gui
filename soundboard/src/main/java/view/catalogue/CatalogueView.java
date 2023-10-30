@@ -1,4 +1,4 @@
-package view;
+package view.catalogue;
 
 import javax.swing.*;
 

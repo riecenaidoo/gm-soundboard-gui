@@ -6,7 +6,7 @@ import javax.swing.*;
  * View that displays the Channel the Bot has joined,
  * and provides an interface to change the Bot's channel.
  */
-public class ChannelsPanel extends JPanel {
+public class ChannelsView extends JPanel {
 
     private final JComboBox<String> channelSelector;
     private final JButton leave;
@@ -14,7 +14,7 @@ public class ChannelsPanel extends JPanel {
     /**
      * Empty view that can display information. Needs to be initialised by the ChannelController.
      */
-    public ChannelsPanel() {
+    public ChannelsView() {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         channelSelector = new JComboBox<>();

@@ -1,20 +1,21 @@
-package controller;
+package controller.catalogue;
 
-import model.CatalogueGroup;
-import view.CatalogueGroupPanel;
-import view.PlaylistButton;
+import controller.API;
+import model.catalogue.Group;
+import view.catalogue.GroupPanel;
+import view.catalogue.PlaylistButton;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class CatalogueGroupController {
+public class GroupController {
 
-    private final CatalogueGroup catalogueGroup;
-    private final CatalogueGroupPanel view;
+    private final Group group;
+    private final GroupPanel view;
     private final Collection<PlaylistButtonController> controllers;
 
-    public CatalogueGroupController(CatalogueGroup catalogueGroup, CatalogueGroupPanel view) {
-        this.catalogueGroup = catalogueGroup;
+    public GroupController(Group group, GroupPanel view) {
+        this.group = group;
         this.view = view;
         controllers = new ArrayList<>();
     }
@@ -24,7 +25,7 @@ public class CatalogueGroupController {
      */
     public void load() {
         if (!controllers.isEmpty()) unload();
-        catalogueGroup.forEach(playlist -> {
+        group.forEach(playlist -> {
             PlaylistButton button = new PlaylistButton(playlist);
             PlaylistButtonController controller = new PlaylistButtonController(playlist, button);
             controllers.add(controller);

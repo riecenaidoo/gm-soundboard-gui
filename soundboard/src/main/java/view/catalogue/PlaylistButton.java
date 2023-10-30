@@ -1,6 +1,6 @@
-package view;
+package view.catalogue;
 
-import model.Playlist;
+import model.catalogue.Playlist;
 
 import javax.swing.*;
 

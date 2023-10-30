@@ -1,4 +1,4 @@
-package model;
+package model.catalogue;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -7,18 +7,18 @@ import java.util.ArrayList;
 /**
  * Named, ordered, collection of Playlists in the Catalogue.
  */
-public class CatalogueGroup extends ArrayList<Playlist> {
+public class Group extends ArrayList<Playlist> {
 
     private final String name;
 
-    public CatalogueGroup(String name) {
+    public Group(String name) {
         this.name = name;
     }
 
-    public static CatalogueGroup fromJson(JsonNode json) {
-        CatalogueGroup catalogueGroup = new CatalogueGroup(json.get("Group").asText());
-        for (JsonNode playlist : json.get("Items")) catalogueGroup.add(Playlist.fromJson(playlist));
-        return catalogueGroup;
+    public static Group fromJson(JsonNode json) {
+        Group group = new Group(json.get("Group").asText());
+        for (JsonNode playlist : json.get("Items")) group.add(Playlist.fromJson(playlist));
+        return group;
     }
 
     public String getName() {
@@ -47,7 +47,7 @@ public class CatalogueGroup extends ArrayList<Playlist> {
         return s.toString();
     }
 
-    public JsonNode toJson(CatalogueGroup catalogueGroup) {
+    public JsonNode toJson(Group group) {
         throw new UnsupportedOperationException("TODO");
     }
 }

@@ -1,19 +1,19 @@
 package controller;
 
 import model.Icons;
-import view.ChannelsPanel;
+import view.ChannelsView;
 
 import javax.swing.*;
 import java.util.Collection;
 
-public class ChannelController {
+public class ChannelsController {
 
     private final Collection<String> channels;
     private final JComboBox<String> channelSelector;
     private final JButton leaveButton;
     private int currentChannelIndex;
 
-    public ChannelController(Collection<String> channels, ChannelsPanel view) {
+    public ChannelsController(Collection<String> channels, ChannelsView view) {
         this.channels = channels;
         this.channelSelector = view.getChannelSelector();
         this.leaveButton = view.getLeave();

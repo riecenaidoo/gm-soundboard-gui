@@ -1,8 +1,9 @@
-package controller;
+package controller.catalogue;
 
-import model.Catalogue;
-import view.CatalogueGroupPanel;
-import view.CatalogueView;
+import controller.API;
+import model.catalogue.Catalogue;
+import view.catalogue.CatalogueView;
+import view.catalogue.GroupPanel;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,7 +12,7 @@ public class CatalogueController {
 
     private final Catalogue catalogue;
     private final CatalogueView tabbedPane;
-    private final Collection<CatalogueGroupController> controllers;
+    private final Collection<GroupController> controllers;
 
     public CatalogueController(Catalogue catalogue, CatalogueView tabbedPane) {
         this.catalogue = catalogue;
@@ -25,8 +26,8 @@ public class CatalogueController {
     public void load() {
         if (!controllers.isEmpty()) unload();
         catalogue.forEach(category -> {
-            CatalogueGroupPanel view = new CatalogueGroupPanel(category);
-            CatalogueGroupController controller = new CatalogueGroupController(category, view);
+            GroupPanel view = new GroupPanel(category);
+            GroupController controller = new GroupController(category, view);
             controller.load();
             controllers.add(controller);
             tabbedPane.addTab(category.getName(), view);
@@ -37,7 +38,7 @@ public class CatalogueController {
      * Unload all elements from the Catalogue view.
      */
     private void unload() {
-        controllers.forEach(CatalogueGroupController::unload);
+        controllers.forEach(GroupController::unload);
         controllers.clear();
         tabbedPane.removeAll();
     }

@@ -1,4 +1,4 @@
-package model;
+package model.catalogue;
 
 import com.fasterxml.jackson.databind.JsonNode;
 

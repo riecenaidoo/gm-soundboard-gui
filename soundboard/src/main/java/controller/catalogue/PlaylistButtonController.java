@@ -1,7 +1,8 @@
-package controller;
+package controller.catalogue;
 
-import model.Playlist;
-import view.PlaylistButton;
+import controller.API;
+import model.catalogue.Playlist;
+import view.catalogue.PlaylistButton;
 
 public class PlaylistButtonController {
 
