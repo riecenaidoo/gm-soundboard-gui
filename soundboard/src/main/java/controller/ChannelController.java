@@ -1,19 +1,19 @@
 package controller;
 
-import model.Channel;
-import view.ChannelPanel;
+import model.VoiceChannels;
+import view.ChannelsPanel;
 
 public class ChannelController {
 
-    private final Channel model;
-    private final ChannelPanel view;
+    private final VoiceChannels model;
+    private final ChannelsPanel view;
 
-    public ChannelController(Channel model, ChannelPanel view) {
+    public ChannelController(VoiceChannels model, ChannelsPanel view) {
         this.model = model;
         this.view = view;
     }
 
-    public void load() {
-//        view.getChannelSelector();
+    public void loadChannels() {
+        model.forEach(channel -> view.getChannelSelector().addItem(channel));
     }
 }
