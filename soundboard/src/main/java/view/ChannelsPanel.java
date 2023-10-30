@@ -21,6 +21,7 @@ public class ChannelsPanel extends JPanel {
         channelSelector.setToolTipText("Join a Channel.");
         this.leave = new JButton();
         leave.setToolTipText("Leave Channel.");
+        leave.setAlignmentX(CENTER_ALIGNMENT);
     }
 
     public JComboBox<String> getChannelSelector() {
