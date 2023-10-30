@@ -15,7 +15,7 @@ public class DiscordBot {
      * Represents a collection of voice channels in the Discord server
      * that the Bot can join, in the order they appear in the Server.
      */
-    private final Collection<String> voiceChannels;
+    private Collection<String> voiceChannels;
 
     public DiscordBot() {
         voiceChannels = new ArrayList<>();
@@ -23,5 +23,9 @@ public class DiscordBot {
 
     public Collection<String> getVoiceChannels() {
         return voiceChannels;
+    }
+
+    public void setVoiceChannels(Collection<String> voiceChannels) {
+        this.voiceChannels = voiceChannels;
     }
 }

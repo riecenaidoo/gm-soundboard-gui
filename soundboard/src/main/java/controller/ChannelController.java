@@ -1,5 +1,6 @@
 package controller;
 
+import model.Icons;
 import view.ChannelsPanel;
 
 import javax.swing.*;
@@ -28,6 +29,16 @@ public class ChannelController {
         channelSelector.addItem("");
         channelSelector.setSelectedIndex(currentChannelIndex);
         channels.forEach(channelSelector::addItem);
+    }
+
+    /**
+     * Applies Icons to the UI.
+     *
+     * @param icons instance containing all loaded Icons available.
+     */
+    public void loadIcons(Icons icons) {
+        leaveButton.setIcon(icons.getLeaveIcon());
+        leaveButton.setText("");    // Hide Text
     }
 
     public void connect(API api) {

@@ -4,9 +4,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.formdev.flatlaf.FlatDarkLaf;
 import model.Catalogue;
+import model.DiscordBot;
 import model.Icons;
 import view.CatalogueTabbedPane;
-import view.ChannelSelectorPanel;
+import view.ChannelsPanel;
 import view.MusicPlayerPanel;
 
 import javax.swing.*;
@@ -14,6 +15,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 public class Soundboard {
 
@@ -66,13 +68,18 @@ public class Soundboard {
         panel.add(catalogueTabbedPane);
 
         JPanel mediaPanel = new JPanel();
+        DiscordBot discordBot = new DiscordBot();
 
         MusicPlayerPanel miniPlayer = new MusicPlayerPanel(api, icons);
         mediaPanel.add(miniPlayer);
 
-        ChannelSelectorPanel channelSelector = new ChannelSelectorPanel(api, icons);
-        channelSelector.populateChannelList(new String[]{"0", "1", "3", "4", "5", "6", "7", "8", "9"});
-        mediaPanel.add(channelSelector);
+        discordBot.setVoiceChannels(List.of("0", "1", "3", "4", "5", "6", "7", "8", "9"));
+        ChannelsPanel channelsPanel = new ChannelsPanel();
+        ChannelController channelController = new ChannelController(discordBot.getVoiceChannels(), channelsPanel);
+        channelController.loadChannels();
+        channelController.loadIcons(icons);
+        channelController.connect(api);
+        mediaPanel.add(channelsPanel);
 
         panel.add(mediaPanel);
         return panel;

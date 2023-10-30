@@ -17,11 +17,14 @@ public class ChannelsPanel extends JPanel {
     public ChannelsPanel() {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        this.channelSelector = new JComboBox<>();
+        channelSelector = new JComboBox<>();
         channelSelector.setToolTipText("Join a Channel.");
-        this.leave = new JButton();
-        leave.setToolTipText("Leave Channel.");
+        this.add(channelSelector);
+
+        leave = new JButton("LEAVE");
         leave.setAlignmentX(CENTER_ALIGNMENT);
+        leave.setToolTipText("Leave Channel.");
+        this.add(leave);
     }
 
     public JComboBox<String> getChannelSelector() {
