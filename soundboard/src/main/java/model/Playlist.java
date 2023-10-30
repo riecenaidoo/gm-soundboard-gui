@@ -2,7 +2,6 @@ package model;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import java.util.Collection;
 import java.util.HashSet;
 
 /**
@@ -11,40 +10,16 @@ import java.util.HashSet;
  * In the future, this may expand to additional services such as Deezer,
  * Spotify, or local songs.
  */
-public class Playlist {
+public class Playlist extends HashSet<String> {
 
     private final String title;
-    private final Collection<String> songs;
 
     public Playlist(String title) {
         this.title = title;
-        this.songs = new HashSet<>();
     }
 
     public String getTitle() {
         return title;
-    }
-
-    public Collection<String> getSongs() {
-        return songs;
-    }
-
-    /**
-     * Note: Playlist does not allow duplications of Songs.
-     */
-    public boolean add(String song) {
-        return songs.add(song);
-    }
-
-    public boolean remove(String song) {
-        return songs.remove(song);
-    }
-
-    /**
-     * @return number of Songs in this Playlist.
-     */
-    public int size() {
-        return songs.size();
     }
 
     @Override
@@ -52,7 +27,7 @@ public class Playlist {
         StringBuilder s = new StringBuilder("{");
         s.append(title);
         s.append(":[");
-        songs.forEach(song -> {
+        this.forEach(song -> {
             s.append(song);
             s.append(", ");
         });

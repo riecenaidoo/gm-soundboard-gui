@@ -1,8 +1,8 @@
 package controller;
 
 import model.Catalogue;
-import view.CatalogueTabbedPane;
-import view.CategoryPanel;
+import view.CatalogueGroupPanel;
+import view.CatalogueView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,10 +10,10 @@ import java.util.Collection;
 public class CatalogueController {
 
     private final Catalogue catalogue;
-    private final CatalogueTabbedPane tabbedPane;
-    private final Collection<CategoryController> controllers;
+    private final CatalogueView tabbedPane;
+    private final Collection<CatalogueGroupController> controllers;
 
-    public CatalogueController(Catalogue catalogue, CatalogueTabbedPane tabbedPane) {
+    public CatalogueController(Catalogue catalogue, CatalogueView tabbedPane) {
         this.catalogue = catalogue;
         this.tabbedPane = tabbedPane;
         controllers = new ArrayList<>();
@@ -24,12 +24,12 @@ public class CatalogueController {
      */
     public void load() {
         if (!controllers.isEmpty()) unload();
-        catalogue.getCategories().forEach(category -> {
-            CategoryPanel view = new CategoryPanel(category);
-            CategoryController controller = new CategoryController(category, view);
+        catalogue.forEach(category -> {
+            CatalogueGroupPanel view = new CatalogueGroupPanel(category);
+            CatalogueGroupController controller = new CatalogueGroupController(category, view);
             controller.load();
             controllers.add(controller);
-            tabbedPane.addTab(category.getTitle(), view);
+            tabbedPane.addTab(category.getName(), view);
         });
     }
 
@@ -37,7 +37,7 @@ public class CatalogueController {
      * Unload all elements from the Catalogue view.
      */
     private void unload() {
-        controllers.forEach(CategoryController::unload);
+        controllers.forEach(CatalogueGroupController::unload);
         controllers.clear();
         tabbedPane.removeAll();
     }

@@ -6,7 +6,7 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import model.Catalogue;
 import model.DiscordBot;
 import model.Icons;
-import view.CatalogueTabbedPane;
+import view.CatalogueView;
 import view.ChannelsPanel;
 import view.MusicPlayerPanel;
 
@@ -61,11 +61,11 @@ public class Soundboard {
             throw new RuntimeException(e.getMessage());
         }
 
-        CatalogueTabbedPane catalogueTabbedPane = new CatalogueTabbedPane();
-        CatalogueController catalogueController = new CatalogueController(catalogue, catalogueTabbedPane);
+        CatalogueView catalogueView = new CatalogueView();
+        CatalogueController catalogueController = new CatalogueController(catalogue, catalogueView);
         catalogueController.load();
         catalogueController.connect(api);
-        panel.add(catalogueTabbedPane);
+        panel.add(catalogueView);
 
         JPanel mediaPanel = new JPanel();
         DiscordBot discordBot = new DiscordBot();

@@ -19,6 +19,6 @@ public class PlaylistButtonController {
      * @param api
      */
     public void connect(API api) {
-        button.addActionListener(l -> api.play(playlist.getSongs()));
+        button.addActionListener(l -> api.play(playlist));
     }
 }
