@@ -42,14 +42,14 @@ public class ChannelController {
     }
 
     public void connect(API api) {
-        leaveButton.addItemListener(l -> channelSelector.setSelectedIndex(0));
+        leaveButton.addActionListener(l -> channelSelector.setSelectedIndex(0));
 
         channelSelector.addItemListener(e -> {
             int selectedIndex = channelSelector.getSelectedIndex();
             if (selectedIndex == currentChannelIndex) return;
             if (channelSelector.getSelectedItem() == "")
                 api.leave();   // "" item is the 0 element, and denotes no channel.
-            else api.join_channel(selectedIndex);
+            else api.join_channel(selectedIndex - 1); // item 0 denotes no channel ^
 
             currentChannelIndex = selectedIndex;
         });
