@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.formdev.flatlaf.FlatDarkLaf;
 import controller.catalogue.CatalogueController;
 import controller.discordbot.DiscordBotController;
+import controller.discordbot.DiscordBotControllersList;
 import model.DiscordBot;
 import model.Icons;
 import model.catalogue.Catalogue;
@@ -71,7 +72,7 @@ public class Soundboard {
         DiscordBot discordBot = new DiscordBot();
         discordBot.setVoiceChannels(List.of("0", "1", "3", "4", "5", "6", "7", "8", "9"));
         DiscordBotView discordBotView = new DiscordBotView();
-        DiscordBotController discordBotController = new DiscordBotController(discordBot, discordBotView);
+        DiscordBotController discordBotController = new DiscordBotControllersList(discordBot, discordBotView);
         discordBotController.loadIcons(icons);
         discordBotController.sync();
         discordBotController.connect(api);

@@ -1,23 +1,22 @@
-package controller.discordbot.songcontrols;
+package controller.discordbot;
 
 import controller.API;
-import controller.discordbot.ServiceController;
 import model.DiscordBot;
 import model.Icons;
 import view.discordbot.SongControlsPanel;
 
 import javax.swing.*;
 
-public class PrevController implements ServiceController {
+class SkipButtonController implements DiscordBotController {
 
     private final DiscordBot model; // I'll be used in the future.
     private final JButton view;
-    private Icon backIcon;
+    private Icon skipIcon;
 
-    public PrevController(DiscordBot discordBot, SongControlsPanel songControlsPanel) {
+    protected SkipButtonController(DiscordBot discordBot, SongControlsPanel songControlsPanel) {
         model = discordBot;
-        view = songControlsPanel.getPrevButton();
-        backIcon = null;
+        view = songControlsPanel.getSkipButton();
+        skipIcon = null;
     }
 
     @Override
@@ -27,16 +26,16 @@ public class PrevController implements ServiceController {
 
     @Override
     public void connect(API api) {
-        view.addActionListener(l -> api.prev());
+        view.addActionListener(l -> api.skip());
     }
 
     @Override
     public void loadIcons(Icons icon) {
-        backIcon = icon.getBackIcon();
-        if (backIcon == null) view.setText("<<-");
+        skipIcon = icon.getSkipIcon();
+        if (skipIcon == null) view.setText("->>");
         else {
             view.setText("");
-            view.setIcon(backIcon);
+            view.setIcon(skipIcon);
         }
     }
 }

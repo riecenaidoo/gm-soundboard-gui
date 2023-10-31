@@ -1,7 +1,6 @@
-package controller.discordbot.songcontrols;
+package controller.discordbot;
 
 import controller.API;
-import controller.discordbot.ServiceController;
 import model.DiscordBot;
 import model.Icons;
 import view.discordbot.SongControlsPanel;
@@ -15,7 +14,7 @@ import javax.swing.*;
  * @see model.DiscordBot.LoopMode
  * @see view.discordbot.SongControlsPanel
  */
-public class LoopToggleController implements ServiceController {
+class LoopToggleController implements DiscordBotController {
 
     private final DiscordBot model;
     private final JButton view;
@@ -24,7 +23,7 @@ public class LoopToggleController implements ServiceController {
     private Icon loopOnIcon;
     private Icon repeatOneIcon;
 
-    public LoopToggleController(DiscordBot discordBot, SongControlsPanel songControlsPanel) {
+    protected LoopToggleController(DiscordBot discordBot, SongControlsPanel songControlsPanel) {
         this.model = discordBot;
         this.view = songControlsPanel.getLoopToggle();
         loopOffIcon = null;

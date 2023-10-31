@@ -1,7 +1,6 @@
-package controller.discordbot.songcontrols;
+package controller.discordbot;
 
 import controller.API;
-import controller.discordbot.ServiceController;
 import model.DiscordBot;
 import model.Icons;
 import view.discordbot.SongControlsPanel;
@@ -13,14 +12,14 @@ import javax.swing.*;
  *
  * @see view.discordbot.SongControlsPanel
  */
-public class ShuffleToggleController implements ServiceController {
+class ShuffleToggleController implements DiscordBotController {
 
     private final DiscordBot model;
     private final JButton view;
     private Icon shuffleIcon;
     private Icon shuffleOffIcon;
 
-    public ShuffleToggleController(DiscordBot discordBot, SongControlsPanel songControlsPanel) {
+    protected ShuffleToggleController(DiscordBot discordBot, SongControlsPanel songControlsPanel) {
         model = discordBot;
         view = songControlsPanel.getShuffleToggle();
         shuffleIcon = null;

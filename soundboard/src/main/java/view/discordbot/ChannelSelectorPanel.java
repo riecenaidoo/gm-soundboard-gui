@@ -14,7 +14,7 @@ public class ChannelSelectorPanel extends JPanel {
     /**
      * Empty view that can display information. Needs to be initialised by the ChannelController.
      */
-    public ChannelSelectorPanel() {
+    protected ChannelSelectorPanel() {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         channelSelector = new JComboBox<>();

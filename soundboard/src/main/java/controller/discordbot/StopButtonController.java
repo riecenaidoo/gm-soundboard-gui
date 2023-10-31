@@ -1,20 +1,19 @@
-package controller.discordbot.songcontrols;
+package controller.discordbot;
 
 import controller.API;
-import controller.discordbot.ServiceController;
 import model.DiscordBot;
 import model.Icons;
 import view.discordbot.SongControlsPanel;
 
 import javax.swing.*;
 
-public class StopController implements ServiceController {
+class StopButtonController implements DiscordBotController {
 
     private final DiscordBot model; // I'll be used in the future.
     private final JButton view;
     private Icon stopIcon;
 
-    public StopController(DiscordBot discordBot, SongControlsPanel songControlsPanel) {
+    protected StopButtonController(DiscordBot discordBot, SongControlsPanel songControlsPanel) {
         model = discordBot;
         view = songControlsPanel.getStopButton();
         stopIcon = null;

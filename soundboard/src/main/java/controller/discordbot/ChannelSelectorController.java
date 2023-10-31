@@ -8,14 +8,14 @@ import view.discordbot.ChannelSelectorPanel;
 import javax.swing.*;
 import java.util.Collection;
 
-class ChannelSelectorController implements ServiceController {
+class ChannelSelectorController implements DiscordBotController {
 
     private final Collection<String> channels;
     private final JComboBox<String> channelSelector;
     private final JButton leaveButton;
     private int currentChannelIndex;
 
-    public ChannelSelectorController(DiscordBot model, ChannelSelectorPanel view) {
+    protected ChannelSelectorController(DiscordBot model, ChannelSelectorPanel view) {
         this.channels = model.getVoiceChannels();
         this.channelSelector = view.getChannelSelector();
         this.leaveButton = view.getLeave();
