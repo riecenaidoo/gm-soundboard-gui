@@ -19,8 +19,7 @@ public class DiscordBot {
 
     private boolean playing;
     private boolean shuffle;
-    private boolean loop;
-    private boolean repeat;
+    private LoopMode loopMode;
 
     private int volume;
 
@@ -28,9 +27,20 @@ public class DiscordBot {
         voiceChannels = new ArrayList<>();
         playing = false;
         shuffle = false;
-        loop = false;
-        repeat = false;
+        loopMode = LoopMode.OFF;
         volume = 0;
+    }
+
+    public LoopMode getLoopMode() {
+        return loopMode;
+    }
+
+    public void setLoopMode(LoopMode loopMode) {
+        this.loopMode = loopMode;
+    }
+
+    public enum LoopMode {
+        OFF, ON, ONE
     }
 
     public Collection<String> getVoiceChannels() {
@@ -55,24 +65,6 @@ public class DiscordBot {
 
     public void setShuffle(boolean shuffle) {
         this.shuffle = shuffle;
-    }
-
-    public boolean isLoop() {
-        return loop;
-    }
-
-    public void setLoop(boolean loop) {
-        if (loop) repeat = false;
-        this.loop = loop;
-    }
-
-    public boolean isRepeat() {
-        return repeat;
-    }
-
-    public void setRepeat(boolean repeat) {
-        if (repeat) loop = false;
-        this.repeat = repeat;
     }
 
     public int getVolume() {
