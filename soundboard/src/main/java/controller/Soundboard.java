@@ -4,13 +4,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.formdev.flatlaf.FlatDarkLaf;
 import controller.catalogue.CatalogueController;
-import controller.discordbot.ChannelsController;
+import controller.discordbot.DiscordBotController;
 import model.DiscordBot;
 import model.Icons;
 import model.catalogue.Catalogue;
-import view.discordbot.ChannelsPanel;
-import view.MusicPlayerPanel;
 import view.catalogue.CatalogueView;
+import view.discordbot.DiscordBotView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -69,21 +68,26 @@ public class Soundboard {
         catalogueController.connect(api);
         panel.add(catalogueView);
 
-        JPanel mediaPanel = new JPanel();
         DiscordBot discordBot = new DiscordBot();
-
-        MusicPlayerPanel miniPlayer = new MusicPlayerPanel(api, icons);
-        mediaPanel.add(miniPlayer);
-
         discordBot.setVoiceChannels(List.of("0", "1", "3", "4", "5", "6", "7", "8", "9"));
-        ChannelsPanel channelsPanel = new ChannelsPanel();
-        ChannelsController channelsController = new ChannelsController(discordBot.getVoiceChannels(), channelsPanel);
-        channelsController.sync();
-        channelsController.loadIcons(icons);
-        channelsController.connect(api);
-        mediaPanel.add(channelsPanel);
+        DiscordBotView discordBotView = new DiscordBotView();
+        DiscordBotController discordBotController = new DiscordBotController(discordBot, discordBotView);
+        discordBotController.loadIcons(icons);
+        discordBotController.sync();
+        discordBotController.connect(api);
+        panel.add(discordBotView);
 
-        panel.add(mediaPanel);
+//        MusicPlayerPanel miniPlayer = new MusicPlayerPanel(api, icons);
+//        mediaPanel.add(miniPlayer);
+
+//        ChannelsPanel channelsPanel = new ChannelsPanel();
+//        ChannelsServiceController channelsServiceController = new ChannelsServiceController(discordBot.getVoiceChannels(), channelsPanel);
+//        channelsServiceController.sync();
+//        channelsServiceController.loadIcons(icons);
+//        channelsServiceController.connect(api);
+//        mediaPanel.add(channelsPanel);
+
+//        panel.add(mediaPanel);
         return panel;
     }
 
