@@ -17,8 +17,20 @@ public class DiscordBot {
      */
     private Collection<String> voiceChannels;
 
+    private boolean playing;
+    private boolean shuffle;
+    private boolean loop;
+    private boolean repeat;
+
+    private int volume;
+
     public DiscordBot() {
         voiceChannels = new ArrayList<>();
+        playing = false;
+        shuffle = false;
+        loop = false;
+        repeat = false;
+        volume = 0;
     }
 
     public Collection<String> getVoiceChannels() {
@@ -27,5 +39,47 @@ public class DiscordBot {
 
     public void setVoiceChannels(Collection<String> voiceChannels) {
         this.voiceChannels = voiceChannels;
+    }
+
+    public boolean isPlaying() {
+        return playing;
+    }
+
+    public void setPlaying(boolean playing) {
+        this.playing = playing;
+    }
+
+    public boolean isShuffle() {
+        return shuffle;
+    }
+
+    public void setShuffle(boolean shuffle) {
+        this.shuffle = shuffle;
+    }
+
+    public boolean isLoop() {
+        return loop;
+    }
+
+    public void setLoop(boolean loop) {
+        if (loop) repeat = false;
+        this.loop = loop;
+    }
+
+    public boolean isRepeat() {
+        return repeat;
+    }
+
+    public void setRepeat(boolean repeat) {
+        if (repeat) loop = false;
+        this.repeat = repeat;
+    }
+
+    public int getVolume() {
+        return volume;
+    }
+
+    public void setVolume(int volume) {
+        if ((volume >= 0) && (volume <= 100)) this.volume = volume;
     }
 }
