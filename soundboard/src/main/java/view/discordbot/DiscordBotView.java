@@ -13,4 +13,12 @@ public class DiscordBotView extends JPanel {
         volumeControl = new VolumeSlider();
         channelsPanel = new ChannelsPanel();
     }
+
+    public VolumeSlider getVolumeControl() {
+        return volumeControl;
+    }
+
+    public ChannelsPanel getChannelsPanel() {
+        return channelsPanel;
+    }
 }

@@ -2,6 +2,7 @@ package controller.discordbot;
 
 import controller.API;
 import model.DiscordBot;
+import model.Icons;
 import view.discordbot.VolumeSlider;
 
 import javax.swing.*;
@@ -31,5 +32,10 @@ class VolumeController implements ServiceController {
                 api.set_volume(desiredVol);
             }
         });
+    }
+
+    @Override
+    public void loadIcons(Icons icon) {
+        //Cries in Spanish. I have no Icon.
     }
 }
