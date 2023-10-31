@@ -10,18 +10,19 @@ import javax.swing.*;
 
 public class SkipController implements ServiceController {
 
+    private final DiscordBot model; // I'll be used in the future.
     private final JButton view;
     private Icon skipIcon;
 
     public SkipController(DiscordBot discordBot, SongControlsPanel songControlsPanel) {
-        view = songControlsPanel.getButton("skip");
+        model = discordBot;
+        view = songControlsPanel.getSkipButton();
         skipIcon = null;
     }
 
     @Override
     public void sync() {
-        if (skipIcon == null) view.setText("->>");
-        else view.setIcon(skipIcon);
+        //I'm a static view for now.
     }
 
     @Override
@@ -32,5 +33,10 @@ public class SkipController implements ServiceController {
     @Override
     public void loadIcons(Icons icon) {
         skipIcon = icon.getSkipIcon();
+        if (skipIcon == null) view.setText("->>");
+        else {
+            view.setText("");
+            view.setIcon(skipIcon);
+        }
     }
 }

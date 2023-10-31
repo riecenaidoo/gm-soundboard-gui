@@ -13,16 +13,16 @@ import javax.swing.*;
  *
  * @see view.discordbot.SongControlsPanel
  */
-public class ShuffleController implements ServiceController {
+public class ShuffleToggleController implements ServiceController {
 
     private final DiscordBot model;
     private final JButton view;
     private Icon shuffleIcon;
     private Icon shuffleOffIcon;
 
-    public ShuffleController(DiscordBot discordBot, SongControlsPanel songControlsPanel) {
+    public ShuffleToggleController(DiscordBot discordBot, SongControlsPanel songControlsPanel) {
         model = discordBot;
-        view = songControlsPanel.getButton("playPause");
+        view = songControlsPanel.getShuffleToggle();
         shuffleIcon = null;
         shuffleOffIcon = null;
     }

@@ -15,7 +15,7 @@ import javax.swing.*;
  * @see model.DiscordBot.LoopMode
  * @see view.discordbot.SongControlsPanel
  */
-public class LoopModeController implements ServiceController {
+public class LoopToggleController implements ServiceController {
 
     private final DiscordBot model;
     private final JButton view;
@@ -24,9 +24,9 @@ public class LoopModeController implements ServiceController {
     private Icon loopOnIcon;
     private Icon repeatOneIcon;
 
-    public LoopModeController(DiscordBot discordBot, SongControlsPanel songControlsPanel) {
+    public LoopToggleController(DiscordBot discordBot, SongControlsPanel songControlsPanel) {
         this.model = discordBot;
-        this.view = songControlsPanel.getButton("loopMode");
+        this.view = songControlsPanel.getLoopToggle();
         loopOffIcon = null;
         loopOnIcon = null;
         repeatOneIcon = null;

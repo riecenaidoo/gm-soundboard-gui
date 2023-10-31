@@ -13,16 +13,16 @@ import javax.swing.*;
  *
  * @see view.discordbot.SongControlsPanel
  */
-public class PlayPauseController implements ServiceController {
+public class PlayToggleController implements ServiceController {
 
     private final DiscordBot model;
     private final JButton view;
     private Icon pauseIcon;
     private Icon playIcon;
 
-    public PlayPauseController(DiscordBot discordBot, SongControlsPanel songControlsPanel) {
+    public PlayToggleController(DiscordBot discordBot, SongControlsPanel songControlsPanel) {
         model = discordBot;
-        view = songControlsPanel.getButton("playPause");
+        view = songControlsPanel.getPlayToggle();
         pauseIcon = null;
         playIcon = null;
     }

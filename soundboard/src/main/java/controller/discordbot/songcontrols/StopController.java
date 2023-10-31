@@ -10,18 +10,19 @@ import javax.swing.*;
 
 public class StopController implements ServiceController {
 
+    private final DiscordBot model; // I'll be used in the future.
     private final JButton view;
     private Icon stopIcon;
 
     public StopController(DiscordBot discordBot, SongControlsPanel songControlsPanel) {
-        view = songControlsPanel.getButton("stop");
+        model = discordBot;
+        view = songControlsPanel.getStopButton();
         stopIcon = null;
     }
 
     @Override
     public void sync() {
-        if (stopIcon == null) view.setText("STOP");
-        else view.setIcon(stopIcon);
+        //I'm a static view for now.
     }
 
     @Override
@@ -32,5 +33,10 @@ public class StopController implements ServiceController {
     @Override
     public void loadIcons(Icons icon) {
         stopIcon = icon.getStopIcon();
+        if (stopIcon == null) view.setText("STOP");
+        else {
+            view.setText("");
+            view.setIcon(stopIcon);
+        }
     }
 }
