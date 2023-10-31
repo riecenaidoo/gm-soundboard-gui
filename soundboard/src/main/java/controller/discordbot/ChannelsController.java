@@ -1,19 +1,20 @@
-package controller;
+package controller.discordbot;
 
+import controller.API;
 import model.Icons;
-import view.ChannelsView;
+import view.discordbot.ChannelsPanel;
 
 import javax.swing.*;
 import java.util.Collection;
 
-public class ChannelsController {
+public class ChannelsController implements ServiceController {
 
     private final Collection<String> channels;
     private final JComboBox<String> channelSelector;
     private final JButton leaveButton;
     private int currentChannelIndex;
 
-    public ChannelsController(Collection<String> channels, ChannelsView view) {
+    public ChannelsController(Collection<String> channels, ChannelsPanel view) {
         this.channels = channels;
         this.channelSelector = view.getChannelSelector();
         this.leaveButton = view.getLeave();
@@ -24,7 +25,7 @@ public class ChannelsController {
      * Loads channels in the ChannelsPanel view. Adds an empty item to denote
      * no channel.
      */
-    public void loadChannels() {
+    public void sync() {
         if (channelSelector.getItemCount() > 0) channelSelector.removeAll();
         channelSelector.addItem("");
         channelSelector.setSelectedIndex(currentChannelIndex);

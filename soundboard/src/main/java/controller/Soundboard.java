@@ -4,10 +4,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.formdev.flatlaf.FlatDarkLaf;
 import controller.catalogue.CatalogueController;
+import controller.discordbot.ChannelsController;
 import model.DiscordBot;
 import model.Icons;
 import model.catalogue.Catalogue;
-import view.ChannelsView;
+import view.discordbot.ChannelsPanel;
 import view.MusicPlayerPanel;
 import view.catalogue.CatalogueView;
 
@@ -75,12 +76,12 @@ public class Soundboard {
         mediaPanel.add(miniPlayer);
 
         discordBot.setVoiceChannels(List.of("0", "1", "3", "4", "5", "6", "7", "8", "9"));
-        ChannelsView channelsView = new ChannelsView();
-        ChannelsController channelsController = new ChannelsController(discordBot.getVoiceChannels(), channelsView);
-        channelsController.loadChannels();
+        ChannelsPanel channelsPanel = new ChannelsPanel();
+        ChannelsController channelsController = new ChannelsController(discordBot.getVoiceChannels(), channelsPanel);
+        channelsController.sync();
         channelsController.loadIcons(icons);
         channelsController.connect(api);
-        mediaPanel.add(channelsView);
+        mediaPanel.add(channelsPanel);
 
         panel.add(mediaPanel);
         return panel;

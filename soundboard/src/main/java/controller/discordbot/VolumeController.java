@@ -1,25 +1,25 @@
-package controller;
+package controller.discordbot;
 
+import controller.API;
 import model.DiscordBot;
-import view.MusicPlayerView;
+import view.discordbot.VolumeSlider;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-/**
- * Controls the audio controls panel of the Soundboard,
- * updating the display in sync with the status of the discord bot.
- */
-class MusicPlayerController {
+class VolumeController implements ServiceController {
 
     private final DiscordBot model;
     private final JSlider volumeSlider;
 
-
-    public MusicPlayerController(DiscordBot model, MusicPlayerView view) {
+    public VolumeController(DiscordBot model, VolumeSlider volumeSlider) {
         this.model = model;
-        volumeSlider = view.getVolumeControl();
+        this.volumeSlider = volumeSlider;
+    }
+
+    public void sync() {
+        volumeSlider.setValue(model.getVolume());
     }
 
     public void connect(API api) {
@@ -31,12 +31,5 @@ class MusicPlayerController {
                 api.set_volume(desiredVol);
             }
         });
-    }
-
-    /**
-     * Synchronise the MusicPlayer view with the DiscordBot model's state.
-     */
-    public void sync() {
-        volumeSlider.setValue(model.getVolume());
     }
 }
