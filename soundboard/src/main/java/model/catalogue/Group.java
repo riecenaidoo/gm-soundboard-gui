@@ -47,7 +47,7 @@ public class Group extends ArrayList<Playlist> {
         return s.toString();
     }
 
-    public JsonNode toJson(Group group) {
+    public JsonNode toJson() {
         throw new UnsupportedOperationException("TODO");
     }
 }

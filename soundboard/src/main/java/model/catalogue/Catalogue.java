@@ -36,7 +36,7 @@ public class Catalogue extends ArrayList<Group> {
         return s.toString();
     }
 
-    public JsonNode toJson(Catalogue catalogue) {
+    public JsonNode toJson() {
         throw new UnsupportedOperationException("TODO");
     }
 }

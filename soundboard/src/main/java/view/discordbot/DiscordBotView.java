@@ -10,10 +10,18 @@ public class DiscordBotView extends JPanel {
 
     public DiscordBotView() {
         super();
-        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         volumeControl = new VolumeSlider();
         channelSelectorPanel = new ChannelSelectorPanel();
         songControlsPanel = new SongControlsPanel();
+
+        JPanel audioControls = new JPanel();    //Stack volume & song controls together.
+        audioControls.setLayout(new BoxLayout(audioControls, BoxLayout.PAGE_AXIS));
+        audioControls.add(volumeControl);
+        audioControls.add(songControlsPanel);
+
+        this.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));   // Place audio & channel controls side by side.
+        this.add(audioControls);
+        this.add(channelSelectorPanel);
     }
 
     public VolumeSlider getVolumeControl() {

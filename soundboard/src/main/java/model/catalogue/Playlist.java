@@ -43,7 +43,7 @@ public class Playlist extends HashSet<String> {
         return playlist;
     }
 
-    public JsonNode toJson(Playlist playlist) {
+    public JsonNode toJson() {
         throw new UnsupportedOperationException("TODO");
     }
 }

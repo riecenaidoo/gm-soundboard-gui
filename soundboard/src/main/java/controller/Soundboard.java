@@ -64,31 +64,24 @@ public class Soundboard {
         }
 
         CatalogueView catalogueView = new CatalogueView();
+        panel.add(catalogueView);
+
         CatalogueController catalogueController = new CatalogueController(catalogue, catalogueView);
         catalogueController.load();
         catalogueController.connect(api);
-        panel.add(catalogueView);
 
         DiscordBot discordBot = new DiscordBot();
-        discordBot.setVoiceChannels(List.of("0", "1", "3", "4", "5", "6", "7", "8", "9"));
+        discordBot.setVoiceChannels(List.of("0", "1", "2", "3", "4", "5", "6", "7", "8", "9"));
+        discordBot.setVolume(50);
+
         DiscordBotView discordBotView = new DiscordBotView();
+        panel.add(discordBotView);
+
         DiscordBotController discordBotController = new DiscordBotControllersList(discordBot, discordBotView);
         discordBotController.loadIcons(icons);
         discordBotController.sync();
         discordBotController.connect(api);
-        panel.add(discordBotView);
 
-//        MusicPlayerPanel miniPlayer = new MusicPlayerPanel(api, icons);
-//        mediaPanel.add(miniPlayer);
-
-//        ChannelsPanel channelsPanel = new ChannelsPanel();
-//        ChannelsServiceController channelsServiceController = new ChannelsServiceController(discordBot.getVoiceChannels(), channelsPanel);
-//        channelsServiceController.sync();
-//        channelsServiceController.loadIcons(icons);
-//        channelsServiceController.connect(api);
-//        mediaPanel.add(channelsPanel);
-
-//        panel.add(mediaPanel);
         return panel;
     }
 
