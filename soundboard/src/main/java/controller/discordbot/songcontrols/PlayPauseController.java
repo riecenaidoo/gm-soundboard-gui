@@ -9,7 +9,7 @@ import view.discordbot.SongControlsPanel;
 import javax.swing.*;
 
 /**
- * Controls the PlayPause Button in the Songs Control Panel.
+ * Controls the PlayPause Toggle Button in the Songs Control Panel.
  *
  * @see view.discordbot.SongControlsPanel
  */
