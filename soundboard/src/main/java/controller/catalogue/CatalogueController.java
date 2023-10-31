@@ -43,11 +43,6 @@ public class CatalogueController {
         tabbedPane.removeAll();
     }
 
-    /**
-     * Connects events to the API.
-     *
-     * @param api
-     */
     public void connect(API api) {
         controllers.forEach(controller -> controller.connect(api));
     }

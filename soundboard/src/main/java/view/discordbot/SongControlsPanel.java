@@ -13,7 +13,7 @@ public class SongControlsPanel extends JPanel {
     private final JButton stopButton;
 
 
-    public SongControlsPanel() {
+    protected SongControlsPanel() {
         super();
         setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 
