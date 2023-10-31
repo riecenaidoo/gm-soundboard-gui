@@ -11,8 +11,8 @@ public class DiscordBotController extends HashMap<String, ServiceController> {
 
     public DiscordBotController(DiscordBot discordBot, DiscordBotView discordBotView){
         super();
-        this.put("volume", new VolumeServiceController(discordBot, discordBotView.getVolumeControl()));
-        this.put("channels", new ChannelsServiceController(discordBot, discordBotView.getChannelsPanel()));
+        this.put("volume", new VolumeController(discordBot, discordBotView.getVolumeControl()));
+        this.put("channels", new ChannelSelectorController(discordBot, discordBotView.getChannelsPanel()));
     }
 
     public void sync() {

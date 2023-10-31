@@ -3,19 +3,19 @@ package controller.discordbot;
 import controller.API;
 import model.DiscordBot;
 import model.Icons;
-import view.discordbot.ChannelsPanel;
+import view.discordbot.ChannelSelectorPanel;
 
 import javax.swing.*;
 import java.util.Collection;
 
-class ChannelsServiceController implements ServiceController {
+class ChannelSelectorController implements ServiceController {
 
     private final Collection<String> channels;
     private final JComboBox<String> channelSelector;
     private final JButton leaveButton;
     private int currentChannelIndex;
 
-    public ChannelsServiceController(DiscordBot model, ChannelsPanel view) {
+    public ChannelSelectorController(DiscordBot model, ChannelSelectorPanel view) {
         this.channels = model.getVoiceChannels();
         this.channelSelector = view.getChannelSelector();
         this.leaveButton = view.getLeave();

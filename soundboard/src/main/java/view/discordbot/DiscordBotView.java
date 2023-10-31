@@ -5,20 +5,26 @@ import javax.swing.*;
 public class DiscordBotView extends JPanel {
 
     private final VolumeSlider volumeControl;
-    private final ChannelsPanel channelsPanel;
+    private final ChannelSelectorPanel channelSelectorPanel;
+    private final SongControlsPanel songControlsPanel;
 
     public DiscordBotView() {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         volumeControl = new VolumeSlider();
-        channelsPanel = new ChannelsPanel();
+        channelSelectorPanel = new ChannelSelectorPanel();
+        songControlsPanel = new SongControlsPanel();
     }
 
     public VolumeSlider getVolumeControl() {
         return volumeControl;
     }
 
-    public ChannelsPanel getChannelsPanel() {
-        return channelsPanel;
+    public ChannelSelectorPanel getChannelsPanel() {
+        return channelSelectorPanel;
+    }
+
+    public SongControlsPanel getSongControlsPanel() {
+        return songControlsPanel;
     }
 }

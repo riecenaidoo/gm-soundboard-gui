@@ -9,12 +9,12 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-class VolumeServiceController implements ServiceController {
+class VolumeController implements ServiceController {
 
     private final DiscordBot model;
     private final JSlider volumeSlider;
 
-    public VolumeServiceController(DiscordBot model, VolumeSlider volumeSlider) {
+    public VolumeController(DiscordBot model, VolumeSlider volumeSlider) {
         this.model = model;
         this.volumeSlider = volumeSlider;
     }
