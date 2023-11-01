@@ -9,11 +9,11 @@ import controller.discordbot.DiscordBotControllersList;
 import model.DiscordBot;
 import model.Icons;
 import model.catalogue.Catalogue;
+import view.HomePanel;
 import view.catalogue.CatalogueView;
 import view.discordbot.DiscordBotView;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,18 +21,19 @@ import java.util.List;
 
 public class Soundboard {
 
-    final static String CATALOGUE = "docs/catalogue_sample.json";
+    private final static String CATALOGUE = "docs/catalogue_sample.json";
 
-    Icons icons;
-    Client client;
-    API api;
-    JPanel home;
-    JPanel soundboard;
-    JFrame app;
+    private final Icons icons;
+    private final JFrame app;
+    private final HomePanel home;
+    private Client client;
+    private API api;
+    private JPanel soundboard;
 
     private Soundboard() {
         icons = new Icons();
-        home = buildHome();
+        home = new HomePanel();
+        new HomeController(this, home);
         //Create and set up the window.
         app = new JFrame("Soundboard");
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,6 +45,9 @@ public class Soundboard {
         new Soundboard().run();
     }
 
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
     private JPanel buildSoundboard() {
         JPanel panel = new JPanel();
@@ -85,41 +89,7 @@ public class Soundboard {
         return panel;
     }
 
-    private JPanel buildHome() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-        panel.setPreferredSize(new Dimension(250, 60));
-
-        JLabel status = new JLabel();
-        status.setPreferredSize(new Dimension(80, 20));
-        JButton connect = new JButton("Connect");
-        connect.setPreferredSize(new Dimension(50, 30));
-        connect.addActionListener(e -> {
-            try {
-                client = Client.getClient(this);
-                status.setText("Connected!");
-
-                openSoundboard();
-            } catch (Client.ClientCreationException c) {
-                status.setText("Connection Failed.");
-            }
-
-            new Thread(() -> {
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException ex) {
-                    System.out.println("Label clearing thread interrupted.");
-                }
-                status.setText("");
-            }).start();
-        });
-
-        panel.add(connect, BorderLayout.CENTER);
-        panel.add(status, BorderLayout.SOUTH);
-        return panel;
-    }
-
-    private void openSoundboard() {
+    public void openSoundboard() {
         api = new API(client);
         soundboard = buildSoundboard();
         JMenuBar menuBar = new JMenuBar();
