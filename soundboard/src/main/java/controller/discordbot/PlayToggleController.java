@@ -6,6 +6,7 @@ import model.Icons;
 import view.discordbot.SongControlsPanel;
 
 import javax.swing.*;
+import java.util.Arrays;
 
 /**
  * Controls the PlayPause Toggle Button in the Songs Control Panel.
@@ -56,6 +57,7 @@ class PlayToggleController implements DiscordBotController {
 
     @Override
     public void connect(API api) {
+        Arrays.stream(view.getActionListeners()).toList().forEach(view::removeActionListener);
         view.addActionListener(l -> {
             if (model.isPlaying()) api.pause();
             else api.resume();

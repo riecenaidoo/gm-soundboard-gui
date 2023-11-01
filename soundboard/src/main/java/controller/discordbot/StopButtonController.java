@@ -6,6 +6,7 @@ import model.Icons;
 import view.discordbot.SongControlsPanel;
 
 import javax.swing.*;
+import java.util.Arrays;
 
 class StopButtonController implements DiscordBotController {
 
@@ -26,6 +27,7 @@ class StopButtonController implements DiscordBotController {
 
     @Override
     public void connect(API api) {
+        Arrays.stream(view.getActionListeners()).toList().forEach(view::removeActionListener);
         view.addActionListener(l -> api.stop());
     }
 

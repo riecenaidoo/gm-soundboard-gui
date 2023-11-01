@@ -6,6 +6,7 @@ import model.Icons;
 import view.discordbot.ChannelSelectorPanel;
 
 import javax.swing.*;
+import java.util.Arrays;
 import java.util.Collection;
 
 class ChannelSelectorController implements DiscordBotController {
@@ -49,8 +50,10 @@ class ChannelSelectorController implements DiscordBotController {
     }
 
     public void connect(API api) {
+        Arrays.stream(leaveButton.getActionListeners()).toList().forEach(leaveButton::removeActionListener);
         leaveButton.addActionListener(l -> channelSelector.setSelectedIndex(0));
 
+        Arrays.stream(channelSelector.getActionListeners()).toList().forEach(channelSelector::removeActionListener);
         channelSelector.addItemListener(e -> {
             int selectedIndex = channelSelector.getSelectedIndex();
             if (selectedIndex == currentChannelIndex) return;

@@ -6,6 +6,7 @@ import model.Icons;
 import view.discordbot.SongControlsPanel;
 
 import javax.swing.*;
+import java.util.Arrays;
 
 /**
  * Controls the Loop Mode Toggle Button, that toggles between the
@@ -66,6 +67,7 @@ class LoopToggleController implements DiscordBotController {
 
     @Override
     public void connect(API api) {
+        Arrays.stream(view.getActionListeners()).toList().forEach(view::removeActionListener);
         view.addActionListener(l -> {
             DiscordBot.LoopMode[] modes = DiscordBot.LoopMode.values();
             int nextModeIndex = ((model.getLoopMode().ordinal() + 1) % modes.length);

@@ -6,6 +6,7 @@ import model.Icons;
 import view.discordbot.SongControlsPanel;
 
 import javax.swing.*;
+import java.util.Arrays;
 
 /**
  * Controls the Shuffle Toggle Button in the Songs Control Panel.
@@ -58,6 +59,7 @@ class ShuffleToggleController implements DiscordBotController {
 
     @Override
     public void connect(API api) {
+        Arrays.stream(view.getActionListeners()).toList().forEach(view::removeActionListener);
         view.addActionListener(l -> {
             api.shuffle();  // Shuffle Toggles.
             model.setShuffle(!model.isShuffle());

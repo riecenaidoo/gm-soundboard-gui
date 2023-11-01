@@ -8,6 +8,7 @@ import view.discordbot.VolumeSlider;
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 
 class VolumeSliderController implements DiscordBotController {
 
@@ -24,6 +25,7 @@ class VolumeSliderController implements DiscordBotController {
     }
 
     public void connect(API api) {
+        Arrays.stream(volumeSlider.getMouseListeners()).toList().forEach(volumeSlider::removeMouseListener);
         volumeSlider.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
