@@ -32,8 +32,10 @@ class ShuffleToggleController implements DiscordBotController {
      */
     public void shuffleOnView() {
         if (shuffleIcon == null) view.setText("SHUFFLE: ON");
-        else view.setIcon(shuffleIcon);
-
+        else {
+            view.setText("");
+            view.setIcon(shuffleIcon);
+        }
     }
 
     /**
@@ -42,7 +44,10 @@ class ShuffleToggleController implements DiscordBotController {
      */
     public void shuffleOffView() {
         if (shuffleOffIcon == null) view.setText("SHUFFLE: OFF");
-        else view.setIcon(shuffleOffIcon);
+        else {
+            view.setText("");
+            view.setIcon(shuffleOffIcon);
+        }
     }
 
     @Override

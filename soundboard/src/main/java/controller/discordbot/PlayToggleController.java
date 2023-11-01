@@ -42,7 +42,10 @@ class PlayToggleController implements DiscordBotController {
      */
     public void pausedView() {
         if (playIcon == null) view.setText("RESUME");
-        else view.setIcon(playIcon);
+        else {
+            view.setText("");
+            view.setIcon(playIcon);
+        }
     }
 
     @Override

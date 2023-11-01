@@ -33,17 +33,26 @@ class LoopToggleController implements DiscordBotController {
 
     public void loopOffView() {
         if (loopOffIcon == null) view.setText("LOOP: " + model.getLoopMode());
-        else view.setIcon(loopOffIcon);
+        else {
+            view.setText("");
+            view.setIcon(loopOffIcon);
+        }
     }
 
     public void loopOnView() {
         if (loopOnIcon == null) view.setText("LOOP: " + model.getLoopMode());
-        else view.setIcon(loopOnIcon);
+        else {
+            view.setText("");
+            view.setIcon(loopOnIcon);
+        }
     }
 
     public void loopOneView() {
         if (repeatOneIcon == null) view.setText("LOOP: " + model.getLoopMode());
-        else view.setIcon(repeatOneIcon);
+        else {
+            view.setText("");
+            view.setIcon(repeatOneIcon);
+        }
     }
     
     @Override

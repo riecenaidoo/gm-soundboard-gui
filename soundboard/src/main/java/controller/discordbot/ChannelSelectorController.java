@@ -27,7 +27,7 @@ class ChannelSelectorController implements DiscordBotController {
      * no channel.
      */
     public void sync() {
-        if (channelSelector.getItemCount() > 0) channelSelector.removeAll();
+        if (channelSelector.getItemCount() > 0) channelSelector.removeAllItems();
         channelSelector.addItem("");
         channelSelector.setSelectedIndex(currentChannelIndex);
         channels.forEach(channelSelector::addItem);
@@ -39,8 +39,13 @@ class ChannelSelectorController implements DiscordBotController {
      * @param icons instance containing all loaded Icons available.
      */
     public void loadIcons(Icons icons) {
-        leaveButton.setIcon(icons.getLeaveIcon());
-        leaveButton.setText("");    // Hide Text
+        Icon leaveIcon = icons.getLeaveIcon();
+        if (leaveIcon != null) {
+            leaveButton.setText("");
+            leaveButton.setIcon(leaveIcon);
+        } else {
+            leaveButton.setText("LEAVE");
+        }
     }
 
     public void connect(API api) {

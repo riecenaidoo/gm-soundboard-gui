@@ -3,15 +3,11 @@ package controller;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.formdev.flatlaf.FlatDarkLaf;
-import controller.catalogue.CatalogueController;
-import controller.discordbot.DiscordBotController;
-import controller.discordbot.DiscordBotControllersList;
 import model.DiscordBot;
 import model.Icons;
 import model.catalogue.Catalogue;
 import view.HomePanel;
-import view.catalogue.CatalogueView;
-import view.discordbot.DiscordBotView;
+import view.SoundboardPanel;
 
 import javax.swing.*;
 import java.io.File;
@@ -23,38 +19,22 @@ public class Soundboard {
 
     private final static String CATALOGUE = "docs/catalogue_sample.json";
 
-    private final Icons icons;
-    private final JFrame app;
-    private final HomePanel home;
     private Client client;
     private API api;
-    private JPanel soundboard;
+
+    private final DiscordBot discordBot;
+    private final Catalogue catalogue;
+
+    private final JFrame app;
+
+    private final HomePanel homeView;
+    private final SoundboardPanel soundboardView;
+    private final SoundboardController soundboardController;
 
     private Soundboard() {
-        icons = new Icons();
-        home = new HomePanel();
-        new HomeController(this, home);
-        //Create and set up the window.
-        app = new JFrame("Soundboard");
-        app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        app.setContentPane(home);
-    }
-
-    public static void main(String[] args) {
-        FlatDarkLaf.setup();
-        new Soundboard().run();
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    private JPanel buildSoundboard() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+        Icons icons = new Icons();
 
         ObjectMapper mapper = new ObjectMapper();
-        Catalogue catalogue;
         try {
             if (!CATALOGUE.isEmpty()) {
                 catalogue = Catalogue.fromJson(mapper.readTree(new File(CATALOGUE)));
@@ -67,31 +47,42 @@ public class Soundboard {
             throw new RuntimeException(e.getMessage());
         }
 
-        CatalogueView catalogueView = new CatalogueView();
-        panel.add(catalogueView);
-
-        CatalogueController catalogueController = new CatalogueController(catalogue, catalogueView);
-        catalogueController.load();
-        catalogueController.connect(api);
-
-        DiscordBot discordBot = new DiscordBot();
+        discordBot = new DiscordBot();
         discordBot.setVoiceChannels(List.of("0", "1", "2", "3", "4", "5", "6", "7", "8", "9"));
         discordBot.setVolume(50);
 
-        DiscordBotView discordBotView = new DiscordBotView();
-        panel.add(discordBotView);
+        soundboardView = new SoundboardPanel();
+        soundboardController = new SoundboardController(this, soundboardView);
+        soundboardController.loadIcons(icons);
 
-        DiscordBotController discordBotController = new DiscordBotControllersList(discordBot, discordBotView);
-        discordBotController.loadIcons(icons);
-        discordBotController.sync();
-        discordBotController.connect(api);
+        homeView = new HomePanel();
+        new HomeController(this, homeView);
+        //Create and set up the window.
+        app = new JFrame("Soundboard");
+        app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        app.setContentPane(homeView);
+    }
 
-        return panel;
+    public static void main(String[] args) {
+        FlatDarkLaf.setup();
+        new Soundboard().run();
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public DiscordBot getDiscordBot() {
+        return discordBot;
+    }
+
+    public Catalogue getCatalogue() {
+        return catalogue;
     }
 
     public void openSoundboard() {
         api = new API(client);
-        soundboard = buildSoundboard();
+        soundboardController.connect(api);
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Options");
         JMenuItem disconnect = new JMenuItem("Disconnect");
@@ -99,7 +90,7 @@ public class Soundboard {
         menu.add(disconnect);
         menuBar.add(menu);
         app.setJMenuBar(menuBar);
-        app.setContentPane(soundboard);
+        app.setContentPane(soundboardView);
         app.pack();
     }
 
@@ -108,9 +99,8 @@ public class Soundboard {
         client = null;
         api = null;
         app.setJMenuBar(null);
-        app.setContentPane(home);
+        app.setContentPane(homeView);
         app.pack();
-        soundboard = null;
     }
 
     public void run() {
