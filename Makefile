@@ -21,6 +21,7 @@ run: $(TARGET)
 
 .PHONY: start_dummy
 start_dummy: $(DUMMY)
+	$(MAKE) shutdown_dummy
 	$(JAVA) -jar $(DUMMY) & echo $$! > server.PID&
 
 
