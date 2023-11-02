@@ -42,7 +42,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>controller.Soundboard</mainClass>
+                            <mainClass>soundboard.App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -62,7 +62,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.0.0</version>
                 <configuration>
-                    <mainClass>controller.Soundboard</mainClass>
+                    <mainClass>soundboard.App</mainClass>
                 </configuration>
             </plugin>
 
