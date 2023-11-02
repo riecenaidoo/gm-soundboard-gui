@@ -7,6 +7,7 @@ import model.DiscordBot;
 import model.Icons;
 import model.catalogue.Catalogue;
 import view.HomePanel;
+import view.MenuBar;
 import view.SoundboardPanel;
 
 import javax.swing.*;
@@ -25,10 +26,11 @@ public class Soundboard {
     private final DiscordBot discordBot;
     private final Catalogue catalogue;
 
-    private final JFrame app;
+    private final MenuBar menuBar;
 
     private final HomePanel homeView;
     private final SoundboardPanel soundboardView;
+    private JFrame app;
     private final SoundboardController soundboardController;
 
     private Soundboard() {
@@ -57,10 +59,9 @@ public class Soundboard {
 
         homeView = new HomePanel();
         new HomeController(this, homeView);
-        //Create and set up the window.
-        app = new JFrame("Soundboard");
-        app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        app.setContentPane(homeView);
+
+        menuBar = new MenuBar();
+        new MenuBarController(this, menuBar);
     }
 
     public static void main(String[] args) {
@@ -83,12 +84,6 @@ public class Soundboard {
     public void openSoundboard() {
         api = new API(client);
         soundboardController.connect(api);
-        JMenuBar menuBar = new JMenuBar();
-        JMenu menu = new JMenu("Options");
-        JMenuItem disconnect = new JMenuItem("Disconnect");
-        disconnect.addActionListener(e -> closeSoundboard());
-        menu.add(disconnect);
-        menuBar.add(menu);
         app.setJMenuBar(menuBar);
         app.setContentPane(soundboardView);
         app.pack();
@@ -99,13 +94,15 @@ public class Soundboard {
         client = null;
         api = null;
         app.setJMenuBar(null);
-//        app.remove(menuBar);
         app.setContentPane(homeView);
         app.pack();
     }
 
     public void run() {
-        //Display the window.
+        //Create and set up the window.
+        app = new JFrame("Soundboard");
+        app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        app.setContentPane(homeView);
         app.pack();
         app.setVisible(true);
     }
