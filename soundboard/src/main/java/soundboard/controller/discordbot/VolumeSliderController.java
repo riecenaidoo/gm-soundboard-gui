@@ -8,12 +8,12 @@ import soundboard.view.discordbot.VolumeSlider;
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Arrays;
 
 class VolumeSliderController implements DiscordBotController {
 
     private final DiscordBot model;
     private final JSlider volumeSlider;
+    private MouseAdapter mouseAdapter;
 
     protected VolumeSliderController(DiscordBot model, VolumeSlider volumeSlider) {
         this.model = model;
@@ -25,15 +25,16 @@ class VolumeSliderController implements DiscordBotController {
     }
 
     public void connect(RequestHandler requestHandler) {
-        Arrays.stream(volumeSlider.getMouseListeners()).toList().forEach(volumeSlider::removeMouseListener);
-        volumeSlider.addMouseListener(new MouseAdapter() {
+        if (mouseAdapter != null) volumeSlider.removeMouseListener(mouseAdapter);
+        mouseAdapter = new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
                 int desiredVol = volumeSlider.getValue();
                 if (model.getVolume() == desiredVol) return;
                 requestHandler.set_volume(desiredVol);
             }
-        });
+        };
+        volumeSlider.addMouseListener(mouseAdapter);
     }
 
     @Override
