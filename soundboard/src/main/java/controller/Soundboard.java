@@ -99,6 +99,7 @@ public class Soundboard {
         client = null;
         api = null;
         app.setJMenuBar(null);
+//        app.remove(menuBar);
         app.setContentPane(homeView);
         app.pack();
     }
