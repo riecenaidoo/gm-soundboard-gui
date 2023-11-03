@@ -1,4 +1,6 @@
-package soundboard;
+package soundboard.model;
+
+import soundboard.App;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,50 +8,35 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 
-public class Client {
+public class ClientSocket {
 
-    static int PORT = 5000;
-    static String SERVER_IP = "localhost";
-    static Client INSTANCE;
+    private final static int PORT = 5000;
+    private final static String SERVER_IP = "localhost";
 
-    Socket socket;
-    PrintStream out;
-    BufferedReader in;
-    Soundboard soundboard;
+    private final App app;
+
+    private final Socket socket;
+    private final PrintStream out;
+    private final BufferedReader in;
+
 
     /**
      * @throws IOException if an I/O error occurs when creating the output stream
      *                     or if the socket is not connected.
      */
-    private Client(Socket socket, Soundboard soundboard) throws IOException {
-        this.socket = socket;
-        this.soundboard = soundboard;
+    public ClientSocket(App app) throws IOException {
+        this.socket = new Socket(SERVER_IP, PORT);
+        this.app = app;
         this.out = new PrintStream(socket.getOutputStream());
         this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-    }
-
-    /**
-     * @throws ClientCreationException if an I/O error occurred while setting up the socket.
-     */
-    public static Client getClient(Soundboard soundboard) {
-        if (INSTANCE != null) {
-            return INSTANCE;
-        }
-
-        try {
-            Socket socket = new Socket(SERVER_IP, PORT);
-            return new Client(socket, soundboard);
-        } catch (IOException e) {
-            throw new ClientCreationException(e);
-        }
     }
 
     public void send(String output) {
         out.println(output);
         out.flush();
         String received = receive();
-        if (received == null) soundboard.closeSoundboard();
-        System.out.println(received);
+        if (received == null) app.viewHome();
+//        System.out.printf("[INFO] Received: '%s'.\n", received);
     }
 
     public String receive() {
@@ -62,7 +49,7 @@ public class Client {
                             [ERROR] An error occurred while communicating with the server.
                             \tReason: '%s'.
                             """, e.getMessage());
-            soundboard.closeSoundboard();
+            app.viewHome();
         } finally {
             if (socket.isClosed()) closeQuietly();
         }
@@ -99,19 +86,6 @@ public class Client {
                             [ERROR] An error occurred while closing down the client socket.
                             \tReason: '%s'.
                             """, e.getMessage());
-        }
-    }
-
-    /**
-     * Custom exception to separate IOExceptions that can occur during runtime from
-     * those that occur when setting up the socket.
-     */
-    static class ClientCreationException extends RuntimeException {
-        ClientCreationException(IOException e) {
-            super(String.format("""
-                    [FATAL] An I/O error occurred while setting up the socket.
-                    \tReason: '%s'.
-                    """, e.getMessage()));
         }
     }
 }

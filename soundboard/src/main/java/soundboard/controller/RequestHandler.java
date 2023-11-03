@@ -1,28 +1,30 @@
-package soundboard;
+package soundboard.controller;
 
-import java.util.List;
+import soundboard.model.ClientSocket;
 
-public class API {
+import java.util.Collection;
 
-    private final Client client;
+public class RequestHandler {
 
-    public API(Client client) {
-        this.client = client;
+    private final ClientSocket clientSocket;
+
+    public RequestHandler(ClientSocket clientSocket) {
+        this.clientSocket = clientSocket;
     }
 
     // Channel Selector Panel
 
     public void join_channel(Object selectedItem) {
 //        System.out.printf("[INFO][POST Request] Set the Bot's audio channel to <%s>.\n", selectedItem);
-        client.send("join " + selectedItem);
+        clientSocket.send("join " + selectedItem);
     }
 
-    public void leave(){
-        client.send("leave");
+    public void leave() {
+        clientSocket.send("leave");
     }
 
     // Catalogue Selector Panel
-    public void play(List<String> songs) {
+    public void play(Collection<String> songs) {
         StringBuilder stringBuilder = new StringBuilder("play");
 
         for (String song : songs) {
@@ -32,53 +34,53 @@ public class API {
         String command = stringBuilder.toString();
 
 //        System.out.printf("[INFO][POST Request] Play these songs: '%s' -> '%s' \n", songs, command);
-        client.send(command);
+        clientSocket.send(command);
     }
 
     // MusicPlayer Panel
 
-    public void stop(){
-        client.send("stop");
+    public void stop() {
+        clientSocket.send("stop");
     }
 
     public void resume() {
 //        System.out.print("[INFO][POST Request] Pause the audio.\n");
-        client.send("resume");
+        clientSocket.send("resume");
     }
 
     public void pause() {
 //        System.out.print("[INFO][POST Request] Resume the audio.\n");
-        client.send("pause");
+        clientSocket.send("pause");
     }
 
     public void set_volume(int volume) {
 //        System.out.printf("[INFO][POST Request] Set the Bot's audio level '<%d>'.\n", volume);
-        client.send("volume " + volume);
+        clientSocket.send("volume " + volume);
     }
 
     public void skip() {
 //        System.out.print("[INFO][POST Request] Skip to the next song.\n");
-        client.send("skip");
+        clientSocket.send("skip");
     }
 
     public void prev() {
 //        System.out.print("[INFO][POST Request] Skip to the previous song.\n");
-        client.send("prev");
+        clientSocket.send("prev");
     }
 
-    public void shuffle(){
-        client.send("shuffle");
+    public void shuffle() {
+        clientSocket.send("shuffle");
     }
 
-    public void loop(){
-        client.send("loop");
+    public void loop() {
+        clientSocket.send("loop");
     }
 
-    public void repeat(){
-        client.send("repeat");
+    public void repeat() {
+        clientSocket.send("repeat");
     }
 
-    public void loop_none(){
-        client.send("normal");
+    public void loop_none() {
+        clientSocket.send("normal");
     }
 }

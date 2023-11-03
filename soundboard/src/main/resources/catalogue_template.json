@@ -1,0 +1,59 @@
+[
+  {
+    "Group": "Ambience",
+    "Items": [
+      {
+        "Title": "Forest",
+        "Songs": [
+          "youtube_url",
+          "youtube_url"
+        ]
+      },
+      {
+        "Title": "Cave",
+        "Songs": [
+          "youtube_url",
+          "youtube_url"
+        ]
+      }
+    ]
+  },
+  {
+    "Group": "Mood",
+    "Items": [
+      {
+        "Title": "Adventure",
+        "Songs": [
+          "youtube_url",
+          "youtube_url"
+        ]
+      },
+      {
+        "Title": "Suspense",
+        "Songs": [
+          "youtube_url",
+          "youtube_url"
+        ]
+      }
+    ]
+  },
+  {
+    "Group": "Combat",
+    "Items": [
+      {
+        "Title": "General",
+        "Songs": [
+          "youtube_url",
+          "youtube_url"
+        ]
+      },
+      {
+        "Title": "Boss",
+        "Songs": [
+          "youtube_url",
+          "youtube_url"
+        ]
+      }
+    ]
+  }
+]
