@@ -34,7 +34,8 @@ public class SingleServer implements Runnable {
             System.out.printf("""
                     [FATAL] Could not establish a SingleServer over Port:%s.
                     \tReason: '%s'.
-                    \tQuickFix: Check if the Port currently in use?""", PORT, e.getMessage());
+                    \tQuickFix: Check if the Port currently in use?
+                    """, PORT, e.getMessage());
         }
     }
 
