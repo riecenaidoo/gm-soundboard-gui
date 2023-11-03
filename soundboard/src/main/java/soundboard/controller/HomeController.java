@@ -15,10 +15,9 @@ public class HomeController {
 
         connect.addActionListener(e -> {
             try {
-                model.setClient(new ClientSocket(model));
                 status.setText("Connected!");
-
-                model.openSoundboard();
+                model.connectClient(new ClientSocket(model));
+                model.viewSoundboard();
             } catch (IOException i) {
                 status.setText("Connection Failed.");
             }

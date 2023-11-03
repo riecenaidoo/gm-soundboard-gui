@@ -2,6 +2,7 @@ package soundboard.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Represents the status of the Bot service this application
@@ -69,6 +70,12 @@ public class DiscordBot {
 
     public void setVolume(int volume) {
         if ((volume >= 0) && (volume <= 100)) this.volume = volume;
+    }
+
+    public DiscordBot dummyValues() {
+        this.setVoiceChannels(List.of("0", "1", "2", "3", "4", "5", "6", "7", "8", "9"));
+        this.setVolume(50);
+        return this;
     }
 
     public enum LoopMode {

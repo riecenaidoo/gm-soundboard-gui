@@ -35,7 +35,7 @@ public class ClientSocket {
         out.println(output);
         out.flush();
         String received = receive();
-        if (received == null) app.closeSoundboard();
+        if (received == null) app.viewHome();
 //        System.out.printf("[INFO] Received: '%s'.\n", received);
     }
 
@@ -49,7 +49,7 @@ public class ClientSocket {
                             [ERROR] An error occurred while communicating with the server.
                             \tReason: '%s'.
                             """, e.getMessage());
-            app.closeSoundboard();
+            app.viewHome();
         } finally {
             if (socket.isClosed()) closeQuietly();
         }

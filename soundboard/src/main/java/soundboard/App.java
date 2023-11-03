@@ -1,7 +1,5 @@
 package soundboard;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.formdev.flatlaf.FlatDarkLaf;
 import soundboard.controller.HomeController;
 import soundboard.controller.MenuBarController;
@@ -16,14 +14,8 @@ import soundboard.view.MenuBar;
 import soundboard.view.SoundboardView;
 
 import javax.swing.*;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
 
 public class App {
-
-    private final static String CATALOGUE = "docs/catalogue_sample.json";
 
     private final DiscordBot discordBot;
     private final Catalogue catalogue;
@@ -36,28 +28,12 @@ public class App {
     private JFrame app;
 
     private App() {
-        Icons icons = new Icons();
-
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            if (!CATALOGUE.isEmpty()) {
-                catalogue = Catalogue.fromJson(mapper.readTree(new File(CATALOGUE)));
-            } else {
-                InputStream in = Thread.currentThread().getContextClassLoader().
-                        getResourceAsStream("catalogue_template.json");
-                catalogue = Catalogue.fromJson(mapper.readValue(in, JsonNode.class));
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
-        }
-
-        discordBot = new DiscordBot();
-        discordBot.setVoiceChannels(List.of("0", "1", "2", "3", "4", "5", "6", "7", "8", "9"));
-        discordBot.setVolume(50);
+        catalogue = Catalogue.fromFile("docs/catalogue_sample.json");
+        discordBot = new DiscordBot().dummyValues();
 
         soundboardView = new SoundboardView();
         soundboardController = new SoundboardController(this, soundboardView);
-        soundboardController.loadIcons(icons);
+        soundboardController.loadIcons(new Icons());
 
         homeView = new HomeView();
         new HomeController(this, homeView);
@@ -71,8 +47,15 @@ public class App {
         new App().run();
     }
 
-    public void setClient(ClientSocket clientSocket) {
+    public void connectClient(ClientSocket clientSocket) {
         this.clientSocket = clientSocket;
+        requestHandler = new RequestHandler(clientSocket);
+    }
+
+    public void disconnectClient() {
+        clientSocket.disconnect();
+        clientSocket = null;
+        requestHandler = null;
     }
 
     public DiscordBot getDiscordBot() {
@@ -83,18 +66,14 @@ public class App {
         return catalogue;
     }
 
-    public void openSoundboard() {
-        requestHandler = new RequestHandler(clientSocket);
+    public void viewSoundboard() {
         soundboardController.connect(requestHandler);
         app.setJMenuBar(menuBar);
         app.setContentPane(soundboardView);
         app.pack();
     }
 
-    public void closeSoundboard() {
-        clientSocket.disconnect();
-        clientSocket = null;
-        requestHandler = null;
+    public void viewHome() {
         app.setJMenuBar(null);
         app.setContentPane(homeView);
         app.pack();
