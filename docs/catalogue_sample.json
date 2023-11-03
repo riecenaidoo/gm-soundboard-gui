@@ -1,0 +1,349 @@
+[
+  {
+    "Group": "Mood",
+    "Items": [
+      {
+        "Title": "Adventure",
+        "Songs": [
+          "https://www.youtube.com/watch?v=zOFJvvsPv5I",
+          "https://www.youtube.com/watch?v=89GJi12ecnk",
+          "https://www.youtube.com/watch?v=hK0qM9hnr-0",
+          "https://www.youtube.com/watch?v=uvW-QTiZLQ0",
+          "https://www.youtube.com/watch?v=B92P1-OUNJo",
+          "https://www.youtube.com/watch?v=SX9d2wolx6I",
+          "https://www.youtube.com/watch?v=7dvC03u_wgo",
+          "https://www.youtube.com/watch?v=t72YTK00iqY",
+          "https://www.youtube.com/watch?v=Vn4uGYW-TRA",
+          "https://www.youtube.com/watch?v=WdLQpyhiH84",
+          "https://www.youtube.com/watch?v=bvfXOdIJTDY",
+          "https://www.youtube.com/watch?v=KHFCJqM_xLU",
+          "https://www.youtube.com/watch?v=IC6s8DOcIZk",
+          "https://www.youtube.com/watch?v=Lp_R_6UBH2w"
+        ]
+      },
+      {
+        "Title": "Fear/Suspense",
+        "Songs": [
+          "https://www.youtube.com/watch?v=p5-ZkZ3luMA",
+          "https://www.youtube.com/watch?v=535yS1PxX2A"
+        ]
+      },
+      {
+        "Title": "The Dark Trilogy Albums",
+        "Songs": [
+          "https://www.youtube.com/watch?v=WUhMLw6vq8g"
+        ]
+      }
+    ]
+  },
+  {
+    "Group": "Exploration",
+    "Items": [
+      {
+        "Title": "Into the Wilds",
+        "Songs": [
+          "https://youtu.be/BjLcRTkyw5k",
+          "https://youtu.be/ZwuiiunmZak",
+          "https://youtu.be/-SbI8K7KBNQ",
+          "https://youtu.be/BR6z7iTHQqE",
+          "https://youtu.be/cw43_MX4IiU",
+          "https://youtu.be/z0scczAMu4I",
+          "https://youtu.be/dcKTwz-UsUo",
+          "https://youtu.be/Tce2KQKB1mI",
+          "https://youtu.be/I5MEWSR0Rxo",
+          "https://youtu.be/xDS4GFnOQHI"
+        ]
+      },
+      {
+        "Title": "Into the Wilds (Night)",
+        "Songs": [
+          "https://youtu.be/udx73YA7N5Q",
+          "https://youtu.be/2lO42FUJDdI",
+          "https://youtu.be/HyFl_SNmRi0",
+          "https://youtu.be/wEjAdU4fjvg",
+          "https://youtu.be/zUe8KbheKbc",
+          "https://youtu.be/6Lu758_UePU"
+        ]
+      }
+    ]
+  },
+  {
+    "Group": "Combat",
+    "Items": [
+      {
+        "Title": "Encounter",
+        "Songs": [
+          "https://www.youtube.com/watch?v=wxUi9WA_zk0",
+          "https://www.youtube.com/watch?v=0YXh3OqUJhc",
+          "https://www.youtube.com/watch?v=lSNF3mTQCi8"
+        ]
+      },
+      {
+        "Title": "Fight",
+        "Songs": [
+          "https://www.youtube.com/watch?v=TD8qEyHq0aY",
+          "https://www.youtube.com/watch?v=ZOnymtmrKYM",
+          "https://www.youtube.com/watch?v=6OpgDKY-BiU",
+          "https://www.youtube.com/watch?v=ZcNyPdipjeU",
+          "https://www.youtube.com/watch?v=T7Qlx8bZTsg"
+        ]
+      },
+      {
+        "Title": "Duel",
+        "Songs": [
+          "https://www.youtube.com/watch?v=56GVo6ZeAOg",
+          "https://www.youtube.com/watch?v=1E83ziGEsPE",
+          "https://www.youtube.com/watch?v=zP_lAuTRRCI"
+        ]
+      },
+      {
+        "Title": "General",
+        "Songs": [
+          "https://www.youtube.com/watch?v=Tw-ihgnMqwA",
+          "https://www.youtube.com/watch?v=3bRN__YwhXU",
+          "https://www.youtube.com/watch?v=SNRJ2v9IEfU",
+          "https://www.youtube.com/watch?v=NDuMvYZbDsU",
+          "https://www.youtube.com/watch?v=ISbV2Rx8VWs",
+          "https://www.youtube.com/watch?v=9CEkOipYAmI",
+          "https://www.youtube.com/watch?v=TTKdvO9LWwk",
+          "https://www.youtube.com/watch?v=XZh5EagnKYo",
+          "https://www.youtube.com/watch?v=n8wbYig-gIw",
+          "https://www.youtube.com/watch?v=aDZVGqCz26g",
+          "https://www.youtube.com/watch?v=DBFxp-DhpVI"
+        ]
+      },
+      {
+        "Title": "The Wilds",
+        "Songs": [
+          "https://www.youtube.com/watch?v=uFJZPjEwmwk",
+          "https://www.youtube.com/watch?v=nugiDjvyf-4",
+          "https://www.youtube.com/watch?v=Qj1RS9vHcsw",
+          "https://www.youtube.com/watch?v=irAd3IaSV2s",
+          "https://www.youtube.com/watch?v=nFmQqUxH7GA",
+          "https://www.youtube.com/watch?v=7SuRgcQ0pM0",
+          "https://www.youtube.com/watch?v=uFJZPjEwmwk",
+          "https://www.youtube.com/watch?v=nugiDjvyf-4",
+          "https://www.youtube.com/watch?v=pa2Ud9GBqKI",
+          "https://www.youtube.com/watch?v=334zUQOnpUc"
+        ]
+      },
+      {
+        "Title": "The Unknown",
+        "Songs": [
+          "https://www.youtube.com/watch?v=twJmux0q7tQ",
+          "https://www.youtube.com/watch?v=5crKb9nMwSw",
+          "https://www.youtube.com/watch?v=V8HUUjDznCc",
+          "https://www.youtube.com/watch?v=pDINdTnK9Ok",
+          "https://www.youtube.com/watch?v=nRLrSOc2654",
+          "https://www.youtube.com/watch?v=YqgwI6uURJw",
+          "https://www.youtube.com/watch?v=KW0QTWpcjc0"
+        ]
+      },
+      {
+        "Title": "Heroic",
+        "Songs": [
+          "https://www.youtube.com/watch?v=RbAU5GIrq-0",
+          "https://www.youtube.com/watch?v=nMmSUGxPEmQ",
+          "https://www.youtube.com/watch?v=N9u-7Xe8rD0",
+          "https://www.youtube.com/watch?v=ciw_WvKa9ck",
+          "https://www.youtube.com/watch?v=DBFxp-DhpVI"
+        ]
+      },
+      {
+        "Title": "Epic",
+        "Songs": [
+          "https://www.youtube.com/watch?v=vHqifHQwxM8",
+          "https://youtu.be/bMfvZmhqW0A",
+          "https://www.youtube.com/watch?v=DBbnhhzXPbQ",
+          "https://www.youtube.com/watch?v=TpJISbt9ftc"
+        ]
+      }
+    ]
+  },
+  {
+    "Group": "Ambience",
+    "Items": [
+      {
+        "Title": "Tension of the Unknown",
+        "Songs": [
+          "https://www.youtube.com/watch?v=Jg_QwWE_5cY"
+        ]
+      },
+      {
+        "Title": "Camping by Fire",
+        "Songs": [
+          "https://www.youtube.com/watch?v=7KFoj-SOfHs",
+          "https://www.youtube.com/watch?v=imxILmKjjCQ"
+        ]
+      },
+      {
+        "Title": "Grassland",
+        "Songs": [
+          "https://www.youtube.com/watch?v=WvmCUxpnePM",
+          "https://www.youtube.com/watch?v=xJN2COqmLg4",
+          "https://www.youtube.com/watch?v=3kE7UsrYoVk"
+        ]
+      },
+      {
+        "Title": "Grassland (Night)",
+        "Songs": [
+          "https://www.youtube.com/watch?v=PQUGfRNNqtY",
+          "https://www.youtube.com/watch?v=bsuYcwlzr2w"
+        ]
+      },
+      {
+        "Title": "Woodland",
+        "Songs": [
+          "https://www.youtube.com/watch?v=6Em9tLXbhfo"
+        ]
+      },
+      {
+        "Title": "Woodland (Night)",
+        "Songs": [
+          "https://www.youtube.com/watch?v=L3dEOA4giio",
+          "https://www.youtube.com/watch?v=BagZxkrxaC0"
+        ]
+      },
+      {
+        "Title": "Highland",
+        "Songs": [
+          "https://www.youtube.com/watch?v=oy0jX_I1CIU",
+          "https://www.youtube.com/watch?v=1zCDGPtDR8Q"
+        ]
+      },
+      {
+        "Title": "Highland (Night)",
+        "Songs": [
+          "https://www.youtube.com/watch?v=jcwuMMQ_J8E",
+          "https://www.youtube.com/watch?v=iO-mUnSjMKM"
+        ]
+      },
+      {
+        "Title": "Wetland",
+        "Songs": [
+          "https://www.youtube.com/watch?v=fq_ZTJqJTcc",
+          "https://www.youtube.com/watch?v=juMabblyLZU"
+        ]
+      },
+      {
+        "Title": "Wetland (Night)",
+        "Songs": [
+          "https://www.youtube.com/watch?v=NQIoLiQ_uNU",
+          "https://www.youtube.com/watch?v=p1HzxO_SKOI"
+        ]
+      }
+    ]
+  },
+  {
+    "Group": "Game",
+    "Items": [
+      {
+        "Title": "Waiting Room",
+        "Songs": [
+          "https://youtu.be/JX4TiwCGSPo"
+        ]
+      },
+      {
+        "Title": "Main Intro",
+        "Songs": [
+          "https://www.youtube.com/watch?v=3aUH08obnTk"
+        ]
+      },
+      {
+        "Title": "Gentler Intro",
+        "Songs": [
+          "https://www.youtube.com/watch?v=EhVyExSGN2o"
+        ]
+      },
+      {
+        "Title": "Lullaby Outro",
+        "Songs": [
+          "https://www.youtube.com/watch?v=9EhWCAHBbjU"
+        ]
+      },
+      {
+        "Title": "Haunting Outro",
+        "Songs": [
+          "https://www.youtube.com/watch?v=y9wm-Yk4lOw"
+        ]
+      }
+    ]
+  },
+  {
+    "Group": "Cinematic",
+    "Items": [
+      {
+        "Title": "Yggdrasil",
+        "Songs": [
+          "https://www.youtube.com/watch?v=uoCHWKbue_c"
+        ]
+      },
+      {
+        "Title": "Tribal Leader",
+        "Songs": [
+          "https://www.youtube.com/watch?v=AMhd6a8FmuQ"
+        ]
+      },
+      {
+        "Title": "Battle Haka",
+        "Songs": [
+          "https://www.youtube.com/watch?v=AUJUAufR8MA"
+        ]
+      }
+    ]
+  },
+  {
+    "Group": "Weather FX",
+    "Items": [
+      {
+        "Title": "Rain",
+        "Songs": [
+          "https://www.youtube.com/watch?v=KSSpVMIgN2Y",
+          "https://www.youtube.com/watch?v=dd4D8tZPfKE"
+        ]
+      },
+      {
+        "Title": "Storm",
+        "Songs": [
+          "https://www.youtube.com/watch?v=hzJTZgGtAVU",
+          "https://www.youtube.com/watch?v=2wqf6nvML7Y",
+          "https://www.youtube.com/watch?v=B7PQv77VmSw"
+        ]
+      }
+    ]
+  },
+  {
+    "Group": "Nature FX",
+    "Items": [
+      {
+        "Title": "Creek",
+        "Songs": [
+          "https://www.youtube.com/watch?v=mk58c70aLcA"
+        ]
+      },
+      {
+        "Title": "Waterfall",
+        "Songs": [
+          "https://www.youtube.com/watch?v=fEgFDTkjprM"
+        ]
+      }
+    ]
+  },
+  {
+    "Group": "Location FX",
+    "Items": [
+      {
+        "Title": "Warcamp",
+        "Songs": [
+          "https://www.youtube.com/watch?v=uhqGVGpVt-A"
+        ]
+      },
+      {
+        "Title": "Fifth-Wheel",
+        "Songs": [
+          "https://www.youtube.com/watch?v=ie2fxiTSreQ"
+        ]
+      }
+    ]
+  }
+]
