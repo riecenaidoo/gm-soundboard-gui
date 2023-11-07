@@ -1,6 +1,7 @@
 package soundboard;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import picocli.CommandLine;
 import soundboard.controller.HomeController;
 import soundboard.controller.MenuBarController;
 import soundboard.controller.RequestHandler;
@@ -27,8 +28,14 @@ public class App {
     private RequestHandler requestHandler;
     private JFrame app;
 
+    @CommandLine.Option(names = {"-f", "--file"}, description = "Path to the catalogue file (json).")
+    private String catalogueFilePath;
+    @CommandLine.Option(names = {"-p", "--port"}, description = "Port the websocket is hosted on.")
+    private int port;
+
     private App() {
-        catalogue = Catalogue.fromFile("docs/catalogue_sample.json");
+        //        catalogue = Catalogue.fromFile("docs/catalogue_sample.json");
+        catalogue = new Catalogue();
         discordBot = new DiscordBot().dummyValues();
 
         soundboardView = new SoundboardView();
@@ -44,7 +51,9 @@ public class App {
 
     public static void main(String[] args) {
         FlatDarkLaf.setup();
-        new App().run();
+        App app = new App();
+        new CommandLine(app).parseArgs(args);
+        app.run();
     }
 
     public void connectClient(ClientSocket clientSocket) {
@@ -81,6 +90,8 @@ public class App {
 
     public void run() {
         //Create and set up the window.
+        //Load the catalogue
+//        catalogue.load(catalogueFilePath);
         app = new JFrame("Soundboard");
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         app.setContentPane(homeView);
