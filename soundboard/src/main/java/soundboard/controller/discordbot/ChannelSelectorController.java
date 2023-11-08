@@ -7,17 +7,16 @@ import soundboard.view.discordbot.ChannelSelectorPanel;
 
 import javax.swing.*;
 import java.util.Arrays;
-import java.util.Collection;
 
 class ChannelSelectorController implements DiscordBotController {
 
-    private final Collection<String> channels;
+    private final DiscordBot model;
     private final JComboBox<String> channelSelector;
     private final JButton leaveButton;
     private int currentChannelIndex;
 
     protected ChannelSelectorController(DiscordBot model, ChannelSelectorPanel view) {
-        this.channels = model.getVoiceChannels();
+        this.model = model;
         this.channelSelector = view.getChannelSelector();
         this.leaveButton = view.getLeave();
         currentChannelIndex = 0;
@@ -31,7 +30,7 @@ class ChannelSelectorController implements DiscordBotController {
         if (channelSelector.getItemCount() > 0) channelSelector.removeAllItems();
         channelSelector.addItem("");
         channelSelector.setSelectedIndex(currentChannelIndex);
-        channels.forEach(channelSelector::addItem);
+        model.getVoiceChannels().forEach(channelSelector::addItem);
     }
 
     /**
