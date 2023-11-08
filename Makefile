@@ -15,8 +15,9 @@ $(DUMMY):
 
 
 .PHONY: run
+run: ARGS?=
 run: $(TARGET)
-	$(JAVA) -jar $(TARGET)
+	$(JAVA) -jar $(TARGET) $(ARGS)
 
 
 .PHONY: start_dummy
@@ -40,10 +41,11 @@ shutdown_dummy:
 
 # Rebuilds & runs the Soundboard against a dummy server.
 .PHONY: debug
+debug: ARGS?=
 debug:
 	$(MAVEN) -f $(SOUNDBOARD) clean
 	$(MAKE) start_dummy
-	$(MAKE) run
+	$(MAKE) run $(ARGS)
 	$(MAKE) shutdown_dummy
 
 
