@@ -14,7 +14,7 @@ public class SingleServer implements Runnable {
     static final String HOSTNAME = "0.0.0.0";
 
     @CommandLine.Option(names = {"-p", "--port"}, description = "Port to host the dummy server on.")
-    private final int port;
+    private int port;
     private ServerSocket serverSocket;
     private Socket clientSocket;
     private BufferedWriter out;
