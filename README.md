@@ -5,7 +5,7 @@ Contains a GUI for using the `discord-console-bot` to play songs pulled from a s
 ## Structure
 
 - The docs directory contains images used in this Readme.
-- The server module contains a dummy server for debugging and testing against.
+- The server module contains a standalone dummy server for debugging and testing against.
 - The soundboard module contains the gui application for the `discord-console-bot`.
 - There is a Makefile for building, running and testing the application.
 
