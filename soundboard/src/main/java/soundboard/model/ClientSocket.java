@@ -10,9 +10,6 @@ import java.net.Socket;
 
 public class ClientSocket {
 
-    private final static int PORT = 5000;
-    private final static String SERVER_IP = "localhost";
-
     private final App app;
 
     private final Socket socket;
@@ -24,8 +21,8 @@ public class ClientSocket {
      * @throws IOException if an I/O error occurs when creating the output stream
      *                     or if the socket is not connected.
      */
-    public ClientSocket(App app) throws IOException {
-        this.socket = new Socket(SERVER_IP, PORT);
+    public ClientSocket(App app, String hostname, int port) throws IOException {
+        this.socket = new Socket(hostname, port);
         this.app = app;
         this.out = new PrintStream(socket.getOutputStream());
         this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));

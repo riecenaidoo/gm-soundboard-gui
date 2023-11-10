@@ -15,8 +15,6 @@ public class SoundboardController {
     public SoundboardController(App model, SoundboardView view) {
         catalogueController = new CatalogueController(model.getCatalogue(), view.getCatalogueView());
         discordBotController = new DiscordBotControllersList(model.getDiscordBot(), view.getDiscordBotView());
-        catalogueController.load();
-        discordBotController.sync();
     }
 
     public void loadIcons(Icons icons) {
@@ -27,5 +25,13 @@ public class SoundboardController {
     public void connect(RequestHandler requestHandler) {
         catalogueController.connect(requestHandler);
         discordBotController.connect(requestHandler);
+    }
+
+    public CatalogueController getCatalogueController() {
+        return catalogueController;
+    }
+
+    public DiscordBotController getDiscordBotController() {
+        return discordBotController;
     }
 }

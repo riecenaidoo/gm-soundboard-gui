@@ -14,28 +14,27 @@ import java.util.ArrayList;
  */
 public class Catalogue extends ArrayList<Group> {
 
-
-    public static Catalogue fromJson(JsonNode json) {
-        Catalogue catalogue = new Catalogue();
-        for (JsonNode category : json) catalogue.add(Group.fromJson(category));
-        return catalogue;
+    public void load(JsonNode catalogueNode) {
+        for (JsonNode group : catalogueNode) add(Group.fromJson(group));
     }
 
-    public static Catalogue fromFile(String catalogueJsonFile) {
+    public boolean load(String catalogueJsonFile) {
         try {
-            return Catalogue.fromJson(new ObjectMapper().readTree(new File(catalogueJsonFile)));
+            JsonNode catalogueNode = new ObjectMapper().readTree(new File(catalogueJsonFile));
+            load(catalogueNode);
+            return true;
         } catch (IOException e) {
             System.out.printf("[WARNING] Could not generate a catalogue from file '%s': %s.\n", catalogueJsonFile, e.getMessage());
-            System.out.println("[INFO] Generating catalogue from template instead.");
-            return fromTemplate();
+            return false;
         }
     }
 
-    public static Catalogue fromTemplate() {
+    public void loadTemplate() {
         InputStream in = Thread.currentThread().getContextClassLoader().
                 getResourceAsStream("catalogue_template.json");
         try {
-            return Catalogue.fromJson(new ObjectMapper().readValue(in, JsonNode.class));
+            JsonNode catalogueNode = (new ObjectMapper().readValue(in, JsonNode.class));
+            load(catalogueNode);
         } catch (IOException e) {
             System.out.println("[ERROR] There may be an issue with catalogue template resource.");
             throw new RuntimeException(e.getMessage());

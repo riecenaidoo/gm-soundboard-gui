@@ -1,3 +1,5 @@
+import picocli.CommandLine;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -8,10 +10,12 @@ import java.net.Socket;
  */
 public class SingleServer implements Runnable {
 
-    static final int PORT = 5000;
-    static final String hostname = "localhost";
+    static final int DEFAULT_PORT = 5000;
+    static final String HOSTNAME = "0.0.0.0";
 
-    private final ServerSocket serverSocket;
+    @CommandLine.Option(names = {"-p", "--port"}, description = "Port to host the dummy server on.")
+    private int port;
+    private ServerSocket serverSocket;
     private Socket clientSocket;
     private BufferedWriter out;
     private BufferedReader in;
@@ -19,24 +23,21 @@ public class SingleServer implements Runnable {
     /**
      * Instantiates the server socket on an available port.
      *
-     * @param PORT available port to host the server on.
-     * @throws IOException If an I/O error occurs when opening the socket.
+     * @param port available port to host the server on.
+     * @throws RuntimeException If an I/O error occurs when opening the socket.
      */
-    public SingleServer(int PORT) throws IOException {
-        serverSocket = new ServerSocket(PORT);
-        System.out.printf("[INFO] Bound server to PORT %d.\n", PORT);
+    public SingleServer(int port) {
+        this.port = port;
+    }
+
+    public SingleServer() {
+        this(DEFAULT_PORT);
     }
 
     public static void main(String[] args) {
-        try {
-            new SingleServer(PORT).run();
-        } catch (IOException e) {
-            System.out.printf("""
-                    [FATAL] Could not establish a SingleServer over Port:%s.
-                    \tReason: '%s'.
-                    \tQuickFix: Check if the Port currently in use?
-                    """, PORT, e.getMessage());
-        }
+        SingleServer srv = new SingleServer();
+        new CommandLine(srv).parseArgs(args);
+        srv.run();
     }
 
     /**
@@ -79,13 +80,34 @@ public class SingleServer implements Runnable {
     public void shutdownServer(){
         System.out.println("[INFO] Shutting down server.");
         try {
-            serverSocket.close();
+            if (serverSocket != null) serverSocket.close();
         } catch (IOException e) {
             System.out.printf("[WARNING] in shutdownServer: %s", e.getMessage());
         }
     }
 
+    /**
+     * Instantiates the server socket.
+     *
+     * @throws RuntimeException If an I/O error occurs when opening the socket. Usually
+     *                          if the port is not available.
+     */
+    private void start() {
+        try {
+            serverSocket = new ServerSocket(port);
+        } catch (IOException e) {
+            System.out.printf("""
+                    [FATAL] Could not establish a SingleServer over Port:%s.
+                    \tReason: '%s'.
+                    \tQuickFix: Check if the Port currently in use?
+                    """, port, e.getMessage());
+            throw new RuntimeException(e);
+        }
+        System.out.printf("[INFO] Bound server to PORT %d.\n", port);
+    }
+
     public void run() {
+        start();
         System.out.println("[INFO] Server online.");
         while (!serverSocket.isClosed()) {
             try {

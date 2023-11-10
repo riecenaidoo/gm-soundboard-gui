@@ -1,6 +1,7 @@
 package soundboard;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import picocli.CommandLine;
 import soundboard.controller.HomeController;
 import soundboard.controller.MenuBarController;
 import soundboard.controller.RequestHandler;
@@ -17,6 +18,10 @@ import javax.swing.*;
 
 public class App {
 
+    private final static String CATALOGUE_FILE_PATH = "docs/catalogue_sample.json";
+    private final static String HOSTNAME = "0.0.0.0";
+    private final static int PORT = 5000;
+
     private final DiscordBot discordBot;
     private final Catalogue catalogue;
     private final MenuBar menuBar;
@@ -27,13 +32,23 @@ public class App {
     private RequestHandler requestHandler;
     private JFrame app;
 
+    @CommandLine.Option(names = {"-f", "--file"}, description = "Path to the catalogue file (json).")
+    private String catalogueFilePath;
+    @CommandLine.Option(names = {"-h", "--host"}, description = "Hostname / server ip the websocket is hosted on.")
+    private String hostname;
+    @CommandLine.Option(names = {"-p", "--port"}, description = "Port the websocket is hosted on.")
+    private int port;
+
     private App() {
-        catalogue = Catalogue.fromFile("docs/catalogue_sample.json");
-        discordBot = new DiscordBot().dummyValues();
+        catalogueFilePath = CATALOGUE_FILE_PATH;
+        hostname = HOSTNAME;
+        port = PORT;
+
+        catalogue = new Catalogue();
+        discordBot = new DiscordBot();
 
         soundboardView = new SoundboardView();
         soundboardController = new SoundboardController(this, soundboardView);
-        soundboardController.loadIcons(new Icons());
 
         homeView = new HomeView();
         new HomeController(this, homeView);
@@ -44,7 +59,9 @@ public class App {
 
     public static void main(String[] args) {
         FlatDarkLaf.setup();
-        new App().run();
+        App app = new App();
+        new CommandLine(app).parseArgs(args);
+        app.run();
     }
 
     public void connectClient(ClientSocket clientSocket) {
@@ -66,6 +83,14 @@ public class App {
         return catalogue;
     }
 
+    public int getPort() {
+        return port;
+    }
+
+    public String getHostname() {
+        return hostname;
+    }
+
     public void viewSoundboard() {
         soundboardController.connect(requestHandler);
         app.setJMenuBar(menuBar);
@@ -79,7 +104,20 @@ public class App {
         app.pack();
     }
 
+    /**
+     * Initialise data of the Catalogue & DiscordBot, and sync their views.
+     */
+    public void initialise() {
+        if (!catalogue.load(catalogueFilePath)) catalogue.loadTemplate();
+        soundboardController.getCatalogueController().load();
+        soundboardController.loadIcons(new Icons());
+
+        discordBot.setDummyValues();
+        soundboardController.getDiscordBotController().sync();
+    }
+
     public void run() {
+        initialise();
         //Create and set up the window.
         app = new JFrame("Soundboard");
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

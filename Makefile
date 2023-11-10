@@ -3,7 +3,7 @@ MAVEN = mvn
 SOUNDBOARD = soundboard
 SERVER = server
 TARGET = $(SOUNDBOARD)/target/soundboard-*-jar-with-dependencies.jar
-DUMMY = $(SERVER)/target/server*.jar
+DUMMY = $(SERVER)/target/server-*-jar-with-dependencies.jar
 
 
 $(TARGET):
@@ -15,14 +15,16 @@ $(DUMMY):
 
 
 .PHONY: run
+run: ARGS?=
 run: $(TARGET)
-	$(JAVA) -jar $(TARGET)
+	$(JAVA) -jar $(TARGET) $(ARGS)
 
 
-.PHONY: start_dummy
-start_dummy: $(DUMMY)
+.PHONY: dummy
+dummy: ARGS?=
+dummy: $(DUMMY)
 	$(MAKE) shutdown_dummy
-	$(JAVA) -jar $(DUMMY) & echo $$! > server.PID&
+	$(JAVA) -jar $(DUMMY) $(ARGS) & echo $$! > server.PID&
 
 
 .PHONY: shutdown_dummy
@@ -42,7 +44,7 @@ shutdown_dummy:
 .PHONY: debug
 debug:
 	$(MAVEN) -f $(SOUNDBOARD) clean
-	$(MAKE) start_dummy
+	$(MAKE) dummy
 	$(MAKE) run
 	$(MAKE) shutdown_dummy
 
