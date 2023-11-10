@@ -1,6 +1,4 @@
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.io.*;
 import java.net.Socket;
@@ -18,14 +16,27 @@ class SingleServerTest {
 
     static final int PORT = SingleServer.DEFAULT_PORT;
     static final String HOST = SingleServer.HOSTNAME;
+    static final SingleServer server = new SingleServer(PORT);
 
-    SingleServer server;
     Socket socket;
     BufferedWriter out;
     BufferedReader in;
 
+
     /**
      * Create an instance of the SingleServer, running it in a thread.
+     */
+    @BeforeAll
+    static void setUp() {
+        new Thread(server).start();
+    }
+
+    @AfterAll
+    static void tearDown() {
+        server.shutdownServer();
+    }
+
+    /**
      * Connects a Socket and sets up its input and output streams for testing.
      *
      * @throws IOException IOExceptions occurring during the setup process.
@@ -33,10 +44,7 @@ class SingleServerTest {
      *                     before testing can proceed.
      */
     @BeforeEach
-    void setUp() throws IOException {
-        server = new SingleServer(PORT);
-        new Thread(() -> server.run()).start();
-
+    void setUpSocket() throws IOException {
         socket = new Socket(HOST, PORT);
         out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         in = new BufferedReader(new InputStreamReader(
@@ -44,10 +52,10 @@ class SingleServerTest {
     }
 
     @AfterEach
-    void tearDown() throws IOException {
+    void tearDownSocket() throws IOException {
         socket.close();
-        server.shutdownServer();
     }
+
 
     /**
      * Appends the system's newline to message and flushes the stream.

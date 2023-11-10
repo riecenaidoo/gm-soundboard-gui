@@ -80,7 +80,7 @@ public class SingleServer implements Runnable {
     public void shutdownServer(){
         System.out.println("[INFO] Shutting down server.");
         try {
-            serverSocket.close();
+            if (serverSocket != null) serverSocket.close();
         } catch (IOException e) {
             System.out.printf("[WARNING] in shutdownServer: %s", e.getMessage());
         }
