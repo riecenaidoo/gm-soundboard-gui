@@ -16,8 +16,8 @@ import static org.junit.jupiter.api.Assertions.fail;
  */
 class SingleServerTest {
 
-    static final int PORT = SingleServer.PORT;
-    static final String HOST = SingleServer.hostname;
+    static final int PORT = SingleServer.DEFAULT_PORT;
+    static final String HOST = SingleServer.HOSTNAME;
 
     SingleServer server;
     Socket socket;
