@@ -1,5 +1,8 @@
-target/
+# Configs
 .idea/
 .vscode/
+
+# Build Step
+target/
 *.PID
 RELEASES/
