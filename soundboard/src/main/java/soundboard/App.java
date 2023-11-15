@@ -68,6 +68,20 @@ public class App {
         requestHandler = null;
     }
 
+    public void viewDiscordBot() {
+        soundboardController.connect(requestHandler);
+        app.setJMenuBar(menuBar);
+        soundboardView.viewDiscordBot();
+        app.pack();
+    }
+
+    public void viewHome() {
+        app.setJMenuBar(null);
+        soundboardController.disconnect();
+        soundboardView.viewHome();
+        app.pack();
+    }
+
     public DiscordBot getDiscordBot() {
         return discordBot;
     }
@@ -82,20 +96,6 @@ public class App {
 
     public String getHostname() {
         return hostname;
-    }
-
-    public void viewDiscordBot() {
-        soundboardController.connect(requestHandler);
-        app.setJMenuBar(menuBar);
-        soundboardView.viewDiscordBot();
-        app.pack();
-    }
-
-    public void viewHome() {
-        app.setJMenuBar(null);
-        soundboardController.disconnect();
-        soundboardView.viewHome();
-        app.pack();
     }
 
     /**
