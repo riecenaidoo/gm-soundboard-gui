@@ -20,6 +20,8 @@ public class DiscordBotControllersList extends ArrayList<DiscordBotController> i
         this.add(new ShuffleToggleController(discordBot, discordBotView.getSongControlsPanel()));
         this.add(new SkipButtonController(discordBot, discordBotView.getSongControlsPanel()));
         this.add(new StopButtonController(discordBot, discordBotView.getSongControlsPanel()));
+        this.loadIcons(new Icons());
+        this.sync();
     }
 
     public void sync() {
