@@ -29,6 +29,10 @@ public class SoundboardController {
         discordBotController.connect(requestHandler);
     }
 
+    public void disconnect() {
+        catalogueController.disconnect();
+    }
+
     public CatalogueController getCatalogueController() {
         return catalogueController;
     }
@@ -40,4 +44,5 @@ public class SoundboardController {
     public DiscordBotController getDiscordBotController() {
         return discordBotController;
     }
+
 }

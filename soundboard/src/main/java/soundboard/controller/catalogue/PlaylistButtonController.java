@@ -17,7 +17,11 @@ class PlaylistButtonController {
     }
 
     public void connect(RequestHandler requestHandler) {
-        Arrays.stream(button.getActionListeners()).toList().forEach(button::removeActionListener);
+        disconnect();
         button.addActionListener(l -> requestHandler.play(playlist));
+    }
+
+    public void disconnect() {
+        Arrays.stream(button.getActionListeners()).toList().forEach(button::removeActionListener);
     }
 }

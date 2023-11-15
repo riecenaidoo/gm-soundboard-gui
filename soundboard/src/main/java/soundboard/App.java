@@ -94,6 +94,7 @@ public class App {
 
     public void viewHome() {
         app.setJMenuBar(null);
+        soundboardController.disconnect();
         soundboardView.viewHome();
         app.pack();
     }
