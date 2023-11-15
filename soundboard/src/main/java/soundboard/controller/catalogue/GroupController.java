@@ -44,4 +44,8 @@ class GroupController {
     public void connect(RequestHandler requestHandler) {
         controllers.forEach(controller -> controller.connect(requestHandler));
     }
+
+    public void disconnect() {
+        controllers.forEach(PlaylistButtonController::disconnect);
+    }
 }

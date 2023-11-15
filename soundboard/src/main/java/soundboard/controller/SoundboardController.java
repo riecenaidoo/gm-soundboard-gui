@@ -10,10 +10,12 @@ import soundboard.view.SoundboardView;
 public class SoundboardController {
 
     private final CatalogueController catalogueController;
+    private final HomeController homeController;
     private final DiscordBotController discordBotController;
 
     public SoundboardController(App model, SoundboardView view) {
         catalogueController = new CatalogueController(model.getCatalogue(), view.getCatalogueView());
+        homeController = new HomeController(model, view.getHomeView());
         discordBotController = new DiscordBotControllersList(model.getDiscordBot(), view.getDiscordBotView());
     }
 
@@ -27,11 +29,20 @@ public class SoundboardController {
         discordBotController.connect(requestHandler);
     }
 
+    public void disconnect() {
+        catalogueController.disconnect();
+    }
+
     public CatalogueController getCatalogueController() {
         return catalogueController;
+    }
+
+    public HomeController getHomeController() {
+        return homeController;
     }
 
     public DiscordBotController getDiscordBotController() {
         return discordBotController;
     }
+
 }

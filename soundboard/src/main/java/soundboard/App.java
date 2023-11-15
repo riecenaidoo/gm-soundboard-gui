@@ -2,7 +2,6 @@ package soundboard;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import picocli.CommandLine;
-import soundboard.controller.HomeController;
 import soundboard.controller.MenuBarController;
 import soundboard.controller.RequestHandler;
 import soundboard.controller.SoundboardController;
@@ -10,7 +9,6 @@ import soundboard.model.ClientSocket;
 import soundboard.model.DiscordBot;
 import soundboard.model.Icons;
 import soundboard.model.catalogue.Catalogue;
-import soundboard.view.HomeView;
 import soundboard.view.MenuBar;
 import soundboard.view.SoundboardView;
 
@@ -25,7 +23,6 @@ public class App {
     private final DiscordBot discordBot;
     private final Catalogue catalogue;
     private final MenuBar menuBar;
-    private final HomeView homeView;
     private final SoundboardView soundboardView;
     private final SoundboardController soundboardController;
     private ClientSocket clientSocket;
@@ -49,9 +46,6 @@ public class App {
 
         soundboardView = new SoundboardView();
         soundboardController = new SoundboardController(this, soundboardView);
-
-        homeView = new HomeView();
-        new HomeController(this, homeView);
 
         menuBar = new MenuBar();
         new MenuBarController(this, menuBar);
@@ -91,16 +85,17 @@ public class App {
         return hostname;
     }
 
-    public void viewSoundboard() {
+    public void viewDiscordBot() {
         soundboardController.connect(requestHandler);
         app.setJMenuBar(menuBar);
-        app.setContentPane(soundboardView);
+        soundboardView.viewDiscordBot();
         app.pack();
     }
 
     public void viewHome() {
         app.setJMenuBar(null);
-        app.setContentPane(homeView);
+        soundboardController.disconnect();
+        soundboardView.viewHome();
         app.pack();
     }
 
@@ -121,7 +116,7 @@ public class App {
         //Create and set up the window.
         app = new JFrame("Soundboard");
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        app.setContentPane(homeView);
+        app.setContentPane(soundboardView);
         app.pack();
         app.setVisible(true);
     }

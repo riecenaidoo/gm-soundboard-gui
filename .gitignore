@@ -2,8 +2,7 @@
 .idea/
 .vscode/
 
-# Compiled Code
+# Build Step
 target/
-
-# Process Files
 *.PID
+RELEASES/
