@@ -17,7 +17,7 @@ public class HomeController {
             try {
                 status.setText("Connected!");
                 model.connectClient(new ClientSocket(model, model.getHostname(), model.getPort()));
-                model.viewSoundboard();
+                model.viewDiscordBot();
             } catch (IOException i) {
                 status.setText("Connection Failed.");
             }
