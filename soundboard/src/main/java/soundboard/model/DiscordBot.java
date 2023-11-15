@@ -32,15 +32,6 @@ public class DiscordBot {
         volume = 0;
     }
 
-    /**
-     * @return instance with dummy values for testing purposes.
-     */
-    public DiscordBot dummyValues() {
-        this.setVoiceChannels(List.of("0", "1", "2", "3", "4", "5", "6", "7", "8", "9"));
-        this.setVolume(50);
-        return this;
-    }
-
     public LoopMode getLoopMode() {
         return loopMode;
     }
@@ -79,6 +70,11 @@ public class DiscordBot {
 
     public void setVolume(int volume) {
         if ((volume >= 0) && (volume <= 100)) this.volume = volume;
+    }
+
+    public void setDummyValues() {
+        this.setVoiceChannels(List.of("0", "1", "2", "3", "4", "5", "6", "7", "8", "9"));
+        this.setVolume(50);
     }
 
     public enum LoopMode {

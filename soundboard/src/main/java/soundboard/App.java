@@ -7,6 +7,7 @@ import soundboard.controller.RequestHandler;
 import soundboard.controller.SoundboardController;
 import soundboard.model.ClientSocket;
 import soundboard.model.DiscordBot;
+import soundboard.model.Icons;
 import soundboard.model.catalogue.Catalogue;
 import soundboard.view.MenuBar;
 import soundboard.view.SoundboardView;
@@ -41,7 +42,7 @@ public class App {
         port = PORT;
 
         catalogue = new Catalogue();
-        discordBot = new DiscordBot().dummyValues();
+        discordBot = new DiscordBot();
 
         soundboardView = new SoundboardView();
         soundboardController = new SoundboardController(this, soundboardView);
@@ -99,11 +100,15 @@ public class App {
     }
 
     /**
-     * Initialise data of the Catalogue.
+     * Initialise data of the Catalogue & DiscordBot, and sync their views.
      */
     public void initialise() {
         if (!catalogue.load(catalogueFilePath)) catalogue.loadTemplate();
         soundboardController.getCatalogueController().load();
+        soundboardController.loadIcons(new Icons());
+
+        discordBot.setDummyValues();
+        soundboardController.getDiscordBotController().sync();
     }
 
     public void run() {
