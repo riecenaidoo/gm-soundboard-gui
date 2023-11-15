@@ -1,9 +1,5 @@
-# Configs
+target/
 .idea/
 .vscode/
-
-# Compiled Code
-target/
-
-# Process Files
 *.PID
+RELEASES/
