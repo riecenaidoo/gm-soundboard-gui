@@ -28,12 +28,13 @@ public class ClientSocket {
         this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
 
-    public void send(String output) {
-        out.println(output);
+    /**
+     * Send a message over this Socket.
+     * @param message String without newline chars.
+     */
+    public void send(String message) {
+        out.println(message);
         out.flush();
-        String received = receive();
-        if (received == null) app.viewHome();
-//        System.out.printf("[INFO] Received: '%s'.\n", received);
     }
 
     public String receive() {
