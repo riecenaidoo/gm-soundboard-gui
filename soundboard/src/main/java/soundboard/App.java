@@ -13,6 +13,7 @@ import soundboard.view.MenuBar;
 import soundboard.view.SoundboardView;
 
 import javax.swing.*;
+import java.util.Optional;
 
 public class App {
 
@@ -58,9 +59,25 @@ public class App {
         app.run();
     }
 
+    /**
+     * |Blocking| Continuously listen for messages over the ClientSocket.
+     * <br><br>
+     * Updates App view when no messages are being received, i.e. Socket has likely disconnected.
+     * <br><br>
+     * TODO Messages received will be used to update the App's views.
+     */
+    private void listen() {
+        Optional<String> receivedMessage;
+        do {
+            receivedMessage = this.clientSocket.receive();
+        } while (receivedMessage.isPresent());
+        viewHome();
+    }
+
     public void connectClient(ClientSocket clientSocket) {
         this.clientSocket = clientSocket;
         requestHandler = new RequestHandler(clientSocket);
+        new Thread(this::listen).start();
     }
 
     public void disconnectClient() {
