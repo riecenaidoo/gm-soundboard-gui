@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.util.Optional;
 
 public class ClientSocket {
 
@@ -37,22 +38,27 @@ public class ClientSocket {
         out.flush();
     }
 
-    public String receive() {
-        String messageFromServer = null;
+    /**
+     * Receive a message from the connected Socket.
+     * <br><br>
+     * If an I/O exception occurs, will gracefully shut down this Socket's
+     * I/O streams.
+     *
+     * @return Optional containing a message if one was received.
+     */
+    public Optional<String> receive() {
         try {
-            messageFromServer = in.readLine();
+            return Optional.ofNullable(in.readLine());
         } catch (IOException e) {
             System.out.printf(
                     """
                             [ERROR] An error occurred while communicating with the server.
                             \tReason: '%s'.
                             """, e.getMessage());
-            app.viewHome();
+            return Optional.empty();
         } finally {
             if (socket.isClosed()) closeQuietly();
         }
-
-        return messageFromServer;
     }
 
     private void closeQuietly() {
