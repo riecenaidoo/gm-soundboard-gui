@@ -1,16 +1,13 @@
 package soundboard.model;
 
-import soundboard.App;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.util.Optional;
 
 public class ClientSocket {
-
-    private final App app;
 
     private final Socket socket;
     private final PrintStream out;
@@ -21,37 +18,43 @@ public class ClientSocket {
      * @throws IOException if an I/O error occurs when creating the output stream
      *                     or if the socket is not connected.
      */
-    public ClientSocket(App app, String hostname, int port) throws IOException {
+    public ClientSocket(String hostname, int port) throws IOException {
         this.socket = new Socket(hostname, port);
-        this.app = app;
         this.out = new PrintStream(socket.getOutputStream());
         this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
 
-    public void send(String output) {
-        out.println(output);
+    /**
+     * Send a message over this Socket.
+     *
+     * @param message String without newline chars.
+     */
+    public void send(String message) {
+        out.println(message);
         out.flush();
-        String received = receive();
-        if (received == null) app.viewHome();
-//        System.out.printf("[INFO] Received: '%s'.\n", received);
     }
 
-    public String receive() {
-        String messageFromServer = null;
+    /**
+     * Receive a message from the connected Socket.
+     * <br><br>
+     * If an I/O exception occurs, will gracefully shut down this Socket's
+     * I/O streams.
+     *
+     * @return Optional containing a message if one was received.
+     */
+    public Optional<String> receive() {
         try {
-            messageFromServer = in.readLine();
+            return Optional.ofNullable(in.readLine());
         } catch (IOException e) {
             System.out.printf(
                     """
                             [ERROR] An error occurred while communicating with the server.
                             \tReason: '%s'.
                             """, e.getMessage());
-            app.viewHome();
+            return Optional.empty();
         } finally {
             if (socket.isClosed()) closeQuietly();
         }
-
-        return messageFromServer;
     }
 
     private void closeQuietly() {
