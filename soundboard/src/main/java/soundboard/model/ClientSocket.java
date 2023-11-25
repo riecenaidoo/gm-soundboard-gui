@@ -1,7 +1,5 @@
 package soundboard.model;
 
-import soundboard.App;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,8 +8,6 @@ import java.net.Socket;
 import java.util.Optional;
 
 public class ClientSocket {
-
-    private final App app;
 
     private final Socket socket;
     private final PrintStream out;
@@ -22,15 +18,15 @@ public class ClientSocket {
      * @throws IOException if an I/O error occurs when creating the output stream
      *                     or if the socket is not connected.
      */
-    public ClientSocket(App app, String hostname, int port) throws IOException {
+    public ClientSocket(String hostname, int port) throws IOException {
         this.socket = new Socket(hostname, port);
-        this.app = app;
         this.out = new PrintStream(socket.getOutputStream());
         this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
 
     /**
      * Send a message over this Socket.
+     *
      * @param message String without newline chars.
      */
     public void send(String message) {
