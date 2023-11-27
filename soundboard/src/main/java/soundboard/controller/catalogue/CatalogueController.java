@@ -5,6 +5,7 @@ import soundboard.model.catalogue.Catalogue;
 import soundboard.view.catalogue.CatalogueView;
 import soundboard.view.catalogue.GroupPanel;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -30,7 +31,10 @@ public class CatalogueController {
             GroupController controller = new GroupController(category, view);
             controller.load();
             controllers.add(controller);
-            tabbedPane.addTab(category.getName(), view);
+            JScrollPane scrollingGroupView = new JScrollPane(view,
+                    JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                    JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            tabbedPane.addTab(category.getName(), scrollingGroupView);
         });
     }
 
