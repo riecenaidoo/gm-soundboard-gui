@@ -12,7 +12,7 @@ import java.net.URL;
  */
 public class Icons {
 
-    private static final int ICON_SIZE = 40;
+    public static final int ICON_SIZE = 40;
 
     private final Icon backIcon;
     private final Icon leaveIcon;
