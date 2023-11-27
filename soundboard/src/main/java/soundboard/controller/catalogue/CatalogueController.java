@@ -31,10 +31,7 @@ public class CatalogueController {
             GroupController controller = new GroupController(category, view);
             controller.load();
             controllers.add(controller);
-            JScrollPane scrollingGroupView = new JScrollPane(view,
-                    JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                    JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-            tabbedPane.addTab(category.getName(), scrollingGroupView);
+            tabbedPane.addTab(category.getName(), new JScrollPane(view));
         });
     }
 
