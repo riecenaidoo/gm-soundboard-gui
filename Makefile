@@ -1,9 +1,11 @@
+SHELL := /bin/bash
 JAVA = java
 MAVEN = mvn
 SOUNDBOARD = soundboard
 SERVER = server
 TARGET = $(SOUNDBOARD)/target/soundboard-*-jar-with-dependencies.jar
 DUMMY = $(SERVER)/target/server-*-jar-with-dependencies.jar
+RELEASE = RELEASES/
 
 
 $(TARGET):
@@ -49,8 +51,36 @@ debug:
 	$(MAKE) shutdown_dummy
 
 
+.PHONY: deploy
+deploy: v?=
+deploy:
+	@if test -z "$$v"; then\
+		echo Missing 'v=' to specifiy version.;\
+		exit 1;\
+	fi;
+	@echo "Updating pom versioning.."
+	@$(MAVEN) versions:set -DnewVersion=$(v) -f $(SOUNDBOARD)/pom.xml > /dev/null
+	@echo "Rebuilding jar..."
+	@$(MAVEN) -f $(SOUNDBOARD) clean package > /dev/null
+	@if ! test -d $(RELEASE);then mkdir $(RELEASE) & echo "Created $(RELEASE) directory."; fi;
+	@$(MAKE) clean_release
+	@echo "Copying latest jar to $(RELEASE)."
+	@cp $(TARGET) $(RELEASE)
+
+
 .PHONY: clean
 clean:
 	$(MAKE) shutdown_dummy
 	$(MAVEN) -f $(SOUNDBOARD) clean
 	$(MAVEN) -f $(SERVER) clean
+	$(MAKE) clean_release
+
+
+clean_release:
+	@if test -d $(RELEASE);then\
+		echo "$(RELEASE) dir exists.";\
+		if compgen -G "$(RELEASE)*.jar" > /dev/null; then\
+			echo "Removing outdated jars in $(RELEASE).";\
+			rm $(RELEASE)*.jar;\
+		fi;\
+	fi;
