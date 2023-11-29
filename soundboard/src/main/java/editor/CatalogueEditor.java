@@ -8,6 +8,7 @@ public class CatalogueEditor extends JPanel {
 
     private final Catalogue catalogue;
     private final GroupPanel groupPanel;
+    private final PlaylistPanel playlistPanel;
 
     public CatalogueEditor(Catalogue catalogue) {
         super();
@@ -15,5 +16,7 @@ public class CatalogueEditor extends JPanel {
         this.catalogue = catalogue;
         groupPanel = new GroupPanel();
         this.add(groupPanel);
+        playlistPanel = new PlaylistPanel();
+        this.add(playlistPanel);
     }
 }
