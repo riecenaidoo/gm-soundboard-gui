@@ -48,11 +48,13 @@ public class PlaylistsPanel extends JPanel {
 
     /**
      * Populate this View with Playlists from a Group.
-     *
+     * The first item in the combo box selector is empty, \
+     * for no selection.
      * @param model Group to view the Playlists of.
      */
     public void view(Group model) {
         playlistSelector.removeAll();
+        playlistSelector.addItem("");
         model.forEach(playlist -> playlistSelector.addItem(playlist.getTitle()));
     }
 

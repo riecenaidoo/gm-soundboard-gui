@@ -48,11 +48,14 @@ public class GroupsPanel extends JPanel {
 
     /**
      * Populate this View with Groups from a Catalogue.
+     * The first item in the combo box selector is empty,
+     * for no selection.
      *
      * @param model Catalogue to view the Groups of.
      */
     public void view(Catalogue model) {
         groupSelector.removeAll();
+        groupSelector.addItem("");
         model.forEach(group -> groupSelector.addItem(group.getName()));
     }
 

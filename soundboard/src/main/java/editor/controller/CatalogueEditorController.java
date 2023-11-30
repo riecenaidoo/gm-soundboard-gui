@@ -23,14 +23,14 @@ public class CatalogueEditorController {
     public void selectGroup() {
         GroupsPanel groupsPanel = this.view.getGroupsPanel();
         int selectedIndex = groupsPanel.getGroupSelector().getSelectedIndex();
-        view.getPlaylistsPanel().view(model.get(selectedIndex));
+        view.getPlaylistsPanel().view(model.get(selectedIndex-1));  // See GroupsPanel#view
         view.groupSelected();
     }
 
     public void selectPlaylist() {
         PlaylistsPanel playlistsPanel = this.view.getPlaylistsPanel();
         int selectedIndex = playlistsPanel.getPlaylistSelector().getSelectedIndex();
-//        view.getPlaylistEditorPanel().view(model.get(selectedIndex));
+//        view.getPlaylistEditorPanel().view(model.get(selectedIndex-1)); // See PlaylistsPanel#view
         view.playlistSelected();
     }
 }
