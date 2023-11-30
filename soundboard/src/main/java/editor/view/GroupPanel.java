@@ -1,4 +1,4 @@
-package editor;
+package editor.view;
 
 import javax.swing.*;
 
@@ -10,7 +10,7 @@ public class GroupPanel extends JPanel {
     JButton editGroup;
     JButton removeGroup;
 
-    public GroupPanel() {
+    protected GroupPanel() {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         JPanel groupInfoPanel = new JPanel();

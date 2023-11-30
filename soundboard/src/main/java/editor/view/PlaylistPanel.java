@@ -1,4 +1,4 @@
-package editor;
+package editor.view;
 
 import javax.swing.*;
 
@@ -10,7 +10,7 @@ public class PlaylistPanel extends JPanel{
     JButton editPlaylist;
     JButton removePlaylist;
 
-    public PlaylistPanel() {
+    protected PlaylistPanel() {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         JPanel playlistInfoPanel = new JPanel();
