@@ -1,6 +1,7 @@
 package editor;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import editor.controller.CatalogueEditorController;
 import editor.view.CatalogueEditorView;
 import soundboard.model.catalogue.Catalogue;
 
@@ -12,7 +13,13 @@ public class App {
         FlatDarkLaf.setup();
         JFrame app = new JFrame("Catalogue Editor");
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        app.setContentPane(new CatalogueEditorView(new Catalogue()));
+
+        Catalogue catalogue = new Catalogue();
+        catalogue.loadTemplate();
+        CatalogueEditorView view = new CatalogueEditorView(catalogue);
+        new CatalogueEditorController(view, catalogue);
+
+        app.setContentPane(view);
         app.pack();
         app.setVisible(true);
     }
