@@ -1,5 +1,7 @@
 package editor.view;
 
+import soundboard.model.catalogue.Catalogue;
+
 import javax.swing.*;
 
 /**
@@ -42,5 +44,15 @@ public class GroupsPanel extends JPanel {
         editGroup = new JButton("Edit");
         editGroup.setToolTipText("Edit this Group");
         groupsPanel.add(editGroup);
+    }
+
+    /**
+     * Populate this View with Groups from a Catalogue.
+     *
+     * @param model Catalogue to view the Groups of.
+     */
+    public void view(Catalogue model) {
+        groupSelector.removeAll();
+        model.forEach(group -> groupSelector.addItem(group.getName()));
     }
 }

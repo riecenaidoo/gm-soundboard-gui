@@ -1,5 +1,7 @@
 package editor.view;
 
+import soundboard.model.catalogue.Group;
+
 import javax.swing.*;
 
 /**
@@ -42,5 +44,15 @@ public class PlaylistsPanel extends JPanel {
         editPlaylist = new JButton("Edit");
         editPlaylist.setToolTipText("Edit this Playlist");
         playlistEditingPanel.add(editPlaylist);
+    }
+
+    /**
+     * Populate this View with Playlists from a Group.
+     *
+     * @param model Group to view the Playlists of.
+     */
+    public void view(Group model) {
+        playlistSelector.removeAll();
+        model.forEach(playlist -> playlistSelector.addItem(playlist.getTitle()));
     }
 }
