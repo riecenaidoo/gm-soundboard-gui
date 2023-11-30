@@ -48,7 +48,7 @@ public class PlaylistsPanel extends JPanel {
 
     /**
      * Populate this View with Playlists from a Group.
-     * The first item in the combo box selector is empty, \
+     * The first item in the combo box selector is empty,
      * for no selection.
      * @param model Group to view the Playlists of.
      */
