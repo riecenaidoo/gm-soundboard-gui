@@ -2,7 +2,12 @@ package editor.view;
 
 import javax.swing.*;
 
-public class PlaylistPanel extends JPanel{
+/**
+ * Contains a view of all Playlists within a Catalogue,
+ * and input elements for receiving instructions to
+ * edit a Playlist.
+ */
+public class PlaylistsPanel extends JPanel {
 
     JComboBox<String> playlistSelector;
     JLabel currentPlaylist;
@@ -10,7 +15,7 @@ public class PlaylistPanel extends JPanel{
     JButton editPlaylist;
     JButton removePlaylist;
 
-    protected PlaylistPanel() {
+    protected PlaylistsPanel() {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         JPanel playlistInfoPanel = new JPanel();
@@ -18,8 +23,6 @@ public class PlaylistPanel extends JPanel{
         JPanel playlistEditingPanel = new JPanel();
         playlistEditingPanel.setLayout(new BoxLayout(playlistEditingPanel, BoxLayout.LINE_AXIS));
         this.add(playlistEditingPanel);
-        JPanel playlistSongsPanel = new JPanel();
-        this.add(playlistSongsPanel);
 
         currentPlaylist = new JLabel("PLAYLIST");
         playlistInfoPanel.add(currentPlaylist);
@@ -39,7 +42,5 @@ public class PlaylistPanel extends JPanel{
         editPlaylist = new JButton("Edit");
         editPlaylist.setToolTipText("Edit this Playlist");
         playlistEditingPanel.add(editPlaylist);
-
-        // TODO Build PlaylistSongsPanel editor view.
     }
 }

@@ -7,16 +7,19 @@ import javax.swing.*;
 public class CatalogueEditorView extends JPanel {
 
     private final Catalogue catalogue;
-    private final GroupPanel groupPanel;
-    private final PlaylistPanel playlistPanel;
+    private final GroupsPanel groupsPanel;
+    private final PlaylistsPanel playlistsPanel;
+    private final PlaylistEditorPanel playlistEditorPanel;
 
     public CatalogueEditorView(Catalogue catalogue) {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.catalogue = catalogue;
-        groupPanel = new GroupPanel();
-        this.add(groupPanel);
-        playlistPanel = new PlaylistPanel();
-        this.add(playlistPanel);
+        groupsPanel = new GroupsPanel();
+        this.add(groupsPanel);
+        playlistsPanel = new PlaylistsPanel();
+        this.add(playlistsPanel);
+        playlistEditorPanel = new PlaylistEditorPanel();
+        this.add(playlistEditorPanel);
     }
 }

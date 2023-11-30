@@ -2,7 +2,12 @@ package editor.view;
 
 import javax.swing.*;
 
-public class GroupPanel extends JPanel {
+/**
+ * Contains a view of all Groups within a Catalogue,
+ * and input elements for receiving instructions to
+ * edit a Group.
+ */
+public class GroupsPanel extends JPanel {
 
     JComboBox<String> groupSelector;
     JLabel currentGroup;
@@ -10,7 +15,7 @@ public class GroupPanel extends JPanel {
     JButton editGroup;
     JButton removeGroup;
 
-    protected GroupPanel() {
+    protected GroupsPanel() {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         JPanel groupInfoPanel = new JPanel();
