@@ -55,4 +55,8 @@ public class PlaylistsPanel extends JPanel {
         playlistSelector.removeAll();
         model.forEach(playlist -> playlistSelector.addItem(playlist.getTitle()));
     }
+
+    public JComboBox<String> getPlaylistSelector() {
+        return playlistSelector;
+    }
 }

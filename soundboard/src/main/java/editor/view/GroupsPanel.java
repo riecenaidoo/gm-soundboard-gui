@@ -11,11 +11,11 @@ import javax.swing.*;
  */
 public class GroupsPanel extends JPanel {
 
-    JComboBox<String> groupSelector;
-    JLabel currentGroup;
-    JButton addGroup;
-    JButton editGroup;
-    JButton removeGroup;
+    private final JComboBox<String> groupSelector;
+    private final JLabel currentGroup;
+    private final JButton addGroup;
+    private final JButton editGroup;
+    private final JButton removeGroup;
 
     protected GroupsPanel() {
         super();
@@ -54,5 +54,9 @@ public class GroupsPanel extends JPanel {
     public void view(Catalogue model) {
         groupSelector.removeAll();
         model.forEach(group -> groupSelector.addItem(group.getName()));
+    }
+
+    public JComboBox<String> getGroupSelector() {
+        return groupSelector;
     }
 }
