@@ -9,7 +9,7 @@ import javax.swing.*;
  * and input elements for receiving instructions to
  * edit the contents of that Playlist.
  */
-public class PlaylistEditorPanel extends JPanel {
+public class SongsPanel extends JPanel {
 
     private final JTextField inputField;
     private final JButton submit;
@@ -19,7 +19,7 @@ public class PlaylistEditorPanel extends JPanel {
      */
     private final JPanel songsView;
 
-    protected PlaylistEditorPanel() {
+    protected SongsPanel() {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
@@ -49,9 +49,9 @@ public class PlaylistEditorPanel extends JPanel {
     public void view(Playlist model) {
         songsView.removeAll();
         model.forEach(song -> {
-            SongView songView = new SongView(song);
-            songView.existing();
-            addSongView(songView);
+            SongStatusPanel songStatusPanel = new SongStatusPanel(song);
+            songStatusPanel.existing();
+            addSongView(songStatusPanel);
         });
     }
 
@@ -60,7 +60,7 @@ public class PlaylistEditorPanel extends JPanel {
      *
      * @param song SongView panel representing the Song.
      */
-    public void addSongView(SongView song) {
+    public void addSongView(SongStatusPanel song) {
         songsView.add(song);
     }
 

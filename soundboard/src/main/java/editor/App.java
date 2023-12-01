@@ -1,8 +1,8 @@
 package editor;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import editor.controller.CatalogueEditorController;
-import editor.view.CatalogueEditorView;
+import editor.controller.EditorController;
+import editor.view.EditorView;
 import soundboard.model.catalogue.Catalogue;
 
 import javax.swing.*;
@@ -16,8 +16,8 @@ public class App {
 
         Catalogue catalogue = new Catalogue();
         catalogue.load("docs/catalogue_sample.json");
-        CatalogueEditorView view = new CatalogueEditorView(catalogue);
-        new CatalogueEditorController(view, catalogue);
+        EditorView view = new EditorView(catalogue);
+        new EditorController(view, catalogue, app);
 
         app.setContentPane(view);
         app.pack();

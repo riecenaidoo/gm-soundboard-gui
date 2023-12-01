@@ -1,19 +1,19 @@
 package editor.controller;
 
-import editor.view.SongView;
+import editor.view.SongStatusPanel;
 
-public class SongViewController {
+public class SongStatusController {
 
-    private final SongView view;
+    private final SongStatusPanel view;
     private SongStatus status;
 
-    protected SongViewController(SongView view, SongStatus status) {
+    protected SongStatusController(SongStatusPanel view, SongStatus status) {
         this.view = view;
         this.status = status;
         this.view.getEditButton().addActionListener(e -> editSong());
     }
 
-    protected SongViewController(SongView view) {
+    protected SongStatusController(SongStatusPanel view) {
         this(view, SongStatus.EXISTING);
     }
 

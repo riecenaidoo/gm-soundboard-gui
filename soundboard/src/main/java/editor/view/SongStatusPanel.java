@@ -9,7 +9,7 @@ import java.awt.*;
  * Indicates the status of the Song in the catalogue; existing,
  * marked for removal, recently added.
  */
-public class SongView extends JPanel {
+public class SongStatusPanel extends JPanel {
 
     /**
      * This text field is not editable, and functions
@@ -19,7 +19,7 @@ public class SongView extends JPanel {
     private final JTextField songField;
     private final JButton editButton;
 
-    public SongView(String song) {
+    public SongStatusPanel(String song) {
         super();
         this.setLayout((new BorderLayout()));
         editButton = new JButton();

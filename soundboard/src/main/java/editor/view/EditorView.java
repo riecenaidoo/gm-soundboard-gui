@@ -4,14 +4,14 @@ import soundboard.model.catalogue.Catalogue;
 
 import javax.swing.*;
 
-public class CatalogueEditorView extends JPanel {
+public class EditorView extends JPanel {
 
     private final Catalogue catalogue;
     private final GroupsPanel groupsPanel;
     private final PlaylistsPanel playlistsPanel;
-    private final PlaylistEditorPanel playlistEditorPanel;
+    private final SongsPanel songsPanel;
 
-    public CatalogueEditorView(Catalogue catalogue) {
+    public EditorView(Catalogue catalogue) {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.catalogue = catalogue;
@@ -20,9 +20,9 @@ public class CatalogueEditorView extends JPanel {
         playlistsPanel = new PlaylistsPanel();
         playlistsPanel.setVisible(false);
         this.add(playlistsPanel);
-        playlistEditorPanel = new PlaylistEditorPanel();
-        playlistEditorPanel.setVisible(false);
-        this.add(playlistEditorPanel);
+        songsPanel = new SongsPanel();
+        songsPanel.setVisible(false);
+        this.add(songsPanel);
     }
 
     public void groupSelected() {
@@ -31,15 +31,15 @@ public class CatalogueEditorView extends JPanel {
 
     public void groupDeselected() {
         playlistsPanel.setVisible(false);
-        playlistEditorPanel.setVisible(false);
+        songsPanel.setVisible(false);
     }
 
     public void playlistSelected() {
-        playlistEditorPanel.setVisible(true);
+        songsPanel.setVisible(true);
     }
 
     public void playlistDeselected() {
-        playlistEditorPanel.setVisible(false);
+        songsPanel.setVisible(false);
     }
 
     public GroupsPanel getGroupsPanel() {
@@ -50,7 +50,7 @@ public class CatalogueEditorView extends JPanel {
         return playlistsPanel;
     }
 
-    public PlaylistEditorPanel getPlaylistEditorPanel() {
-        return playlistEditorPanel;
+    public SongsPanel getPlaylistEditorPanel() {
+        return songsPanel;
     }
 }
