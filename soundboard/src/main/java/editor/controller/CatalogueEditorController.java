@@ -3,6 +3,7 @@ package editor.controller;
 import editor.view.CatalogueEditorView;
 import editor.view.GroupsPanel;
 import editor.view.PlaylistsPanel;
+import editor.view.SongView;
 import soundboard.model.catalogue.Catalogue;
 import soundboard.model.catalogue.Group;
 import soundboard.model.catalogue.Playlist;
@@ -90,7 +91,14 @@ public class CatalogueEditorController {
         if (selectedPlaylist.isEmpty()) {
             view.playlistDeselected();
         } else {
-            view.getPlaylistEditorPanel().view(selectedPlaylist.get());
+            // TODO Correct this implementation.
+            for (String song : selectedPlaylist.get()) {
+                SongView songView = new SongView(song);
+                songView.existing();
+                new SongViewController(songView);
+                view.getPlaylistEditorPanel().addSongView(songView);
+            }
+
             view.playlistSelected();
         }
     }

@@ -63,4 +63,8 @@ public class PlaylistEditorPanel extends JPanel {
     public void addSongView(SongView song) {
         songsView.add(song);
     }
+
+    public JPanel getSongsView() {
+        return songsView;
+    }
 }
