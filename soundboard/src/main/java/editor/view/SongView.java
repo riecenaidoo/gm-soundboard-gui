@@ -11,15 +11,22 @@ import java.awt.*;
  */
 public class SongView extends JPanel {
 
-    private final JLabel url;
+    /**
+     * This text field is not editable, and functions
+     * as a label. Text fields elements allow mouse actions for highlighting and copying,
+     * whereas label elements do not. Useful if a user wants to open URLs to test them.
+     */
+    private final JTextField url;
     private final JButton removeSong;
 
     protected SongView(String song) {
         super();
-        this.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
-        url = new JLabel(song);
-        this.add(url);
+        this.setLayout((new BorderLayout()));
         removeSong = new JButton();
+        this.add(removeSong, BorderLayout.LINE_START);
+        url = new JTextField(song);
+        url.setEditable(false);
+        this.add(url, BorderLayout.CENTER);
     }
 
     /**

@@ -1,7 +1,8 @@
 package editor.view;
 
+import soundboard.model.catalogue.Playlist;
+
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Contains a view of all Songs within a Playlist,
@@ -32,8 +33,22 @@ public class PlaylistEditorPanel extends JPanel {
         this.add(addSongView);
 
         songsView = new JPanel();
-        songsView.setLayout(new GridLayout(0, 2));
+        songsView.setLayout((new BoxLayout(songsView, BoxLayout.PAGE_AXIS)));
         this.add(new JScrollPane(songsView));
+    }
+
+    /**
+     * Populate this View with Songs from a Playlist.
+     *
+     * @param model Playlist to view the Songs of.
+     */
+    public void view(Playlist model) {
+        songsView.removeAll();
+        model.forEach(song -> {
+            SongView songView = new SongView(song);
+            songView.existing();
+            addSongView(songView);
+        });
     }
 
     /**
@@ -41,7 +56,7 @@ public class PlaylistEditorPanel extends JPanel {
      *
      * @param song SongView panel representing the Song.
      */
-    public void addSong(SongView song) {
+    public void addSongView(SongView song) {
         songsView.add(song);
     }
 }
