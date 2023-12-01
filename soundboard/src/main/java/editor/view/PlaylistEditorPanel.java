@@ -23,6 +23,10 @@ public class PlaylistEditorPanel extends JPanel {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
+        JPanel songsInfo = new JPanel();
+        songsInfo.add(new JLabel("SONGS"));
+        this.add(songsInfo);
+
         JPanel addSongView = new JPanel();
         addSongView.setLayout(new BoxLayout(addSongView, BoxLayout.LINE_AXIS));
         addSongView.add(new JLabel("Song URL: "));
