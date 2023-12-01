@@ -53,7 +53,7 @@ public class PlaylistsPanel extends JPanel {
      * @param model Group to view the Playlists of.
      */
     public void view(Group model) {
-        playlistSelector.removeAll();
+        playlistSelector.removeAllItems();
         playlistSelector.addItem("");
         model.forEach(playlist -> playlistSelector.addItem(playlist.getTitle()));
     }

@@ -38,7 +38,7 @@ public class CatalogueEditorController {
     public void selectGroup() {
         GroupsPanel groupsPanel = this.view.getGroupsPanel();
         int selectedIndex = groupsPanel.getGroupSelector().getSelectedIndex();
-        if (selectedIndex == 0) {
+        if (selectedIndex <= 0) {
             view.groupDeselected();
         } else {
             view.getPlaylistsPanel().view(model.get(selectedIndex - 1));  // See GroupsPanel#view
@@ -49,7 +49,7 @@ public class CatalogueEditorController {
     public void selectPlaylist() {
         PlaylistsPanel playlistsPanel = this.view.getPlaylistsPanel();
         int selectedIndex = playlistsPanel.getPlaylistSelector().getSelectedIndex();
-        if (selectedIndex == 0) {
+        if (selectedIndex <= 0) {
             view.playlistDeselected();
         } else {
             Group group = model.get(this.view.getGroupsPanel().getGroupSelector().getSelectedIndex() - 1);

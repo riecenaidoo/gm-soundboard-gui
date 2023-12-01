@@ -54,7 +54,7 @@ public class GroupsPanel extends JPanel {
      * @param model Catalogue to view the Groups of.
      */
     public void view(Catalogue model) {
-        groupSelector.removeAll();
+        groupSelector.removeAllItems();
         groupSelector.addItem("");
         model.forEach(group -> groupSelector.addItem(group.getName()));
     }
