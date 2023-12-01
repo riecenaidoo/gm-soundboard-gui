@@ -29,8 +29,16 @@ public class CatalogueEditorView extends JPanel {
         this.playlistsPanel.setVisible(true);
     }
 
+    public void groupDeselected() {
+        playlistsPanel.setVisible(false);
+    }
+
     public void playlistSelected() {
         this.playlistEditorPanel.setVisible(true);
+    }
+
+    public void playlistDeselected() {
+        playlistEditorPanel.setVisible(false);
     }
 
     public GroupsPanel getGroupsPanel() {
