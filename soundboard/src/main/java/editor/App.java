@@ -15,7 +15,7 @@ public class App {
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Catalogue catalogue = new Catalogue();
-        catalogue.loadTemplate();
+        catalogue.load("docs/catalogue_sample.json");
         CatalogueEditorView view = new CatalogueEditorView(catalogue);
         new CatalogueEditorController(view, catalogue);
 
