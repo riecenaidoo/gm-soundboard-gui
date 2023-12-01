@@ -91,6 +91,7 @@ public class CatalogueEditorController {
         if (selectedPlaylist.isEmpty()) {
             view.playlistDeselected();
         } else {
+            view.getPlaylistEditorPanel().getSongsView().removeAll();
             // TODO Correct this implementation.
             for (String song : selectedPlaylist.get()) {
                 SongView songView = new SongView(song);
