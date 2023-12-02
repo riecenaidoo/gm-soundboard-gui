@@ -23,9 +23,6 @@ public class SongStatusController {
                 view.markedForRemovalView();
                 status = SongStatus.MARKED_FOR_REMOVAL;
             }
-            case RECENTLY_ADDED -> {
-                // TODO Delete this view from the Parent.
-            }
             case MARKED_FOR_REMOVAL -> {
                 view.existingView();
                 status = SongStatus.EXISTING;
@@ -36,7 +33,7 @@ public class SongStatusController {
     /**
      * TODO Consider moving this to a Model Class.
      */
-    private enum SongStatus {
-        EXISTING, RECENTLY_ADDED, MARKED_FOR_REMOVAL
+    public enum SongStatus {
+        EXISTING, MARKED_FOR_REMOVAL
     }
 }

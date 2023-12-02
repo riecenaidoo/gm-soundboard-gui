@@ -33,7 +33,10 @@ public class SongsController {
         model.add(song);
         SongStatusPanel songStatusPanel = new SongStatusPanel(song);
         songStatusPanel.recentlyAddedView();
-        new SongStatusController(songStatusPanel);
+        songStatusPanel.getEditButton().addActionListener(e -> {
+            view.getSongsView().remove(songStatusPanel);
+            view.getSongsView().repaint();
+        });
         view.addSongView(songStatusPanel);
 
         this.app.ifPresent(Window::pack);
