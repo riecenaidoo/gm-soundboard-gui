@@ -12,7 +12,7 @@ import javax.swing.*;
 public class SongsPanel extends JPanel {
 
     private final JTextField inputField;
-    private final JButton submit;
+    private final JButton submitButton;
     /**
      * View of all Songs within a Playlist. This Panel is used as a container
      * of individual SongViews.
@@ -32,8 +32,8 @@ public class SongsPanel extends JPanel {
         addSongView.add(new JLabel("Song URL: "));
         inputField = new JTextField();
         addSongView.add(inputField);
-        submit = new JButton("Add");
-        addSongView.add(submit);
+        submitButton = new JButton("Add");
+        addSongView.add(submitButton);
         this.add(addSongView);
 
         songsView = new JPanel();
@@ -66,5 +66,9 @@ public class SongsPanel extends JPanel {
 
     public JPanel getSongsView() {
         return songsView;
+    }
+
+    public JButton getSubmitButton() {
+        return submitButton;
     }
 }
