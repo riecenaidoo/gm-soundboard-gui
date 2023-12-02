@@ -12,7 +12,7 @@ import java.util.HashSet;
  */
 public class Playlist extends HashSet<String> {
 
-    private final String title;
+    private String title;
 
     protected Playlist(String title) {
         this.title = title;
@@ -26,6 +26,10 @@ public class Playlist extends HashSet<String> {
 
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
