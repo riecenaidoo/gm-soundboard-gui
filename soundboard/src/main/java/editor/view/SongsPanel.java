@@ -50,7 +50,7 @@ public class SongsPanel extends JPanel {
         songsView.removeAll();
         model.forEach(song -> {
             SongStatusPanel songStatusPanel = new SongStatusPanel(song);
-            songStatusPanel.existing();
+            songStatusPanel.existingView();
             addSongView(songStatusPanel);
         });
     }

@@ -114,7 +114,7 @@ public class EditorController {
             // TODO Correct this implementation.
             for (String song : selectedPlaylist.get()) {
                 SongStatusPanel songStatusPanel = new SongStatusPanel(song);
-                songStatusPanel.existing();
+                songStatusPanel.existingView();
                 new SongStatusController(songStatusPanel);
                 view.getPlaylistEditorPanel().addSongView(songStatusPanel);
             }

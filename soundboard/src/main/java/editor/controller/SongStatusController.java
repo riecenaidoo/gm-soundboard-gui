@@ -20,14 +20,14 @@ public class SongStatusController {
     private void editSong() {
         switch (status) {
             case EXISTING -> {
-                view.markedForRemoval();
+                view.markedForRemovalView();
                 status = SongStatus.MARKED_FOR_REMOVAL;
             }
             case RECENTLY_ADDED -> {
                 // TODO Delete this view from the Parent.
             }
             case MARKED_FOR_REMOVAL -> {
-                view.existing();
+                view.existingView();
                 status = SongStatus.EXISTING;
             }
         }

@@ -32,7 +32,7 @@ public class SongStatusPanel extends JPanel {
     /**
      * Default View. Song already existing in the Catalogue.
      */
-    public void existing() {
+    public void existingView() {
         songField.setForeground(Color.BLACK);
         editButton.setText("-");
         editButton.setToolTipText("Remove Song from Playlist.");
@@ -41,7 +41,7 @@ public class SongStatusPanel extends JPanel {
     /**
      * Song was recently added to the Catalogue.
      */
-    public void recentlyAdded() {
+    public void recentlyAddedView() {
         songField.setForeground(Color.GREEN);
         editButton.setText("-");
         editButton.setToolTipText("Cancel adding Song to Playlist.");
@@ -50,7 +50,7 @@ public class SongStatusPanel extends JPanel {
     /**
      * Song has been marked to be removed from the Catalogue.
      */
-    public void markedForRemoval() {
+    public void markedForRemovalView() {
         songField.setForeground(Color.RED);
         editButton.setText("+");
         editButton.setToolTipText("Add Song back to Playlist.");
