@@ -71,4 +71,8 @@ public class SongsPanel extends JPanel {
     public JButton getSubmitButton() {
         return submitButton;
     }
+
+    public JTextField getInputField() {
+        return inputField;
+    }
 }

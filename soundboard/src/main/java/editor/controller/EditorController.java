@@ -109,7 +109,7 @@ public class EditorController {
         } else {
             SongsPanel songsPanel = view.getSongsPanel();
             Playlist playlist = selectedPlaylist.get();
-            new SongsController(songsPanel, playlist);
+            new SongsController(songsPanel, playlist, app.orElse(null));
 
             // TODO Refine this implementation.
             songsPanel.getSongsView().removeAll();
