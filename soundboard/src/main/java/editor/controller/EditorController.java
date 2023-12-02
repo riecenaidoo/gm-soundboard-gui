@@ -1,9 +1,6 @@
 package editor.controller;
 
-import editor.view.EditorView;
-import editor.view.GroupsPanel;
-import editor.view.PlaylistsPanel;
-import editor.view.SongStatusPanel;
+import editor.view.*;
 import soundboard.model.catalogue.Catalogue;
 import soundboard.model.catalogue.Group;
 import soundboard.model.catalogue.Playlist;
@@ -110,13 +107,17 @@ public class EditorController {
         if (selectedPlaylist.isEmpty()) {
             view.playlistDeselected();
         } else {
-            view.getPlaylistEditorPanel().getSongsView().removeAll();
-            // TODO Correct this implementation.
-            for (String song : selectedPlaylist.get()) {
+            SongsPanel songsPanel = view.getSongsPanel();
+            Playlist playlist = selectedPlaylist.get();
+            new SongsController(songsPanel, playlist);
+
+            // TODO Refine this implementation.
+            songsPanel.getSongsView().removeAll();
+            for (String song : playlist) {
                 SongStatusPanel songStatusPanel = new SongStatusPanel(song);
                 songStatusPanel.existingView();
                 new SongStatusController(songStatusPanel);
-                view.getPlaylistEditorPanel().addSongView(songStatusPanel);
+                songsPanel.addSongView(songStatusPanel);
             }
 
             view.playlistSelected();
