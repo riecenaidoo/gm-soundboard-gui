@@ -50,7 +50,7 @@ public class EditorView extends JPanel {
         return playlistsPanel;
     }
 
-    public SongsPanel getPlaylistEditorPanel() {
+    public SongsPanel getSongsPanel() {
         return songsPanel;
     }
 }
