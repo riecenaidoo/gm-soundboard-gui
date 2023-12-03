@@ -47,7 +47,7 @@ class EditableGroupTest {
         assertEquals(1, group.size());
 
         editableGroup.saveChanges();
-        assertEquals(0, group.size(), "Changes should only be saved once.");
+        assertEquals(0, group.size());
 
         editableGroup.saveChanges();
         assertEquals(0, group.size(), "Changes should only be saved once.");
