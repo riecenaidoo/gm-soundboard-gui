@@ -14,7 +14,7 @@ public class Playlist extends HashSet<String> {
 
     private String title;
 
-    protected Playlist(String title) {
+    public Playlist(String title) {
         this.title = title;
     }
 
