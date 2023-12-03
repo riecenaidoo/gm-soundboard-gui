@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class Group extends ArrayList<Playlist> {
 
-    private final String name;
+    private String name;
 
     protected Group(String name) {
         this.name = name;
@@ -23,6 +23,10 @@ public class Group extends ArrayList<Playlist> {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
