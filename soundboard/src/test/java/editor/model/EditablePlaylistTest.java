@@ -1,9 +1,10 @@
 package editor.model;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import soundboard.model.catalogue.Playlist;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Confirm the EditablePlaylist only mutates the wrapped Playlist
@@ -14,11 +15,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class EditablePlaylistTest {
 
+    Playlist playlist;
+    EditablePlaylist editablePlaylist;
+
+    @BeforeEach
+    void setUp() {
+        playlist = new Playlist("dummy");
+        editablePlaylist = new EditablePlaylist(playlist);
+    }
+
     @Test
     void addSongs() {
-        Playlist playlist = new Playlist("dummy");
-        EditablePlaylist editablePlaylist = new EditablePlaylist(playlist);
-
         editablePlaylist.addSong("foo");
         editablePlaylist.addSong("fib");
         editablePlaylist.addSong("fob");
@@ -33,11 +40,9 @@ class EditablePlaylistTest {
 
     @Test
     void removeSongs() {
-        Playlist playlist = new Playlist("dummy");
         playlist.add("foo");
         playlist.add("fib");
         playlist.add("fob");
-        EditablePlaylist editablePlaylist = new EditablePlaylist(playlist);
 
         editablePlaylist.removeSong("foo");
         assertEquals(3, playlist.size());
@@ -57,9 +62,6 @@ class EditablePlaylistTest {
 
     @Test
     void updateTitle() {
-        Playlist playlist = new Playlist("dummy");
-        EditablePlaylist editablePlaylist = new EditablePlaylist(playlist);
-
         editablePlaylist.updateTitle("test");
         assertEquals("dummy", playlist.getTitle());
 
@@ -69,5 +71,25 @@ class EditablePlaylistTest {
         editablePlaylist.updateTitle("foo");
         editablePlaylist.clearChanges();
         assertEquals("test", playlist.getTitle());
+    }
+
+    @Test
+    void isMarkedForRemoval() {
+        assertFalse(editablePlaylist.isMarkedForRemoval("foo"));
+        editablePlaylist.removeSong("foo");
+        assertTrue(editablePlaylist.isMarkedForRemoval("foo"));
+
+        editablePlaylist.clearChanges();
+        assertFalse(editablePlaylist.isMarkedForRemoval("foo"));
+    }
+
+    @Test
+    void isRecentlyAdded() {
+        assertFalse(editablePlaylist.isRecentlyAdded("foo"));
+        editablePlaylist.addSong("foo");
+        assertTrue(editablePlaylist.isRecentlyAdded("foo"));
+
+        editablePlaylist.clearChanges();
+        assertFalse(editablePlaylist.isRecentlyAdded("foo"));
     }
 }
