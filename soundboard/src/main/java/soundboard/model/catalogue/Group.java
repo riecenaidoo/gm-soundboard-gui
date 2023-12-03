@@ -11,7 +11,7 @@ public class Group extends ArrayList<Playlist> {
 
     private String name;
 
-    protected Group(String name) {
+    public Group(String name) {
         this.name = name;
     }
 
