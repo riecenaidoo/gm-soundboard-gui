@@ -7,8 +7,11 @@ import soundboard.model.catalogue.Playlist;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Confirm the EditablePlaylist only mutates the wrapped Playlist
- * when requested.
+ * Confirm the EditablePlaylist only mutates the wrapped Playlist when requested.
+ * <br><br>
+ * Implementation of EditablePlaylist is simple, and these tests are very basic.
+ * They are here as a safeguard to make sure future changes to EditablePlaylist
+ * do not unexpectedly mutate the wrapped Playlist.
  *
  * @see EditablePlaylist
  * @see Playlist

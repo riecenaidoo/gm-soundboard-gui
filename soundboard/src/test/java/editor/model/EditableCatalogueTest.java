@@ -8,8 +8,11 @@ import soundboard.model.catalogue.Group;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Confirm the EditableCatalogue only mutates the wrapped Catalogue.
- * when requested.
+ * Confirm the EditableCatalogue only mutates the wrapped Catalogue when requested.
+ * <br><br>
+ * Implementation of EditableCatalogue is simple, and these tests are very basic.
+ * They are here as a safeguard to make sure future changes to EditableCatalogue
+ * do not unexpectedly mutate the wrapped Catalogue.
  *
  * @see EditableCatalogue
  * @see Catalogue

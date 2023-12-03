@@ -8,8 +8,11 @@ import soundboard.model.catalogue.Playlist;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Confirm the EditableGroup only mutates the wrapped Group.
- * when requested.
+ * Confirm the EditableGroup only mutates the wrapped Group when requested.
+ * <br><br>
+ * Implementation of EditableGroup is simple, and these tests are very basic.
+ * They are here as a safeguard to make sure future changes to EditableGroup
+ * do not unexpectedly mutate the wrapped Group.
  *
  * @see EditableGroup
  * @see Group
