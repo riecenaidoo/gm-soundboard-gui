@@ -40,12 +40,11 @@ shutdown_dummy:
 	fi;
 
 
-# Rebuilds & runs the Soundboard against a dummy server.
+# Runs a clean snapshot of the Soundboard against a dummy server instance.
 .PHONY: debug
 debug:
-	$(MAVEN) clean --projects $(SOUNDBOARD)
+	$(MAVEN) clean compile exec:java --projects $(SOUNDBOARD)
 	$(MAKE) start_dummy
-	$(MAKE) run
 	$(MAKE) shutdown_dummy
 
 
