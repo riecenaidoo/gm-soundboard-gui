@@ -2,7 +2,7 @@ package soundboard.model.catalogue;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 /**
  * A Playlist represents a collection of songs.
@@ -10,7 +10,7 @@ import java.util.HashSet;
  * In the future, this may expand to additional services such as Deezer,
  * Spotify, or local songs.
  */
-public class Playlist extends HashSet<String> {
+public class Playlist extends ArrayList<String> {
 
     private final String title;
 
