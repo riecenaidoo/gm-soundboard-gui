@@ -95,4 +95,30 @@ class EditablePlaylistTest {
         editablePlaylist.clearChanges();
         assertFalse(editablePlaylist.isMarkedForRemoval("foo"));
     }
+
+    @Test
+    void addRemoveSong() {
+        editablePlaylist.addSong("foo");
+        editablePlaylist.removeSong("foo");
+        editablePlaylist.saveChanges();
+        assertEquals(0, playlist.size());
+    }
+
+    @Test
+    void addRemoveSongNameClash() {
+        playlist.add("foo");
+        editablePlaylist.addSong("foo");
+        editablePlaylist.removeSong("foo");
+        editablePlaylist.saveChanges();
+        assertEquals(1, playlist.size());
+    }
+
+    @Test
+    void undoRemoveSong() {
+        playlist.add("foo");
+        editablePlaylist.removeSong("foo");
+        editablePlaylist.addSong("foo");
+        editablePlaylist.saveChanges();
+        assertEquals(1, playlist.size());
+    }
 }
