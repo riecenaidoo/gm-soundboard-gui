@@ -20,9 +20,9 @@ run: $(TARGET)
 	$(JAVA) -jar $(TARGET) $(ARGS)
 
 
-.PHONY: dummy
-dummy: ARGS?=
-dummy: $(DUMMY)
+.PHONY: start_dummy
+start_dummy: ARGS?=
+start_dummy: $(DUMMY)
 	$(MAKE) shutdown_dummy
 	$(JAVA) -jar $(DUMMY) $(ARGS) & echo $$! > server.PID&
 
@@ -44,7 +44,7 @@ shutdown_dummy:
 .PHONY: debug
 debug:
 	$(MAVEN) clean --projects $(SOUNDBOARD)
-	$(MAKE) dummy
+	$(MAKE) start_dummy
 	$(MAKE) run
 	$(MAKE) shutdown_dummy
 
