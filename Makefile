@@ -58,9 +58,9 @@ deploy:
 		exit 1;\
 	fi;
 	@echo "Updating pom versioning.."
-	@$(MAVEN) versions:set -DnewVersion=$(v) -f $(SOUNDBOARD)/pom.xml > /dev/null
+	@$(MAVEN) versions:set -DnewVersion=$(v) --projects $(SOUNDBOARD)/pom.xml > /dev/null
 	@echo "Rebuilding jar..."
-	@$(MAVEN) -f $(SOUNDBOARD) clean package > /dev/null
+	@$(MAVEN) clean package --projects $(SOUNDBOARD)  > /dev/null
 	@if ! test -d $(RELEASE);then mkdir $(RELEASE) & echo "Created $(RELEASE) directory."; fi;
 	@$(MAKE) clean_release
 	@echo "Copying latest jar to $(RELEASE)."
