@@ -7,11 +7,11 @@ DUMMY = $(SERVER)/target/server-*-jar-with-dependencies.jar
 
 
 $(TARGET):
-	$(MAVEN) -f $(SOUNDBOARD) package
+	$(MAVEN) package --projects $(SOUNDBOARD)
 
 
 $(DUMMY):
-	$(MAVEN) -f $(SERVER) package
+	$(MAVEN) package --projects $(SERVER)
 
 
 .PHONY: run
@@ -20,9 +20,9 @@ run: $(TARGET)
 	$(JAVA) -jar $(TARGET) $(ARGS)
 
 
-.PHONY: dummy
-dummy: ARGS?=
-dummy: $(DUMMY)
+.PHONY: start_dummy
+start_dummy: ARGS?=
+start_dummy: $(DUMMY)
 	$(MAKE) shutdown_dummy
 	$(JAVA) -jar $(DUMMY) $(ARGS) & echo $$! > server.PID&
 
@@ -40,17 +40,15 @@ shutdown_dummy:
 	fi;
 
 
-# Rebuilds & runs the Soundboard against a dummy server.
+# Runs a clean snapshot of the Soundboard against a dummy server instance.
 .PHONY: debug
 debug:
-	$(MAVEN) -f $(SOUNDBOARD) clean
-	$(MAKE) dummy
-	$(MAKE) run
+	$(MAVEN) clean compile exec:java --projects $(SOUNDBOARD)
+	$(MAKE) start_dummy
 	$(MAKE) shutdown_dummy
 
 
 .PHONY: clean
 clean:
 	$(MAKE) shutdown_dummy
-	$(MAVEN) -f $(SOUNDBOARD) clean
-	$(MAVEN) -f $(SERVER) clean
+	$(MAVEN) clean
