@@ -21,7 +21,7 @@ $(DUMMY):
 
 
 $(RELEASES):
-	@if ! test -d $(RELEASES);then mkdir $(RELEASES) & echo "Created release directory @ $(RELEASES)."; fi;
+	@mkdir $(RELEASES) & echo "Created release directory @ $(RELEASES)."
 
 
 .PHONY: run
