@@ -60,8 +60,8 @@ snapshot:
 	@$(MAKE) stop_dummy
 
 
-.PHONY: clean_release
-clean_release: $(RELEASES)
+.PHONY: clean_releases
+clean_releases: $(RELEASES)
 	@if test -d $(RELEASES);then\
 		if compgen -G "$(RELEASES)*.jar" > /dev/null; then\
 			echo "Removing jars found in $(RELEASES).";\
@@ -73,9 +73,9 @@ clean_release: $(RELEASES)
 .PHONY: clean
 clean:
 	@$(MAKE) stop_dummy
-	@echo Cleaning object code..
+	@echo "Removing compiled code and artifacts..."
 	@$(MAVEN) clean
-	@$(MAKE) clean_release
+	@$(MAKE) clean_releases
 
 
 .PHONY: version
@@ -99,6 +99,6 @@ release: $(RELEASES)
 	@echo "Repackaging $(SOUNDBOARD) jar..."
 	@$(MAVEN) clean package --projects $(SOUNDBOARD)  > /dev/null
 	@echo "Checking for jars in $(RELEASES).."
-	@$(MAKE) clean_release
+	@$(MAKE) clean_releases
 	@echo "Copying latest $(SOUNDBOARD) jar to $(RELEASES).."
 	@cp $(TARGET) $(RELEASES)
