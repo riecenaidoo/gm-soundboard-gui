@@ -9,7 +9,7 @@ SERVER = server
 TARGET = $(SOUNDBOARD)/target/soundboard-*-jar-with-dependencies.jar
 DUMMY = $(SERVER)/target/server-*-jar-with-dependencies.jar
 # Dev Folders
-RELEASE = RELEASES/
+RELEASES = RELEASES/
 
 
 $(TARGET):
@@ -18,6 +18,10 @@ $(TARGET):
 
 $(DUMMY):
 	$(MAVEN) package --projects $(SERVER)
+
+
+$(RELEASES):
+	@if ! test -d $(RELEASES);then mkdir $(RELEASES) & echo "Created release directory @ $(RELEASES)."; fi;
 
 
 .PHONY: run
@@ -56,12 +60,12 @@ snapshot:
 	@$(MAKE) stop_dummy
 
 
-.PHONY: clean_deploy
-clean_deploy:
-	@if test -d $(RELEASE);then\
-		if compgen -G "$(RELEASE)*.jar" > /dev/null; then\
-			echo "Removing jars found in $(RELEASE).";\
-			rm $(RELEASE)*.jar;\
+.PHONY: clean_release
+clean_release: $(RELEASES)
+	@if test -d $(RELEASES);then\
+		if compgen -G "$(RELEASES)*.jar" > /dev/null; then\
+			echo "Removing jars found in $(RELEASES).";\
+			rm $(RELEASES)*.jar;\
 		fi;\
 	fi;
 
@@ -71,7 +75,7 @@ clean:
 	@$(MAKE) stop_dummy
 	@echo Cleaning object code..
 	@$(MAVEN) clean
-	@$(MAKE) clean_deploy
+	@$(MAKE) clean_release
 
 
 .PHONY: version
@@ -85,17 +89,16 @@ version:
 	@$(MAVEN) versions:set -DnewVersion=$(v) --projects $(SOUNDBOARD)/pom.xml > /dev/null
 
 
-.PHONY: deploy
-deploy: v?=
-deploy:
+.PHONY: release
+release: v?=
+release: $(RELEASES)
 	@if ! test -z "$$v"; then\
 		echo "Versioning was specified.";\
 		$(MAKE) version v=$(v);\
 	fi;
 	@echo "Repackaging $(SOUNDBOARD) jar..."
 	@$(MAVEN) clean package --projects $(SOUNDBOARD)  > /dev/null
-	@if ! test -d $(RELEASE);then mkdir $(RELEASE) & echo "Created $(RELEASE) directory."; fi;
-	@echo "Checking for jars in $(RELEASE).."
-	@$(MAKE) clean_deploy
-	@echo "Copying latest $(SOUNDBOARD) jar to $(RELEASE).."
-	@cp $(TARGET) $(RELEASE)
+	@echo "Checking for jars in $(RELEASES).."
+	@$(MAKE) clean_release
+	@echo "Copying latest $(SOUNDBOARD) jar to $(RELEASES).."
+	@cp $(TARGET) $(RELEASES)
