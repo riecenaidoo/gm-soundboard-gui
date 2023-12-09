@@ -60,7 +60,7 @@ snapshot:
 clean_deploy:
 	@if test -d $(RELEASE);then\
 		if compgen -G "$(RELEASE)*.jar" > /dev/null; then\
-			echo "Removing jars in $(RELEASE).";\
+			echo "Removing jars found in $(RELEASE).";\
 			rm $(RELEASE)*.jar;\
 		fi;\
 	fi;
@@ -74,18 +74,28 @@ clean:
 	@$(MAKE) clean_deploy
 
 
+.PHONY: version
+version: v?=
+version:
+	@if test -z "$$v"; then\
+		echo "Rule requires 'v=' arg to specify target version.";\
+		exit 1;\
+	fi;
+	@echo "Updating $(SOUNDBOARD)'s version..."
+	@$(MAVEN) versions:set -DnewVersion=$(v) --projects $(SOUNDBOARD)/pom.xml > /dev/null
+
+
 .PHONY: deploy
 deploy: v?=
 deploy:
-	@if test -z "$$v"; then\
-		echo Missing 'v=' to specifiy version.;\
-		exit 1;\
+	@if ! test -z "$$v"; then\
+		echo "Versioning was specified.";\
+		$(MAKE) version v=$(v);\
 	fi;
-	@echo "Updating pom versioning.."
-	@$(MAVEN) versions:set -DnewVersion=$(v) --projects $(SOUNDBOARD)/pom.xml > /dev/null
-	@echo "Repackaging jar..."
+	@echo "Repackaging $(SOUNDBOARD) jar..."
 	@$(MAVEN) clean package --projects $(SOUNDBOARD)  > /dev/null
 	@if ! test -d $(RELEASE);then mkdir $(RELEASE) & echo "Created $(RELEASE) directory."; fi;
+	@echo "Checking for jars in $(RELEASE).."
 	@$(MAKE) clean_deploy
-	@echo "Copying latest jar to $(RELEASE)."
+	@echo "Copying latest $(SOUNDBOARD) jar to $(RELEASE).."
 	@cp $(TARGET) $(RELEASE)
