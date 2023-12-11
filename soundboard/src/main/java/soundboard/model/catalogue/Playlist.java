@@ -18,9 +18,9 @@ import java.util.ArrayList;
  */
 public class Playlist extends ArrayList<String> {
 
-    private final String title;
+    private String title;
 
-    protected Playlist(String title) {
+    public Playlist(String title) {
         this.title = title;
     }
 
@@ -36,6 +36,10 @@ public class Playlist extends ArrayList<String> {
 
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
