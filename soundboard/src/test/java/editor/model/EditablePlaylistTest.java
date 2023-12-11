@@ -99,7 +99,7 @@ class EditablePlaylistTest {
     @Test
     void undoAddSong() {
         editablePlaylist.addSong("foo");
-        editablePlaylist.removeSong("foo");
+        editablePlaylist.undoAddSong("foo");
 
         assertFalse(editablePlaylist.isRecentlyAdded("foo"));
         assertFalse(editablePlaylist.isMarkedForRemoval("foo"));
@@ -113,7 +113,7 @@ class EditablePlaylistTest {
         playlist.add("foo");
 
         editablePlaylist.addSong("foo");
-        editablePlaylist.removeSong("foo");
+        editablePlaylist.undoAddSong("foo");
         assertFalse(editablePlaylist.isRecentlyAdded("foo"));
         assertFalse(editablePlaylist.isMarkedForRemoval("foo"));
 
@@ -126,7 +126,7 @@ class EditablePlaylistTest {
         playlist.add("foo");
 
         editablePlaylist.removeSong("foo");
-        editablePlaylist.addSong("foo");
+        editablePlaylist.undoRemoveSong("foo");
         assertFalse(editablePlaylist.isRecentlyAdded("foo"));
         assertFalse(editablePlaylist.isMarkedForRemoval("foo"));
 

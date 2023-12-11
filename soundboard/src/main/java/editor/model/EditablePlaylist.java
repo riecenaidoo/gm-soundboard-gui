@@ -33,12 +33,18 @@ public class EditablePlaylist {
 
     public void addSong(String song) {
         recentlyAdded.add(song);
-        markedForRemoval.remove(song);
+    }
+
+    public void undoAddSong(String song) {
+        recentlyAdded.remove(song);
     }
 
     public void removeSong(String song) {
         markedForRemoval.add(song);
-        recentlyAdded.remove(song);
+    }
+
+    public void undoRemoveSong(String song) {
+        markedForRemoval.remove(song);
     }
 
     public void updateTitle(String title) {
