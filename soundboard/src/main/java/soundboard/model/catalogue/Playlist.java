@@ -5,10 +5,16 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.util.ArrayList;
 
 /**
- * A Playlist represents a collection of songs.
- * Specifically, YouTube URL to songs for the discord bot to play from.
- * In the future, this may expand to additional services such as Deezer,
- * Spotify, or local songs.
+ * Represents a collection of songs.
+ * <br><br>
+ * Specifically, YouTube URLs to songs.
+ * These URLs are sent to the Bot service where they are used to retrieve
+ * audio sources to stream into a Discord Voice Channel.
+ * <br><br>
+ * In the future, the Bot may expand to additional services such as Deezer,
+ * Spotify, or local songs. In which case this Playlist will store
+ * Song objects that contain URLs and the name of the service the URL points to
+ * so that the Bot can know how to handle retrieving the audio source at that URL.
  */
 public class Playlist extends ArrayList<String> {
 
@@ -18,6 +24,10 @@ public class Playlist extends ArrayList<String> {
         this.title = title;
     }
 
+    /**
+     * @param json Node representing a Playlist.
+     * @return Playlist constructed from the contents of a JSON node.
+     */
     public static Playlist fromJson(JsonNode json) {
         Playlist playlist = new Playlist(json.get("Title").asText());
         for (JsonNode song : json.get("Songs")) playlist.add(song.asText());
