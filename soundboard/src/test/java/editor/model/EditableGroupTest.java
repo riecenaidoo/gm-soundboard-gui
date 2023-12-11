@@ -98,7 +98,7 @@ class EditableGroupTest {
         assertFalse(editableGroup.isMarkedForRemoval(playlist));
 
         editableGroup.saveChanges();
-        assertEquals(0, playlist.size());
+        assertEquals(0, group.size());
     }
 
     @Test
