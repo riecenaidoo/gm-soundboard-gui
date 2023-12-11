@@ -88,4 +88,29 @@ class EditableGroupTest {
         editableGroup.clearChanges();
         assertFalse(editableGroup.isMarkedForRemoval(playlist));
     }
+
+    @Test
+    void undoAddPlaylist() {
+        editableGroup.addPlaylist(playlist);
+        editableGroup.undoAddPlaylist(playlist);
+
+        assertFalse(editableGroup.isRecentlyAdded(playlist));
+        assertFalse(editableGroup.isMarkedForRemoval(playlist));
+
+        editableGroup.saveChanges();
+        assertEquals(0, playlist.size());
+    }
+
+    @Test
+    void undoRemovePlaylist() {
+        group.add(playlist);
+
+        editableGroup.removePlaylist(playlist);
+        editableGroup.undoRemovePlaylist(playlist);
+        assertFalse(editableGroup.isRecentlyAdded(playlist));
+        assertFalse(editableGroup.isMarkedForRemoval(playlist));
+
+        editableGroup.saveChanges();
+        assertEquals(1, group.size());
+    }
 }

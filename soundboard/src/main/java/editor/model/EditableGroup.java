@@ -34,12 +34,18 @@ public class EditableGroup {
 
     public void addPlaylist(Playlist playlist) {
         recentlyAdded.add(playlist);
-        markedForRemoval.remove(playlist);
+    }
+
+    public void undoAddPlaylist(Playlist playlist) {
+        recentlyAdded.remove(playlist);
     }
 
     public void removePlaylist(Playlist playlist) {
         markedForRemoval.add(playlist);
-        recentlyAdded.remove(playlist);
+    }
+
+    public void undoRemovePlaylist(Playlist playlist) {
+        markedForRemoval.remove(playlist);
     }
 
     public void updateTitle(String title) {
