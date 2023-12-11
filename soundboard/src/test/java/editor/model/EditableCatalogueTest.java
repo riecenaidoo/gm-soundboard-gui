@@ -75,4 +75,29 @@ class EditableCatalogueTest {
         editableCatalogue.clearChanges();
         assertFalse(editableCatalogue.isMarkedForRemoval(group));
     }
+
+    @Test
+    void undoAddGroup() {
+        editableCatalogue.addGroup(group);
+        editableCatalogue.undoAddGroup(group);
+
+        assertFalse(editableCatalogue.isRecentlyAdded(group));
+        assertFalse(editableCatalogue.isMarkedForRemoval(group));
+
+        editableCatalogue.saveChanges();
+        assertEquals(0, catalogue.size());
+    }
+
+    @Test
+    void undoRemoveGroup() {
+        catalogue.add(group);
+
+        editableCatalogue.removeGroup(group);
+        editableCatalogue.undoRemoveGroup(group);
+        assertFalse(editableCatalogue.isRecentlyAdded(group));
+        assertFalse(editableCatalogue.isMarkedForRemoval(group));
+
+        editableCatalogue.saveChanges();
+        assertEquals(1, catalogue.size());
+    }
 }

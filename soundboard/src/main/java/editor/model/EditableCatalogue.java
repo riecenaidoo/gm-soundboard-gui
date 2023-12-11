@@ -32,12 +32,18 @@ public class EditableCatalogue {
 
     public void addGroup(Group group) {
         recentlyAdded.add(group);
-        markedForRemoval.remove(group);
+    }
+
+    public void undoAddGroup(Group group) {
+        recentlyAdded.remove(group);
     }
 
     public void removeGroup(Group group) {
         markedForRemoval.add(group);
-        recentlyAdded.remove(group);
+    }
+
+    public void undoRemoveGroup(Group group) {
+        markedForRemoval.remove(group);
     }
 
     public boolean isRecentlyAdded(Group group) {
