@@ -20,6 +20,7 @@ public class GroupsController {
         this.model = model;
         this.view.getAddGroup().addActionListener(e -> addGroup());
         this.view.getEditGroup().addActionListener(e -> editGroup());
+        this.view.getRemoveGroup().addActionListener(e -> removeGroup());
     }
 
     /**
@@ -62,6 +63,9 @@ public class GroupsController {
     }
 
     public void removeGroup() {
-
+        getSelectedGroup().ifPresent(group -> {
+            model.removeGroup(group);
+            view.groupMarkedForRemovalView();
+        });
     }
 }

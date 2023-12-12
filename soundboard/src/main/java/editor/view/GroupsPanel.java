@@ -3,6 +3,7 @@ package editor.view;
 import editor.model.EditableCatalogue;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Contains a view of all Groups within a Catalogue,
@@ -73,5 +74,37 @@ public class GroupsPanel extends JPanel {
 
     public JButton getEditGroup() {
         return editGroup;
+    }
+
+    public JButton getRemoveGroup() {
+        return removeGroup;
+    }
+
+    /**
+     * Default View. Group was existing in the Catalogue.
+     */
+    public void groupExistingView() {
+        groupSelector.setForeground(Color.red);
+    }
+
+    /**
+     * Denote the currently selected Group was recently added.
+     */
+    public void groupRecentlyView() {
+        groupSelector.setForeground(Color.red);
+    }
+
+    /**
+     * Denote the currently selected Group has been edited.
+     */
+    public void groupEditedView() {
+        groupSelector.setForeground(Color.red);
+    }
+
+    /**
+     * Denote the currently selected Group has been marked for removal.
+     */
+    public void groupMarkedForRemovalView() {
+        groupSelector.setForeground(Color.red);
     }
 }
