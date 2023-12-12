@@ -1,7 +1,5 @@
 package editor.view;
 
-import soundboard.model.catalogue.Playlist;
-
 import javax.swing.*;
 
 /**
@@ -39,20 +37,6 @@ public class SongsPanel extends JPanel {
         songsView = new JPanel();
         songsView.setLayout((new BoxLayout(songsView, BoxLayout.PAGE_AXIS)));
         this.add(new JScrollPane(songsView));
-    }
-
-    /**
-     * Populate this View with Songs from a Playlist.
-     *
-     * @param model Playlist to view the Songs of.
-     */
-    public void view(Playlist model) {
-        songsView.removeAll();
-        model.forEach(song -> {
-            SongStatusPanel songStatusPanel = new SongStatusPanel(song);
-            songStatusPanel.existingView();
-            addSongView(songStatusPanel);
-        });
     }
 
     /**
