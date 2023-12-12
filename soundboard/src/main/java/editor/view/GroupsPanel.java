@@ -66,4 +66,8 @@ public class GroupsPanel extends JPanel {
     public JComboBox<String> getGroupSelector() {
         return groupSelector;
     }
+
+    public JButton getAddGroup() {
+        return addGroup;
+    }
 }
