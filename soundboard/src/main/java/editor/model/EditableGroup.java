@@ -76,4 +76,13 @@ public class EditableGroup {
         recentlyAdded.clear();
         updatedName = group.getName();
     }
+
+    /**
+     * Accessor to the original wrapped Group.
+     *
+     * @return the original Group.
+     */
+    public Group getGroup() {
+        return group;
+    }
 }

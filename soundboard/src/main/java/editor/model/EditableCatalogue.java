@@ -68,4 +68,13 @@ public class EditableCatalogue {
         markedForRemoval.clear();
         recentlyAdded.clear();
     }
+
+    /**
+     * Accessor to the original wrapped Catalogue.
+     *
+     * @return the original Catalogue.
+     */
+    public Catalogue getCatalogue() {
+        return catalogue;
+    }
 }

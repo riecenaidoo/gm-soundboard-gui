@@ -75,4 +75,13 @@ public class EditablePlaylist {
         recentlyAdded.clear();
         updatedTitle = playlist.getTitle();
     }
+
+    /**
+     * Accessor to the original wrapped Playlist.
+     *
+     * @return the original Playlist.
+     */
+    public Playlist getPlaylist() {
+        return playlist;
+    }
 }
