@@ -1,6 +1,6 @@
 package editor.view;
 
-import soundboard.model.catalogue.Catalogue;
+import editor.model.EditableCatalogue;
 
 import javax.swing.*;
 
@@ -53,10 +53,10 @@ public class GroupsPanel extends JPanel {
      *
      * @param model Catalogue to view the Groups of.
      */
-    public void view(Catalogue model) {
+    public void view(EditableCatalogue model) {
         groupSelector.removeAllItems();
         groupSelector.addItem("");
-        model.forEach(group -> groupSelector.addItem(group.getName()));
+        model.getCatalogue().forEach(group -> groupSelector.addItem(group.getName()));
     }
 
     public JComboBox<String> getGroupSelector() {

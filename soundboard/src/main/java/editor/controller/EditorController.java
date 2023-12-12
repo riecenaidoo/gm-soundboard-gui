@@ -1,7 +1,7 @@
 package editor.controller;
 
+import editor.model.EditableCatalogue;
 import editor.view.*;
-import soundboard.model.catalogue.Catalogue;
 import soundboard.model.catalogue.Group;
 import soundboard.model.catalogue.Playlist;
 
@@ -15,7 +15,7 @@ import java.util.Optional;
 public class EditorController {
 
     private final EditorView view;
-    private final Catalogue model;
+    private final EditableCatalogue model;
 
     /**
      * If a reference to a JFrame was passed, changes to the CatalogueEditor's
@@ -28,10 +28,10 @@ public class EditorController {
      * to handle events on the View. Updates to the View will dynamically resize the App's window.
      *
      * @param view initialised CatalogueEditor panel.
-     * @param model initialised Catalogue to be displayed on the View.
+     * @param model initialised Catalogue wrapped in the EditableCatalogue model to be displayed on the View.
      * @param app JFrame the CatalogueEditor panel belongs to.
      */
-    public EditorController(EditorView view, Catalogue model, JFrame app) {
+    public EditorController(EditorView view, EditableCatalogue model, JFrame app) {
         this.view = view;
         this.model = model;
         this.app = Optional.ofNullable(app);
@@ -45,9 +45,9 @@ public class EditorController {
      * to handle events on the View.
      *
      * @param view  initialised CatalogueEditor panel.
-     * @param model initialised Catalogue to be displayed on the View.
+     * @param model initialised Catalogue wrapped in the EditableCatalogue model to be displayed on the View.
      */
-    public EditorController(EditorView view, Catalogue model) {
+    public EditorController(EditorView view, EditableCatalogue model) {
         this(view, model, null);
     }
 
@@ -58,7 +58,7 @@ public class EditorController {
         GroupsPanel groupsPanel = this.view.getGroupsPanel();
         int selectedIndex = (groupsPanel.getGroupSelector().getSelectedIndex()) - 1; // See GroupsPanel#view
         try {
-            return Optional.of(model.get(selectedIndex));
+            return Optional.of(model.getCatalogue().get(selectedIndex));
         } catch (IndexOutOfBoundsException e) {
             return Optional.empty();
         }
