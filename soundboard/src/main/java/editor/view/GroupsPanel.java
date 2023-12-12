@@ -1,6 +1,6 @@
 package editor.view;
 
-import soundboard.model.catalogue.Catalogue;
+import editor.model.EditableCatalogue;
 
 import javax.swing.*;
 
@@ -17,7 +17,7 @@ public class GroupsPanel extends JPanel {
     private final JButton editGroup;
     private final JButton removeGroup;
 
-    protected GroupsPanel() {
+    public GroupsPanel() {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         JPanel groupInfoPanel = new JPanel();
@@ -47,16 +47,20 @@ public class GroupsPanel extends JPanel {
     }
 
     /**
-     * Populate this View with Groups from a Catalogue.
+     * Populate this View with Groups from an EditableCatalogue.
+     * <br><br>
      * The first item in the combo box selector is empty,
-     * for no selection.
+     * for no selection. The next list of items are the original
+     * elements of the wrapped Catalogue, followed by the
+     * Recently Added Groups of the EditableCatalogue.
      *
      * @param model Catalogue to view the Groups of.
      */
-    public void view(Catalogue model) {
+    public void view(EditableCatalogue model) {
         groupSelector.removeAllItems();
         groupSelector.addItem("");
-        model.forEach(group -> groupSelector.addItem(group.getName()));
+        model.getCatalogue().forEach(group -> groupSelector.addItem(group.getName()));
+        model.getRecentlyAdded().forEach(group -> groupSelector.addItem(group.getName()));
     }
 
     public JComboBox<String> getGroupSelector() {
