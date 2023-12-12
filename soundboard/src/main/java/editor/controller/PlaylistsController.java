@@ -1,14 +1,14 @@
 package editor.controller;
 
+import editor.model.EditablePlaylist;
 import editor.view.PlaylistsPanel;
-import soundboard.model.catalogue.Playlist;
 
 public class PlaylistsController {
 
     private final PlaylistsPanel view;
-    private final Playlist model;
+    private final EditablePlaylist model;
 
-    protected PlaylistsController(PlaylistsPanel view, Playlist model) {
+    protected PlaylistsController(PlaylistsPanel view, EditablePlaylist model) {
         this.view = view;
         this.model = model;
     }

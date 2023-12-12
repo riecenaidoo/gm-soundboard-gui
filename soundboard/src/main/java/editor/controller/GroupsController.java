@@ -1,14 +1,14 @@
 package editor.controller;
 
+import editor.model.EditableCatalogue;
 import editor.view.GroupsPanel;
-import soundboard.model.catalogue.Catalogue;
 
 public class GroupsController {
 
     private final GroupsPanel view;
-    private final Catalogue model;
+    private final EditableCatalogue model;
 
-    protected GroupsController(GroupsPanel view, Catalogue model) {
+    protected GroupsController(GroupsPanel view, EditableCatalogue model) {
         this.view = view;
         this.model = model;
     }
