@@ -1,16 +1,48 @@
 package editor.controller;
 
+import editor.model.EditableCatalogue;
 import editor.view.GroupsPanel;
 import soundboard.model.catalogue.Catalogue;
+import soundboard.model.catalogue.Group;
+
+import java.util.List;
+import java.util.Optional;
 
 public class GroupsController {
 
     private final GroupsPanel view;
-    private final Catalogue model;
+    private final EditableCatalogue model;
 
     protected GroupsController(GroupsPanel view, Catalogue model) {
         this.view = view;
-        this.model = model;
+        this.model = new EditableCatalogue(model);
+    }
+
+    /**
+     * Retrieve the Group selected in GroupsPanel#GroupSelector from the model.
+     * <br><br>
+     * Retrieves via index. The initial element in the GroupSelector is always empty,
+     * for no selection. The next list of elements are the existing Groups in the Catalogue,
+     * followed by the list of Recently Added Groups in the EditableCatalogue.
+     *
+     * @return Group selected, if it exists.
+     */
+    private Optional<Group> getSelectedGroup() {
+        int selectedIndex = view.getGroupSelector().getSelectedIndex() - 1;  // 1st element is empty
+        if (selectedIndex < 0) return Optional.empty();
+
+        Catalogue catalogue = model.getCatalogue();     // In original catalogue?
+        if (selectedIndex < catalogue.size()) {
+            return Optional.of(catalogue.get(selectedIndex));
+        }
+
+        selectedIndex -= catalogue.size();
+        List<Group> recentlyAdded = model.getRecentlyAdded();      // In the recently added list?
+        if (selectedIndex < recentlyAdded.size()) {
+            return Optional.of(recentlyAdded.get(selectedIndex));
+        } else {
+            return Optional.empty();
+        }
     }
 
     public void addGroup() {
