@@ -68,4 +68,12 @@ public class EditableCatalogue {
         markedForRemoval.clear();
         recentlyAdded.clear();
     }
+
+    public Catalogue getCatalogue() {
+        return catalogue;
+    }
+
+    public List<Group> getRecentlyAdded() {
+        return recentlyAdded;
+    }
 }
