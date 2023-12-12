@@ -16,7 +16,7 @@ public class App {
 
         Catalogue catalogue = new Catalogue();
         catalogue.load("docs/catalogue_sample.json");
-        EditorView view = new EditorView(catalogue);
+        EditorView view = new EditorView();
         new EditorController(view, catalogue, app);
 
         app.setContentPane(view);

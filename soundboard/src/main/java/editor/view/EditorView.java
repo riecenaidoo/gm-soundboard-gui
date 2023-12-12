@@ -1,20 +1,16 @@
 package editor.view;
 
-import soundboard.model.catalogue.Catalogue;
-
 import javax.swing.*;
 
 public class EditorView extends JPanel {
 
-    private final Catalogue catalogue;
     private final GroupsPanel groupsPanel;
     private final PlaylistsPanel playlistsPanel;
     private final SongsPanel songsPanel;
 
-    public EditorView(Catalogue catalogue) {
+    public EditorView() {
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        this.catalogue = catalogue;
         groupsPanel = new GroupsPanel();
         this.add(groupsPanel);
         playlistsPanel = new PlaylistsPanel();
