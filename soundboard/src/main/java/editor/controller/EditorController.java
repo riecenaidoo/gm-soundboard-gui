@@ -1,6 +1,7 @@
 package editor.controller;
 
 import editor.model.EditableCatalogue;
+import editor.model.EditableGroup;
 import editor.view.*;
 import soundboard.model.catalogue.Group;
 import soundboard.model.catalogue.Playlist;
@@ -91,7 +92,7 @@ public class EditorController {
         if (selectedGroup.isEmpty()) {
             view.groupDeselected();
         } else {
-            view.getPlaylistsPanel().view(selectedGroup.get());
+            view.getPlaylistsPanel().view(new EditableGroup(selectedGroup.get()));
             view.groupSelected();
         }
 

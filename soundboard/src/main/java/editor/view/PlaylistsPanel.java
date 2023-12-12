@@ -1,6 +1,6 @@
 package editor.view;
 
-import soundboard.model.catalogue.Group;
+import editor.model.EditableGroup;
 
 import javax.swing.*;
 
@@ -52,10 +52,10 @@ public class PlaylistsPanel extends JPanel {
      * for no selection.
      * @param model Group to view the Playlists of.
      */
-    public void view(Group model) {
+    public void view(EditableGroup model) {
         playlistSelector.removeAllItems();
         playlistSelector.addItem("");
-        model.forEach(playlist -> playlistSelector.addItem(playlist.getTitle()));
+        model.getGroup().forEach(playlist -> playlistSelector.addItem(playlist.getTitle()));
     }
 
     public JComboBox<String> getPlaylistSelector() {
