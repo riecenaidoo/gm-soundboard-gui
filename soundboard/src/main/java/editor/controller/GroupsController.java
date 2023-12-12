@@ -13,9 +13,9 @@ public class GroupsController {
     private final GroupsPanel view;
     private final EditableCatalogue model;
 
-    protected GroupsController(GroupsPanel view, Catalogue model) {
+    protected GroupsController(GroupsPanel view, EditableCatalogue model) {
         this.view = view;
-        this.model = new EditableCatalogue(model);
+        this.model = model;
     }
 
     /**
@@ -27,7 +27,7 @@ public class GroupsController {
      *
      * @return Group selected, if it exists.
      */
-    private Optional<Group> getSelectedGroup() {
+    public Optional<Group> getSelectedGroup() {
         int selectedIndex = view.getGroupSelector().getSelectedIndex() - 1;  // 1st element is empty
         if (selectedIndex < 0) return Optional.empty();
 

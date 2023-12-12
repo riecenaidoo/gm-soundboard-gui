@@ -1,5 +1,6 @@
 package editor.controller;
 
+import editor.model.EditableCatalogue;
 import editor.view.*;
 import soundboard.model.catalogue.Catalogue;
 import soundboard.model.catalogue.Group;
@@ -35,7 +36,7 @@ public class EditorController {
         this.view = view;
         this.model = model;
         this.app = Optional.ofNullable(app);
-        view.getGroupsPanel().view(model);
+        view.getGroupsPanel().view(new EditableCatalogue(model));
         this.view.getGroupsPanel().getGroupSelector().addItemListener(e -> selectGroup());
         this.view.getPlaylistsPanel().getPlaylistSelector().addItemListener(e -> selectPlaylist());
     }
