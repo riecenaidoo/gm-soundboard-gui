@@ -70,4 +70,8 @@ public class GroupsPanel extends JPanel {
     public JButton getAddGroup() {
         return addGroup;
     }
+
+    public JButton getEditGroup() {
+        return editGroup;
+    }
 }

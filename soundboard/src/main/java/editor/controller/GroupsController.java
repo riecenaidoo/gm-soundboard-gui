@@ -2,6 +2,7 @@ package editor.controller;
 
 import editor.model.EditableCatalogue;
 import editor.view.AddGroupDialog;
+import editor.view.EditGroupDialog;
 import editor.view.GroupsPanel;
 import soundboard.model.catalogue.Catalogue;
 import soundboard.model.catalogue.Group;
@@ -18,6 +19,7 @@ public class GroupsController {
         this.view = view;
         this.model = model;
         this.view.getAddGroup().addActionListener(e -> addGroup());
+        this.view.getEditGroup().addActionListener(e -> editGroup());
     }
 
     /**
@@ -54,7 +56,9 @@ public class GroupsController {
     }
 
     public void editGroup() {
-
+        EditGroupDialog dialog = new EditGroupDialog();
+        dialog.pack();
+        dialog.setVisible(true);
     }
 
     public void removeGroup() {
