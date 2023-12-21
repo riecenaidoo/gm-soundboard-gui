@@ -1,4 +1,4 @@
-package editor.view;
+package editor.controller.group;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;

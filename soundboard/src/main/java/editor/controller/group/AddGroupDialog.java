@@ -1,6 +1,7 @@
-package editor.view;
+package editor.controller.group;
 
 import editor.model.EditableCatalogue;
+import editor.view.GroupsPanel;
 import soundboard.model.catalogue.Group;
 
 import javax.swing.*;

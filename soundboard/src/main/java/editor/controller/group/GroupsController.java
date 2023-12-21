@@ -1,8 +1,6 @@
-package editor.controller;
+package editor.controller.group;
 
 import editor.model.EditableCatalogue;
-import editor.view.AddGroupDialog;
-import editor.view.EditGroupDialog;
 import editor.view.GroupsPanel;
 import soundboard.model.catalogue.Catalogue;
 import soundboard.model.catalogue.Group;
@@ -15,7 +13,7 @@ public class GroupsController {
     private final GroupsPanel view;
     private final EditableCatalogue model;
 
-    protected GroupsController(GroupsPanel view, EditableCatalogue model) {
+    public GroupsController(GroupsPanel view, EditableCatalogue model) {
         this.view = view;
         this.model = model;
         this.view.getAddGroup().addActionListener(e -> addGroup());

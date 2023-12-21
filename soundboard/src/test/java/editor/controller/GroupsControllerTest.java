@@ -1,5 +1,6 @@
 package editor.controller;
 
+import editor.controller.group.GroupsController;
 import editor.model.EditableCatalogue;
 import editor.view.GroupsPanel;
 import org.junit.jupiter.api.BeforeEach;
