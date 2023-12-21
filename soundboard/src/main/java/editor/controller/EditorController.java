@@ -1,7 +1,10 @@
 package editor.controller;
 
 import editor.model.EditableCatalogue;
-import editor.view.*;
+import editor.view.EditorView;
+import editor.view.PlaylistsPanel;
+import editor.view.SongStatusPanel;
+import editor.view.SongsPanel;
 import soundboard.model.catalogue.Group;
 import soundboard.model.catalogue.Playlist;
 
@@ -16,6 +19,7 @@ public class EditorController {
 
     private final EditorView view;
     private final EditableCatalogue model;
+    private final GroupsController groupsController;
 
     /**
      * If a reference to a JFrame was passed, changes to the CatalogueEditor's
@@ -36,7 +40,7 @@ public class EditorController {
         this.model = model;
         this.app = Optional.ofNullable(app);
         view.getGroupsPanel().view(model);
-        new GroupsController(view.getGroupsPanel(), model);
+        groupsController = new GroupsController(view.getGroupsPanel(), model);
         this.view.getGroupsPanel().getGroupSelector().addItemListener(e -> selectGroup());
         this.view.getPlaylistsPanel().getPlaylistSelector().addItemListener(e -> selectPlaylist());
     }
@@ -53,23 +57,10 @@ public class EditorController {
     }
 
     /**
-     * @return Selected Group option from the Catalogue.
-     */
-    private Optional<Group> getSelectedGroup() {
-        GroupsPanel groupsPanel = this.view.getGroupsPanel();
-        int selectedIndex = (groupsPanel.getGroupSelector().getSelectedIndex()) - 1; // See GroupsPanel#view
-        try {
-            return Optional.of(model.getCatalogue().get(selectedIndex));
-        } catch (IndexOutOfBoundsException e) {
-            return Optional.empty();
-        }
-    }
-
-    /**
      * @return Selected Playlist option from the selected Catalogue Group.
      */
     private Optional<Playlist> getSelectedPlaylist() {
-        Optional<Group> selectedGroup = getSelectedGroup();
+        Optional<Group> selectedGroup = groupsController.getSelectedGroup();
         if (selectedGroup.isEmpty()) return Optional.empty();
 
         Group group = selectedGroup.get();
@@ -88,7 +79,7 @@ public class EditorController {
      * for editing. Updates the View with the currently selected group in the GroupPanel's group selector.
      */
     public void selectGroup() {
-        Optional<Group> selectedGroup = getSelectedGroup();
+        Optional<Group> selectedGroup = groupsController.getSelectedGroup();
         if (selectedGroup.isEmpty()) {
             view.groupDeselected();
         } else {
