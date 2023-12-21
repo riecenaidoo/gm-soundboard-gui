@@ -1,10 +1,7 @@
 package editor.controller;
 
 import editor.model.EditableCatalogue;
-import editor.view.EditorView;
-import editor.view.PlaylistsPanel;
-import editor.view.SongStatusPanel;
-import editor.view.SongsPanel;
+import editor.view.*;
 import soundboard.model.catalogue.Group;
 import soundboard.model.catalogue.Playlist;
 
@@ -77,14 +74,25 @@ public class EditorController {
     /**
      * Selecting a Group will load its Playlists into the Playlist Panel
      * for editing. Updates the View with the currently selected group in the GroupPanel's group selector.
+     * Updates the View to highlight display a Group based on its status in the Catalogue (Edited, RecentlyAdded, MarkedForRemoval, Etc)
      */
     public void selectGroup() {
         Optional<Group> selectedGroup = groupsController.getSelectedGroup();
         if (selectedGroup.isEmpty()) {
             view.groupDeselected();
         } else {
-            view.getPlaylistsPanel().view(selectedGroup.get());
+            Group group = selectedGroup.get();
+            view.getPlaylistsPanel().view(group);
             view.groupSelected();
+
+            GroupsPanel groupsPanel = view.getGroupsPanel();
+            if (model.isMarkedForRemoval(group)) {
+                groupsPanel.groupMarkedForRemovalView();
+            } else if (model.isRecentlyAdded(group)) {
+                groupsPanel.groupRecentlyAddedView();
+            } else {
+                groupsPanel.groupExistingView();
+            }
         }
 
         if (app.isPresent()) app.get().pack();

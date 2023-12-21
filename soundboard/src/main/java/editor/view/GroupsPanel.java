@@ -84,27 +84,27 @@ public class GroupsPanel extends JPanel {
      * Default View. Group was existing in the Catalogue.
      */
     public void groupExistingView() {
-        groupSelector.setForeground(Color.red);
+        groupSelector.setForeground(Color.BLACK);
     }
 
     /**
      * Denote the currently selected Group was recently added.
      */
-    public void groupRecentlyView() {
-        groupSelector.setForeground(Color.red);
+    public void groupRecentlyAddedView() {
+        groupSelector.setForeground(Color.GREEN);
     }
 
     /**
      * Denote the currently selected Group has been edited.
      */
     public void groupEditedView() {
-        groupSelector.setForeground(Color.red);
+        groupSelector.setForeground(Color.PINK);
     }
 
     /**
      * Denote the currently selected Group has been marked for removal.
      */
     public void groupMarkedForRemovalView() {
-        groupSelector.setForeground(Color.red);
+        groupSelector.setForeground(Color.RED);
     }
 }
