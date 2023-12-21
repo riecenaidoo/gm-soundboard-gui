@@ -1,17 +1,25 @@
 package editor.view;
 
+import editor.model.EditableCatalogue;
+import soundboard.model.catalogue.Group;
+
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class AddGroupDialog extends JDialog {
+
+    private final EditableCatalogue model;
+    private final GroupsPanel view;
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
     private JTextField groupNameField;
 
-    public AddGroupDialog() {
+    public AddGroupDialog(EditableCatalogue model, GroupsPanel view) {
+        this.model = model;
+        this.view = view;
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -31,7 +39,16 @@ public class AddGroupDialog extends JDialog {
         contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
+    /**
+     * Add new Group to the Catalogue.
+     */
     private void onOK() {
+        String groupName = groupNameField.getText();
+        if (!groupName.isBlank()) {
+            groupName = groupName.trim();
+            model.addGroup(new Group(groupName));
+            view.getGroupSelector().addItem(groupName);
+        }
         dispose();
     }
 

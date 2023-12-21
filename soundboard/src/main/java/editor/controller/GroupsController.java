@@ -51,7 +51,7 @@ public class GroupsController {
     }
 
     public void addGroup() {
-        AddGroupDialog dialog = new AddGroupDialog();
+        AddGroupDialog dialog = new AddGroupDialog(model, view);
         dialog.pack();
         dialog.setVisible(true);
     }
