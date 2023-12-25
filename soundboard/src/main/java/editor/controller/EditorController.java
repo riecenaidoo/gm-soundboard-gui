@@ -91,6 +91,8 @@ public class EditorController {
                 groupsPanel.groupMarkedForRemovalView();
             } else if (model.isRecentlyAdded(group)) {
                 groupsPanel.groupRecentlyAddedView();
+            } else if (model.isGroupEdited(group)) {
+                groupsPanel.groupEditedView();
             } else {
                 groupsPanel.groupExistingView();
             }

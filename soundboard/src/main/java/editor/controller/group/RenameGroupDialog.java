@@ -1,21 +1,30 @@
 package editor.controller.group;
 
+import editor.model.EditableGroup;
+import editor.view.GroupsPanel;
+
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class EditGroupDialog extends JDialog {
+public class RenameGroupDialog extends JDialog {
+    private final GroupsPanel view;
+    private final EditableGroup model;
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
     private JTextField groupNameField;
 
-    public EditGroupDialog() {
+    public RenameGroupDialog(EditableGroup model, GroupsPanel view) {
+        this.model = model;
+        this.view = view;
+
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
+        groupNameField.setText(model.getUpdatedName());
         buttonOK.addActionListener(e -> onOK());
         buttonCancel.addActionListener(e -> onCancel());
 
@@ -32,6 +41,18 @@ public class EditGroupDialog extends JDialog {
     }
 
     private void onOK() {
+        String groupName = groupNameField.getText();
+        if (!groupName.isBlank()) {
+            groupName = groupName.trim();
+            model.updateName(groupName);
+            if (model.isGroupNameEdited()) view.groupEditedView();
+
+            JComboBox<String> groupSelector = view.getGroupSelector();
+            int selectedIndex = groupSelector.getSelectedIndex();
+            groupSelector.removeItemAt(selectedIndex);
+            groupSelector.insertItemAt(groupName, selectedIndex);
+            groupSelector.setSelectedIndex(selectedIndex);
+        }
         dispose();
     }
 

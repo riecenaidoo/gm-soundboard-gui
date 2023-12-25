@@ -17,7 +17,7 @@ public class GroupsController {
         this.view = view;
         this.model = model;
         this.view.getAddGroup().addActionListener(e -> addGroup());
-        this.view.getEditGroup().addActionListener(e -> editGroup());
+        this.view.getRenameGroup().addActionListener(e -> editGroup());
         this.view.getRemoveGroup().addActionListener(e -> removeGroup());
     }
 
@@ -55,9 +55,11 @@ public class GroupsController {
     }
 
     public void editGroup() {
-        EditGroupDialog dialog = new EditGroupDialog();
-        dialog.pack();
-        dialog.setVisible(true);
+        getSelectedGroup().flatMap(model::getEditableGroup).ifPresent(editableGroup -> {
+            RenameGroupDialog dialog = new RenameGroupDialog(editableGroup, view);
+            dialog.pack();
+            dialog.setVisible(true);
+        });
     }
 
     public void removeGroup() {

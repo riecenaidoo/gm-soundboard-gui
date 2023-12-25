@@ -48,8 +48,8 @@ public class EditableGroup {
         markedForRemoval.remove(playlist);
     }
 
-    public void updateTitle(String title) {
-        updatedName = title;
+    public void updateName(String name) {
+        updatedName = name;
     }
 
     public boolean isRecentlyAdded(Playlist playlist) {
@@ -58,6 +58,14 @@ public class EditableGroup {
 
     public boolean isMarkedForRemoval(Playlist playlist) {
         return markedForRemoval.contains(playlist);
+    }
+
+    public boolean isGroupNameEdited() {
+        return !updatedName.equals(group.getName());
+    }
+
+    public String getUpdatedName() {
+        return updatedName;
     }
 
     /**
@@ -75,5 +83,9 @@ public class EditableGroup {
         markedForRemoval.clear();
         recentlyAdded.clear();
         updatedName = group.getName();
+    }
+
+    public Group getGroup() {
+        return group;
     }
 }

@@ -15,7 +15,7 @@ public class GroupsPanel extends JPanel {
     private final JComboBox<String> groupSelector;
     private final JLabel currentGroup;
     private final JButton addGroup;
-    private final JButton editGroup;
+    private final JButton renameGroup;
     private final JButton removeGroup;
 
     public GroupsPanel() {
@@ -42,9 +42,9 @@ public class GroupsPanel extends JPanel {
         removeGroup.setToolTipText("Remove this Group from the Catalogue");
         groupsPanel.add(removeGroup);
 
-        editGroup = new JButton("Edit");
-        editGroup.setToolTipText("Edit this Group");
-        groupsPanel.add(editGroup);
+        renameGroup = new JButton("Rename");
+        renameGroup.setToolTipText("Rename this Group");
+        groupsPanel.add(renameGroup);
     }
 
     /**
@@ -72,8 +72,8 @@ public class GroupsPanel extends JPanel {
         return addGroup;
     }
 
-    public JButton getEditGroup() {
-        return editGroup;
+    public JButton getRenameGroup() {
+        return renameGroup;
     }
 
     public JButton getRemoveGroup() {
