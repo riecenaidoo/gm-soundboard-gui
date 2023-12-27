@@ -4,6 +4,7 @@ import editor.controller.group.GroupsController;
 import editor.model.EditableCatalogue;
 import editor.view.GroupsPanel;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import soundboard.model.catalogue.Catalogue;
 import soundboard.model.catalogue.Group;
@@ -52,5 +53,53 @@ class GroupsControllerTest {
                 "Should retrieve from the first element of the recentlyAdded list from the EditableCatalogue.");
 
 //        view.getGroupSelector().setSelectedIndex(5); Selector prevents out of bounds selection.
+    }
+
+    @Nested
+    class NoGroupSelected {
+
+        @Test
+        void removeGroupHidden() {
+            throw new RuntimeException("TODO");
+        }
+
+        @Test
+        void renameGroupHidden() {
+            throw new RuntimeException("TODO");
+        }
+
+        @Test
+        void addGroupVisible() {
+            throw new RuntimeException("TODO");
+        }
+    }
+
+    @Nested
+    class RemoveGroup {
+
+        @Test
+        void cannotRenameRemovedGroup() {
+            throw new RuntimeException("TODO");
+        }
+
+        @Test
+        void cannotEditRemovedGroup() {
+            throw new RuntimeException("TODO");
+        }
+
+        @Test
+        void canUndoRemoveGroup() {
+            throw new RuntimeException("TODO");
+        }
+
+        @Test
+        void undoRemoveGroupEnablesEditGroup() {
+            throw new RuntimeException("TODO");
+        }
+
+        @Test
+        void undoRemoveGroupEnablesRenameGroup() {
+            throw new RuntimeException("TODO");
+        }
     }
 }
