@@ -30,13 +30,13 @@ public class GroupsPanel extends JPanel {
         currentGroup = new JLabel("GROUP");
         groupInfoPanel.add(currentGroup);
 
-        groupSelector = new JComboBox<>();
-        groupSelector.setToolTipText("Select a Group from the Catalogue");
-        groupsPanel.add(groupSelector);
-
         addGroup = new JButton("+");
         addGroup.setToolTipText("Add a new Group to the Catalogue");
         groupsPanel.add(addGroup);
+
+        groupSelector = new JComboBox<>();
+        groupSelector.setToolTipText("Select a Group from the Catalogue");
+        groupsPanel.add(groupSelector);
 
         removeGroup = new JButton("-");
         removeGroup.setToolTipText("Remove this Group from the Catalogue");
