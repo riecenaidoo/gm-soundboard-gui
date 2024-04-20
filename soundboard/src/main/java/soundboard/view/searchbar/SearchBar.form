@@ -22,6 +22,7 @@
         </constraints>
         <properties>
           <text value="Play"/>
+          <toolTipText value="Play the URL immediately"/>
         </properties>
       </component>
       <component id="e7602" class="javax.swing.JButton" binding="queueButton" default-binding="true">
@@ -30,6 +31,7 @@
         </constraints>
         <properties>
           <text value="Queue"/>
+          <toolTipText value="Add Song to the end of the Queue"/>
         </properties>
       </component>
     </children>
