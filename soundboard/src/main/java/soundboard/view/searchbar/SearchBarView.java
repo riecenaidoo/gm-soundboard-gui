@@ -24,6 +24,10 @@ public class SearchBarView {
     return panel;
   }
 
+  public boolean hasText() {
+    return !songField.getText().isBlank();
+  }
+
   /**
    * Return and clear text from the searchbar.
    *
