@@ -36,6 +36,10 @@ public class SoundboardView extends JPanel {
         return homeView;
     }
 
+    public SearchBarView getSearchBarView() {
+        return searchBarView;
+    }
+
     public void viewHome() {
         this.remove(searchBarView.getPanel());
         this.remove(discordBotView);
