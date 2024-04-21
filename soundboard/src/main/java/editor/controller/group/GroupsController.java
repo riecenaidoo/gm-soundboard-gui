@@ -68,8 +68,12 @@ public class GroupsController {
 
     public void removeGroup() {
         getSelectedGroup().ifPresent(group -> {
-            model.removeGroup(group);
-            view.groupMarkedForRemovalView();
+             if(model.isMarkedForRemoval(group)){
+                model.undoRemoveGroup(group);
+            }else{
+                model.removeGroup(group);
+            }
+            updateViewFor(group);
         });
     }
 
