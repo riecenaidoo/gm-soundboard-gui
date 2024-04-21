@@ -1,5 +1,6 @@
 package editor.controller.group;
 
+import editor.controller.dialogs.MessagePopUp;
 import editor.model.EditableCatalogue;
 import editor.view.GroupsPanel;
 import soundboard.model.catalogue.Group;
@@ -47,6 +48,12 @@ public class AddGroupDialog extends JDialog {
         String groupName = groupNameField.getText();
         if (!groupName.isBlank()) {
             groupName = groupName.trim();
+            if(model.hasGroup(groupName)){
+                MessagePopUp messagePopUp = new MessagePopUp("Group name already exists!");
+                messagePopUp.pack();
+                messagePopUp.setVisible(true);
+                return;
+            }
             model.addGroup(new Group(groupName));
             view.getGroupSelector().addItem(groupName);
         }

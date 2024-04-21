@@ -99,4 +99,14 @@ public class EditableCatalogue {
     public List<Group> getRecentlyAdded() {
         return recentlyAdded;
     }
+
+    public boolean hasGroup(String groupName) {
+        if (recentlyAdded.stream().anyMatch(group-> group.getName().equals(groupName))){
+            return true;
+        }
+        if (editedGroups.stream().anyMatch(group-> group.getUpdatedName().equals(groupName))){
+            return true;
+        }
+        return catalogue.stream().anyMatch(group -> group.getName().equals(groupName));
+    }
 }

@@ -60,7 +60,7 @@ public class GroupsController {
 
     public void editGroup() {
         getSelectedGroup().flatMap(model::getEditableGroup).ifPresent(editableGroup -> {
-            RenameGroupDialog dialog = new RenameGroupDialog(editableGroup, view);
+            RenameGroupDialog dialog = new RenameGroupDialog(model,editableGroup, view);
             dialog.pack();
             dialog.setVisible(true);
         });

@@ -1,5 +1,7 @@
 package editor.controller.group;
 
+import editor.controller.dialogs.MessagePopUp;
+import editor.model.EditableCatalogue;
 import editor.model.EditableGroup;
 import editor.view.GroupsPanel;
 
@@ -10,17 +12,20 @@ import java.awt.event.WindowEvent;
 
 public class RenameGroupDialog extends JDialog {
     private final GroupsPanel view;
+    private final EditableCatalogue catalogue;
     private final EditableGroup model;
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
+
     private JTextField groupNameField;
 
-    public RenameGroupDialog(EditableGroup model, GroupsPanel view) {
+    public RenameGroupDialog(EditableCatalogue catalogue, EditableGroup model, GroupsPanel view) {
         this.model = model;
         this.view = view;
+        this.catalogue = catalogue;
 
-        setContentPane(contentPane);
+      setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
@@ -44,6 +49,12 @@ public class RenameGroupDialog extends JDialog {
         String groupName = groupNameField.getText();
         if (!groupName.isBlank()) {
             groupName = groupName.trim();
+            if(catalogue.hasGroup(groupName)){
+                MessagePopUp messagePopUp = new MessagePopUp("Group name already exists!");
+                messagePopUp.pack();
+                messagePopUp.setVisible(true);
+                return;
+            }
             model.updateName(groupName);
             if (model.isGroupNameEdited()) view.groupEditedView();
 
