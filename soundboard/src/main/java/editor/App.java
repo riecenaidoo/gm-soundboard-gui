@@ -2,6 +2,7 @@ package editor;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import editor.controller.EditorController;
+import editor.model.EditableCatalogue;
 import editor.view.EditorView;
 import soundboard.model.catalogue.Catalogue;
 
@@ -17,7 +18,7 @@ public class App {
         Catalogue catalogue = new Catalogue();
         catalogue.load("docs/catalogue_sample.json");
         EditorView view = new EditorView(catalogue);
-        new EditorController(view, catalogue, app);
+        new EditorController(view, new EditableCatalogue(catalogue), app);
 
         app.setContentPane(view);
         app.pack();

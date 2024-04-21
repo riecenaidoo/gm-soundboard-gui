@@ -1,7 +1,8 @@
 package editor.controller;
 
+import editor.controller.group.GroupsController;
+import editor.model.EditableCatalogue;
 import editor.view.*;
-import soundboard.model.catalogue.Catalogue;
 import soundboard.model.catalogue.Group;
 import soundboard.model.catalogue.Playlist;
 
@@ -15,7 +16,8 @@ import java.util.Optional;
 public class EditorController {
 
     private final EditorView view;
-    private final Catalogue model;
+    private final EditableCatalogue model;
+    private final GroupsController groupsController;
 
     /**
      * If a reference to a JFrame was passed, changes to the CatalogueEditor's
@@ -31,11 +33,12 @@ public class EditorController {
      * @param model initialised Catalogue to be displayed on the View.
      * @param app JFrame the CatalogueEditor panel belongs to.
      */
-    public EditorController(EditorView view, Catalogue model, JFrame app) {
+    public EditorController(EditorView view, EditableCatalogue model, JFrame app) {
         this.view = view;
         this.model = model;
         this.app = Optional.ofNullable(app);
         view.getGroupsPanel().view(model);
+        groupsController = new GroupsController(view.getGroupsPanel(), model);
         this.view.getGroupsPanel().getGroupSelector().addItemListener(e -> selectGroup());
         this.view.getPlaylistsPanel().getPlaylistSelector().addItemListener(e -> selectPlaylist());
     }
@@ -47,28 +50,15 @@ public class EditorController {
      * @param view  initialised CatalogueEditor panel.
      * @param model initialised Catalogue to be displayed on the View.
      */
-    public EditorController(EditorView view, Catalogue model) {
+    public EditorController(EditorView view, EditableCatalogue model) {
         this(view, model, null);
-    }
-
-    /**
-     * @return Selected Group option from the Catalogue.
-     */
-    private Optional<Group> getSelectedGroup() {
-        GroupsPanel groupsPanel = this.view.getGroupsPanel();
-        int selectedIndex = (groupsPanel.getGroupSelector().getSelectedIndex()) - 1; // See GroupsPanel#view
-        try {
-            return Optional.of(model.get(selectedIndex));
-        } catch (IndexOutOfBoundsException e) {
-            return Optional.empty();
-        }
     }
 
     /**
      * @return Selected Playlist option from the selected Catalogue Group.
      */
     private Optional<Playlist> getSelectedPlaylist() {
-        Optional<Group> selectedGroup = getSelectedGroup();
+        Optional<Group> selectedGroup = groupsController.getSelectedGroup();
         if (selectedGroup.isEmpty()) return Optional.empty();
 
         Group group = selectedGroup.get();
@@ -85,14 +75,19 @@ public class EditorController {
     /**
      * Selecting a Group will load its Playlists into the Playlist Panel
      * for editing. Updates the View with the currently selected group in the GroupPanel's group selector.
+     * Updates the View to highlight display a Group based on its status in the Catalogue (Edited, RecentlyAdded, MarkedForRemoval, Etc)
      */
     public void selectGroup() {
-        Optional<Group> selectedGroup = getSelectedGroup();
+        Optional<Group> selectedGroup = groupsController.getSelectedGroup();
         if (selectedGroup.isEmpty()) {
             view.groupDeselected();
+            groupsController.groupDeselected();
         } else {
-            view.getPlaylistsPanel().view(selectedGroup.get());
+            Group group = selectedGroup.get();
+            view.getPlaylistsPanel().view(group);
             view.groupSelected();
+            groupsController.groupSelected();
+            groupsController.updateViewFor(group);
         }
 
         if (app.isPresent()) app.get().pack();

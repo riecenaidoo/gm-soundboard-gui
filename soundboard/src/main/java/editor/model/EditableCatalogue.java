@@ -5,6 +5,7 @@ import soundboard.model.catalogue.Group;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Editable Catalogue that can track changes (edits), without mutating or cloning
@@ -17,6 +18,7 @@ public class EditableCatalogue {
     private final Catalogue catalogue;
     private final List<Group> markedForRemoval;
     private final List<Group> recentlyAdded;
+    private final List<EditableGroup> editedGroups;
 
     /**
      * Wraps a Catalogue, creating an Editable Catalogue that can tracks changes
@@ -28,6 +30,7 @@ public class EditableCatalogue {
         this.catalogue = catalogue;
         markedForRemoval = new ArrayList<>();
         recentlyAdded = new ArrayList<>();
+        editedGroups = new ArrayList<>();
     }
 
     public void addGroup(Group group) {
@@ -46,12 +49,32 @@ public class EditableCatalogue {
         markedForRemoval.remove(group);
     }
 
+    public Optional<EditableGroup> getEditableGroup(Group group) {
+        if (!(catalogue.contains(group) || recentlyAdded.contains(group))) {
+            return Optional.empty();
+        }
+
+        for (EditableGroup editableGroup : editedGroups) {
+            if (editableGroup.getGroup().equals(group)) {
+                return Optional.of(editableGroup);
+            }
+        }
+
+        EditableGroup editableGroup = new EditableGroup(group);
+        editedGroups.add(editableGroup);
+        return Optional.of(editableGroup);
+    }
+
     public boolean isRecentlyAdded(Group group) {
         return recentlyAdded.contains(group);
     }
 
     public boolean isMarkedForRemoval(Group group) {
         return markedForRemoval.contains(group);
+    }
+
+    public boolean isGroupEdited(Group group) {
+        return editedGroups.stream().anyMatch(editableGroup -> editableGroup.getGroup().equals(group) && editableGroup.hasChanges());
     }
 
     /**
@@ -67,5 +90,23 @@ public class EditableCatalogue {
     public void clearChanges() {
         markedForRemoval.clear();
         recentlyAdded.clear();
+    }
+
+    public Catalogue getCatalogue() {
+        return catalogue;
+    }
+
+    public List<Group> getRecentlyAdded() {
+        return recentlyAdded;
+    }
+
+    public boolean hasGroup(String groupName) {
+        if (recentlyAdded.stream().anyMatch(group-> group.getName().equals(groupName))){
+            return true;
+        }
+        if (editedGroups.stream().anyMatch(group-> group.getUpdatedName().equals(groupName))){
+            return true;
+        }
+        return catalogue.stream().anyMatch(group -> group.getName().equals(groupName));
     }
 }

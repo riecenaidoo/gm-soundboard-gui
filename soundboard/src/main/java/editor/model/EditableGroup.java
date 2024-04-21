@@ -48,8 +48,8 @@ public class EditableGroup {
         markedForRemoval.remove(playlist);
     }
 
-    public void updateTitle(String title) {
-        updatedName = title;
+    public void updateName(String name) {
+        updatedName = name;
     }
 
     public boolean isRecentlyAdded(Playlist playlist) {
@@ -58,6 +58,24 @@ public class EditableGroup {
 
     public boolean isMarkedForRemoval(Playlist playlist) {
         return markedForRemoval.contains(playlist);
+    }
+
+    public boolean isGroupNameEdited() {
+        return !updatedName.equals(group.getName());
+    }
+
+    /**
+     * @return true if this Group has been edited in any one of the following ways:
+     * <li>Name edited</li>
+     * <li>Playlist added</li>
+     * <li>Playlist removed</li>
+     */
+    public boolean hasChanges(){
+        return isGroupNameEdited() || !recentlyAdded.isEmpty() || !markedForRemoval.isEmpty();
+    }
+
+    public String getUpdatedName() {
+        return updatedName;
     }
 
     /**
@@ -75,5 +93,9 @@ public class EditableGroup {
         markedForRemoval.clear();
         recentlyAdded.clear();
         updatedName = group.getName();
+    }
+
+    public Group getGroup() {
+        return group;
     }
 }

@@ -58,13 +58,13 @@ class EditableGroupTest {
 
     @Test
     void updateTitle() {
-        editableGroup.updateTitle("dummy");
+        editableGroup.updateName("dummy");
         assertEquals("test", group.getName());
 
         editableGroup.saveChanges();
         assertEquals("dummy", group.getName());
 
-        editableGroup.updateTitle("foo");
+        editableGroup.updateName("foo");
         editableGroup.clearChanges();
         assertEquals("dummy", group.getName());
     }
