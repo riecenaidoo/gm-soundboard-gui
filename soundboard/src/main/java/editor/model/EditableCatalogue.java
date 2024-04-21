@@ -74,7 +74,7 @@ public class EditableCatalogue {
     }
 
     public boolean isGroupEdited(Group group) {
-        return editedGroups.stream().anyMatch(editableGroup -> editableGroup.getGroup().equals(group));
+        return editedGroups.stream().anyMatch(editableGroup -> editableGroup.getGroup().equals(group) && editableGroup.hasChanges());
     }
 
     /**

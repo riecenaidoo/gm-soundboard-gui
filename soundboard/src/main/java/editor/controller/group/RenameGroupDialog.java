@@ -45,11 +45,22 @@ public class RenameGroupDialog extends JDialog {
         contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK() {
+  /**
+   * Updates the selected Group's name and displays the changes on the View.
+   */
+  private void onOK() {
         String groupName = groupNameField.getText();
         if (!groupName.isBlank()) {
             groupName = groupName.trim();
-            if(catalogue.hasGroup(groupName)){
+
+            if(groupName.equals(model.getUpdatedName())){
+              dispose();
+              return;
+            }
+
+            if(groupName.equals(model.getGroup().getName())){
+                view.groupExistingView();
+            } else if (catalogue.hasGroup(groupName)) {
                 MessagePopUp messagePopUp = new MessagePopUp("Group name already exists!");
                 messagePopUp.pack();
                 messagePopUp.setVisible(true);

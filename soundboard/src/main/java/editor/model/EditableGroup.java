@@ -64,6 +64,16 @@ public class EditableGroup {
         return !updatedName.equals(group.getName());
     }
 
+    /**
+     * @return true if this Group has been edited in any one of the following ways:
+     * <li>Name edited</li>
+     * <li>Playlist added</li>
+     * <li>Playlist removed</li>
+     */
+    public boolean hasChanges(){
+        return isGroupNameEdited() || !recentlyAdded.isEmpty() || !markedForRemoval.isEmpty();
+    }
+
     public String getUpdatedName() {
         return updatedName;
     }
