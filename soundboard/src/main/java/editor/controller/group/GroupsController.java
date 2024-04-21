@@ -13,12 +13,16 @@ public class GroupsController {
     private final GroupsPanel view;
     private final EditableCatalogue model;
 
+    /**
+     * Begins in a deselected state.
+     */
     public GroupsController(GroupsPanel view, EditableCatalogue model) {
         this.view = view;
         this.model = model;
         this.view.getAddGroup().addActionListener(e -> addGroup());
         this.view.getRenameGroup().addActionListener(e -> editGroup());
         this.view.getRemoveGroup().addActionListener(e -> removeGroup());
+        groupDeselected();
     }
 
     /**
@@ -67,5 +71,15 @@ public class GroupsController {
             model.removeGroup(group);
             view.groupMarkedForRemovalView();
         });
+    }
+
+    public void groupDeselected() {
+        view.getRenameGroup().setEnabled(false);
+        view.getRemoveGroup().setEnabled(false);
+    }
+
+    public void groupSelected() {
+        view.getRenameGroup().setEnabled(true);
+        view.getRemoveGroup().setEnabled(true);
     }
 }

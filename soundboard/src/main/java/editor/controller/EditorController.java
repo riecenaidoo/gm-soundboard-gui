@@ -81,10 +81,12 @@ public class EditorController {
         Optional<Group> selectedGroup = groupsController.getSelectedGroup();
         if (selectedGroup.isEmpty()) {
             view.groupDeselected();
+            groupsController.groupDeselected();
         } else {
             Group group = selectedGroup.get();
             view.getPlaylistsPanel().view(group);
             view.groupSelected();
+            groupsController.groupSelected();
 
             GroupsPanel groupsPanel = view.getGroupsPanel();
             if (model.isMarkedForRemoval(group)) {

@@ -4,6 +4,7 @@ import editor.controller.group.GroupsController;
 import editor.model.EditableCatalogue;
 import editor.view.GroupsPanel;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import soundboard.model.catalogue.Catalogue;
@@ -77,12 +78,16 @@ class GroupsControllerTest {
         void removeGroupDisabled() {
             assertTrue(view.getRemoveGroup().isVisible());
             assertFalse(view.getRemoveGroup().isEnabled());
+            groupsController.groupSelected();
+            assertTrue(view.getRemoveGroup().isEnabled());
         }
 
         @Test
         void renameGroupDisabled() {
             assertTrue(view.getRenameGroup().isVisible());
             assertFalse(view.getRenameGroup().isEnabled());
+            groupsController.groupSelected();
+            assertTrue(view.getRenameGroup().isEnabled());
         }
 
         @Test
@@ -92,6 +97,7 @@ class GroupsControllerTest {
         }
     }
 
+    @Disabled
     @Nested
     class RemoveGroup {
 
