@@ -21,7 +21,7 @@ public class GroupsController {
         this.model = model;
         this.view.getAddGroup().addActionListener(e -> addGroup());
         this.view.getRenameGroup().addActionListener(e -> editGroup());
-        this.view.getRemoveGroupToggle().addActionListener(e -> removeGroup());
+        this.view.getRemoveGroupToggle().addActionListener(e -> removeOrUndoRemoveGroup());
         groupDeselected();
     }
 
@@ -66,7 +66,7 @@ public class GroupsController {
         });
     }
 
-    public void removeGroup() {
+    public void removeOrUndoRemoveGroup() {
         getSelectedGroup().ifPresent(group -> {
              if(model.isMarkedForRemoval(group)){
                 model.undoRemoveGroup(group);
@@ -75,6 +75,7 @@ public class GroupsController {
             }
             updateViewFor(group);
         });
+
     }
 
     public void groupDeselected() {
