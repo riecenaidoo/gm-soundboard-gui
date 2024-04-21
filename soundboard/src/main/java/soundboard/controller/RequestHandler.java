@@ -37,6 +37,18 @@ public class RequestHandler {
         clientSocket.send(command);
     }
 
+    public void queue(Collection<String> songs) {
+        StringBuilder stringBuilder = new StringBuilder("queue");
+
+        for (String song : songs) {
+            stringBuilder.append(" ").append(song);
+        }
+
+        String command = stringBuilder.toString();
+
+        clientSocket.send(command);
+    }
+
     // MusicPlayer Panel
 
     public void stop() {
