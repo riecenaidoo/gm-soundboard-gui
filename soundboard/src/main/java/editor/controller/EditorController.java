@@ -87,17 +87,7 @@ public class EditorController {
             view.getPlaylistsPanel().view(group);
             view.groupSelected();
             groupsController.groupSelected();
-
-            GroupsPanel groupsPanel = view.getGroupsPanel();
-            if (model.isMarkedForRemoval(group)) {
-                groupsPanel.groupMarkedForRemovalView();
-            } else if (model.isRecentlyAdded(group)) {
-                groupsPanel.groupRecentlyAddedView();
-            } else if (model.isGroupEdited(group)) {
-                groupsPanel.groupEditedView();
-            } else {
-                groupsPanel.groupExistingView();
-            }
+            groupsController.updateViewFor(group);
         }
 
         if (app.isPresent()) app.get().pack();

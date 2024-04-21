@@ -82,4 +82,17 @@ public class GroupsController {
         view.getRenameGroup().setEnabled(true);
         view.getRemoveGroupToggle().setEnabled(true);
     }
+
+
+    public void updateViewFor(Group group){
+        if (model.isMarkedForRemoval(group)) {
+            view.groupMarkedForRemovalView();
+        } else if (model.isRecentlyAdded(group)) {
+            view.groupRecentlyAddedView();
+        } else if (model.isGroupEdited(group)) {
+            view.groupEditedView();
+        } else {
+            view.groupExistingView();
+        }
+    }
 }
