@@ -15,7 +15,7 @@ public class MessagePopUp extends JDialog {
     setModal(true);
     getRootPane().setDefaultButton(buttonOK);
     messageField.setEditable(false);
-    buttonOK.addActionListener(e->dispose());
+    buttonOK.addActionListener(e -> dispose());
   }
 
   public MessagePopUp(String message) {

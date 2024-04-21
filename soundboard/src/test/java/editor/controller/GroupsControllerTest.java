@@ -16,114 +16,117 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GroupsControllerTest {
 
-    Catalogue catalogue;
-    EditableCatalogue model;
-    GroupsPanel view;
-    GroupsController groupsController;
+  Catalogue catalogue;
+
+  EditableCatalogue model;
+
+  GroupsPanel view;
+
+  GroupsController groupsController;
+
+  @BeforeEach
+  void setUp() {
+    catalogue = new Catalogue();
+    model = new EditableCatalogue(catalogue);
+    view = new GroupsPanel();
+    groupsController = new GroupsController(view, model);
+  }
+
+  @Test
+  void getSelectedGroup() {
+    Group groupA = new Group("A");
+    Group groupB = new Group("B");
+    Group groupC = new Group("C");
+    Group groupD = new Group("D");
+    catalogue.add(groupA);
+    catalogue.add(groupB);
+    model.addGroup(groupC);
+    model.addGroup(groupD);
+    view.view(model);
+
+    view.getGroupSelector().setSelectedIndex(0);
+    assertEquals(Optional.empty(), groupsController.getSelectedGroup(),
+            "First selection should not return a Group.");
+
+    view.getGroupSelector().setSelectedIndex(1);
+    assertEquals(Optional.of(groupA), groupsController.getSelectedGroup(),
+            "Should retrieve from the first element of the original Catalogue.");
+
+    view.getGroupSelector().setSelectedIndex(3);
+    assertEquals(Optional.of(groupC), groupsController.getSelectedGroup(),
+            "Should retrieve from the first element of the recentlyAdded list from the EditableCatalogue.");
+
+    //        view.getGroupSelector().setSelectedIndex(5); Selector prevents out of bounds selection.
+  }
+
+  @Nested
+  class NoGroupSelected {
 
     @BeforeEach
     void setUp() {
-        catalogue = new Catalogue();
-        model = new EditableCatalogue(catalogue);
-        view = new GroupsPanel();
-        groupsController = new GroupsController(view, model);
+      Group groupA = new Group("A");
+      Group groupB = new Group("B");
+      Group groupC = new Group("C");
+      Group groupD = new Group("D");
+      catalogue.add(groupA);
+      catalogue.add(groupB);
+      model.addGroup(groupC);
+      model.addGroup(groupD);
+      view.view(model);
+
+      view.getGroupSelector().setSelectedIndex(0);
     }
 
     @Test
-    void getSelectedGroup() {
-        Group groupA = new Group("A");
-        Group groupB = new Group("B");
-        Group groupC = new Group("C");
-        Group groupD = new Group("D");
-        catalogue.add(groupA);
-        catalogue.add(groupB);
-        model.addGroup(groupC);
-        model.addGroup(groupD);
-        view.view(model);
-
-        view.getGroupSelector().setSelectedIndex(0);
-        assertEquals(Optional.empty(), groupsController.getSelectedGroup(),
-                "First selection should not return a Group.");
-
-        view.getGroupSelector().setSelectedIndex(1);
-        assertEquals(Optional.of(groupA), groupsController.getSelectedGroup(),
-                "Should retrieve from the first element of the original Catalogue.");
-
-        view.getGroupSelector().setSelectedIndex(3);
-        assertEquals(Optional.of(groupC), groupsController.getSelectedGroup(),
-                "Should retrieve from the first element of the recentlyAdded list from the EditableCatalogue.");
-
-//        view.getGroupSelector().setSelectedIndex(5); Selector prevents out of bounds selection.
+    void removeGroupDisabled() {
+      assertTrue(view.getRemoveGroupToggle().isVisible());
+      assertFalse(view.getRemoveGroupToggle().isEnabled());
+      groupsController.groupSelected();
+      assertTrue(view.getRemoveGroupToggle().isEnabled());
     }
 
-    @Nested
-    class NoGroupSelected {
-
-        @BeforeEach
-        void setUp(){
-            Group groupA = new Group("A");
-            Group groupB = new Group("B");
-            Group groupC = new Group("C");
-            Group groupD = new Group("D");
-            catalogue.add(groupA);
-            catalogue.add(groupB);
-            model.addGroup(groupC);
-            model.addGroup(groupD);
-            view.view(model);
-
-            view.getGroupSelector().setSelectedIndex(0);
-        }
-
-        @Test
-        void removeGroupDisabled() {
-            assertTrue(view.getRemoveGroupToggle().isVisible());
-            assertFalse(view.getRemoveGroupToggle().isEnabled());
-            groupsController.groupSelected();
-            assertTrue(view.getRemoveGroupToggle().isEnabled());
-        }
-
-        @Test
-        void renameGroupDisabled() {
-            assertTrue(view.getRenameGroup().isVisible());
-            assertFalse(view.getRenameGroup().isEnabled());
-            groupsController.groupSelected();
-            assertTrue(view.getRenameGroup().isEnabled());
-        }
-
-        @Test
-        void addGroupEnabled() {
-            assertTrue(view.getAddGroup().isVisible());
-            assertTrue(view.getAddGroup().isEnabled());
-        }
+    @Test
+    void renameGroupDisabled() {
+      assertTrue(view.getRenameGroup().isVisible());
+      assertFalse(view.getRenameGroup().isEnabled());
+      groupsController.groupSelected();
+      assertTrue(view.getRenameGroup().isEnabled());
     }
 
-    @Disabled
-    @Nested
-    class RemoveGroup {
-
-        @Test
-        void cannotRenameRemovedGroup() {
-            throw new RuntimeException("TODO");
-        }
-
-        @Test
-        void cannotEditRemovedGroup() {
-            throw new RuntimeException("TODO");
-        }
-
-        @Test
-        void canUndoRemoveGroup() {
-            throw new RuntimeException("TODO");
-        }
-
-        @Test
-        void undoRemoveGroupEnablesEditGroup() {
-            throw new RuntimeException("TODO");
-        }
-
-        @Test
-        void undoRemoveGroupEnablesRenameGroup() {
-            throw new RuntimeException("TODO");
-        }
+    @Test
+    void addGroupEnabled() {
+      assertTrue(view.getAddGroup().isVisible());
+      assertTrue(view.getAddGroup().isEnabled());
     }
+  }
+
+  @Disabled
+  @Nested
+  class RemoveGroup {
+
+    @Test
+    void cannotRenameRemovedGroup() {
+      throw new RuntimeException("TODO");
+    }
+
+    @Test
+    void cannotEditRemovedGroup() {
+      throw new RuntimeException("TODO");
+    }
+
+    @Test
+    void canUndoRemoveGroup() {
+      throw new RuntimeException("TODO");
+    }
+
+    @Test
+    void undoRemoveGroupEnablesEditGroup() {
+      throw new RuntimeException("TODO");
+    }
+
+    @Test
+    void undoRemoveGroupEnablesRenameGroup() {
+      throw new RuntimeException("TODO");
+    }
+  }
 }
