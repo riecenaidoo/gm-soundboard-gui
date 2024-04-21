@@ -76,10 +76,10 @@ class GroupsControllerTest {
 
         @Test
         void removeGroupDisabled() {
-            assertTrue(view.getRemoveGroup().isVisible());
-            assertFalse(view.getRemoveGroup().isEnabled());
+            assertTrue(view.getRemoveGroupToggle().isVisible());
+            assertFalse(view.getRemoveGroupToggle().isEnabled());
             groupsController.groupSelected();
-            assertTrue(view.getRemoveGroup().isEnabled());
+            assertTrue(view.getRemoveGroupToggle().isEnabled());
         }
 
         @Test

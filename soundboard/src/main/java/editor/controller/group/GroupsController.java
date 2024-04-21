@@ -21,7 +21,7 @@ public class GroupsController {
         this.model = model;
         this.view.getAddGroup().addActionListener(e -> addGroup());
         this.view.getRenameGroup().addActionListener(e -> editGroup());
-        this.view.getRemoveGroup().addActionListener(e -> removeGroup());
+        this.view.getRemoveGroupToggle().addActionListener(e -> removeGroup());
         groupDeselected();
     }
 
@@ -75,11 +75,11 @@ public class GroupsController {
 
     public void groupDeselected() {
         view.getRenameGroup().setEnabled(false);
-        view.getRemoveGroup().setEnabled(false);
+        view.getRemoveGroupToggle().setEnabled(false);
     }
 
     public void groupSelected() {
         view.getRenameGroup().setEnabled(true);
-        view.getRemoveGroup().setEnabled(true);
+        view.getRemoveGroupToggle().setEnabled(true);
     }
 }

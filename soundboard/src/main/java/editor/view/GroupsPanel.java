@@ -16,7 +16,12 @@ public class GroupsPanel extends JPanel {
     private final JLabel currentGroup;
     private final JButton addGroup;
     private final JButton renameGroup;
-    private final JButton removeGroup;
+
+    /**
+     * Used to mark a Group for removal. If a Group has been marked for removal,
+     * clicking the button again will undo the action.
+     */
+    private final JButton removeGroupToggle;
 
     public GroupsPanel() {
         super();
@@ -38,9 +43,9 @@ public class GroupsPanel extends JPanel {
         groupSelector.setToolTipText("Select a Group from the Catalogue");
         groupsPanel.add(groupSelector);
 
-        removeGroup = new JButton("-");
-        removeGroup.setToolTipText("Remove this Group from the Catalogue");
-        groupsPanel.add(removeGroup);
+        removeGroupToggle = new JButton();
+        groupsPanel.add(removeGroupToggle);
+        removeGroupView();
 
         renameGroup = new JButton("Rename");
         renameGroup.setToolTipText("Rename this Group");
@@ -76,8 +81,8 @@ public class GroupsPanel extends JPanel {
         return renameGroup;
     }
 
-    public JButton getRemoveGroup() {
-        return removeGroup;
+    public JButton getRemoveGroupToggle() {
+        return removeGroupToggle;
     }
 
     /**
@@ -85,6 +90,7 @@ public class GroupsPanel extends JPanel {
      */
     public void groupExistingView() {
         groupSelector.setForeground(Color.BLACK);
+        removeGroupView();
     }
 
     /**
@@ -92,6 +98,7 @@ public class GroupsPanel extends JPanel {
      */
     public void groupRecentlyAddedView() {
         groupSelector.setForeground(Color.GREEN);
+        removeGroupView();
     }
 
     /**
@@ -99,6 +106,7 @@ public class GroupsPanel extends JPanel {
      */
     public void groupEditedView() {
         groupSelector.setForeground(Color.PINK);
+        removeGroupView();
     }
 
     /**
@@ -106,5 +114,22 @@ public class GroupsPanel extends JPanel {
      */
     public void groupMarkedForRemovalView() {
         groupSelector.setForeground(Color.RED);
+        undoRemoveGroupView();
+    }
+
+    /**
+     * Denote that clicking the removeGroupToggle now will remove the selected Group.
+     */
+    private void removeGroupView(){
+        removeGroupToggle.setText("-");
+        removeGroupToggle.setToolTipText("Remove this Group from the Catalogue");
+    }
+
+    /**
+     * Denote that clicking the removeGroupToggle now will undo the removal of the selected Group.
+     */
+    private void undoRemoveGroupView(){
+        removeGroupToggle.setText("+");
+        removeGroupToggle.setToolTipText("Undo removing this Group from the Catalogue");
     }
 }
