@@ -11,7 +11,7 @@ import soundboard.model.catalogue.Group;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class GroupsControllerTest {
 
@@ -58,19 +58,37 @@ class GroupsControllerTest {
     @Nested
     class NoGroupSelected {
 
-        @Test
-        void removeGroupHidden() {
-            throw new RuntimeException("TODO");
+        @BeforeEach
+        void setUp(){
+            Group groupA = new Group("A");
+            Group groupB = new Group("B");
+            Group groupC = new Group("C");
+            Group groupD = new Group("D");
+            catalogue.add(groupA);
+            catalogue.add(groupB);
+            model.addGroup(groupC);
+            model.addGroup(groupD);
+            view.view(model);
+
+            view.getGroupSelector().setSelectedIndex(0);
         }
 
         @Test
-        void renameGroupHidden() {
-            throw new RuntimeException("TODO");
+        void removeGroupDisabled() {
+            assertTrue(view.getRemoveGroup().isVisible());
+            assertFalse(view.getRemoveGroup().isEnabled());
         }
 
         @Test
-        void addGroupVisible() {
-            throw new RuntimeException("TODO");
+        void renameGroupDisabled() {
+            assertTrue(view.getRenameGroup().isVisible());
+            assertFalse(view.getRenameGroup().isEnabled());
+        }
+
+        @Test
+        void addGroupEnabled() {
+            assertTrue(view.getAddGroup().isVisible());
+            assertTrue(view.getAddGroup().isEnabled());
         }
     }
 
