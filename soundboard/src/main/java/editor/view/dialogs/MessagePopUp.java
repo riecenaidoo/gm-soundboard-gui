@@ -1,4 +1,4 @@
-package editor.controller.dialogs;
+package editor.view.dialogs;
 
 import javax.swing.*;
 

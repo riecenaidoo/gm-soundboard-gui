@@ -1,6 +1,6 @@
 package editor.controller.group;
 
-import editor.controller.dialogs.MessagePopUp;
+import editor.view.dialogs.MessagePopUp;
 import editor.model.EditableCatalogue;
 import editor.model.EditableGroup;
 import editor.view.GroupsPanel;
